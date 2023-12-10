@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.app
+{
+    background-image: url('./assets/background.png');
+    background-size: cover;  
+    background-position: center; 
+    background-repeat: repeat;
+}
+.app2
+{
+    background-image: url('./assets/bg.png');
+    background-size: cover;  
+    background-position: center; 
+    background-repeat: repeat;
+}

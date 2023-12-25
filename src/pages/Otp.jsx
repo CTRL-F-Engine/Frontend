@@ -3,11 +3,11 @@ import { Forget_pop_up } from "../components/Forget_pop_up"
 export const Otp=()=>
 {
     const [otp,setOtp]=useState();
-const handleChangeOtp=(value)=>
-{
-setOtp(value); // the value containsthe real otp
-console.log(otp);
-}
+    const handleChangeOtp=(value)=>
+    {
+     setOtp(value); // the value containsthe real otp
+     console.log(otp);
+    }
     return (
         <div className=" flex app2 justify-center w-full
          h-[100vh] items-center">
@@ -17,7 +17,7 @@ console.log(otp);
         act="Resend" placeholder="OTP number" content="Confirm"
         input={true}
         />
-            </div>
-            )
+        </div>
+           )
   
 }

@@ -20,12 +20,12 @@ export const Input_search = (props) => {
       onChange={handleChange}
       placeholder={props.placeholder}
       {...(props.type != null ? { type: props.type } : {})}
-      className="
+      className=" outline-none
        bg-transparent border-2 lg:w-[88%] md:w-[78%]  w-[100%]
        sm:w-[75%] sm:mb-0 mb-6 text-[17px]
        pl-[20px]   text-gray-900  lg:text-xl py-2 
-       border-sky-950 placeholder:opacity-75
-      focus:border-[2px] focus:text-gray-900 placeholder:text-gray-900 rounded-[8px] mx-auto placeholder-TT-Commons box-border"
+       border-sky-950  placeholder:opacity-75
+      focus:border-[2px]  focus:text-gray-900 placeholder:text-gray-900 rounded-[8px] mx-auto placeholder-TT-Commons box-border"
       />
      
  

@@ -7,6 +7,8 @@ import { Route } from 'react-router-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Routes } from 'react-router-dom';
 import { Forget } from './pages/Forget';
+import { SignUp } from './pages/SignUp';
+import {Home} from './pages/Home';
 function App() {
  
   return (
@@ -17,6 +19,10 @@ function App() {
     <Route path='/Login/Forget' element={<Forget/>}/>
     <Route path='/Welcome' element={<Welcome/>}/>
     <Route path='/Login/Otp' element={<Otp/>}/>
+    <Route path='/Signup' element={<SignUp/>}/>
+
+    <Route path='/' element={<Home/>}/>
+
     {/* <Login/> */}
        </Routes>    
     </Router>

@@ -23,8 +23,10 @@ export const Input = (props) => {
       {...(props.type != null ? { type: props.type } : {})}
       
       className="border-cyan-300
-       bg-transparent border-2 sm:w-[300px] lg:w-[450px] px-4 h-[50px] sm:h-[60px] text-white  sm:text-xl w-[258.4px] box-border
-      focus:border-[2px] focus:border-cyan-300 placeholder:text-cyan-300 rounded-[10px] mx-auto placeholder-TT-Commons0 sm:box-content"
+       bg-transparent border-2 sm:w-[300px] lg:w-[450px] px-4 h-[50px] sm:h-[60px] text-white outline-none sm:text-xl w-[258.4px] box-border
+      focus:border-[2px]
+      focus:text-cyan-300
+      focus:border-cyan-300 placeholder:text-cyan-300 rounded-[10px] mx-auto placeholder-TT-Commons0 sm:box-content"
       />
      
  

@@ -1,6 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+  
 .app
 {
     background-image: url('./assets/background.png');
@@ -14,4 +16,15 @@
     background-size: cover;  
     background-position: center; 
     background-repeat: repeat;
+}
+.home
+{
+    background-image: url('./assets/background2.png');
+    background-size: cover;  
+    background-position: center; 
+    background-repeat: repeat;
+}
+.border-zero:focus
+{
+ border: 0px;
 }

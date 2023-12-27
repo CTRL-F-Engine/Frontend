@@ -10,7 +10,7 @@ export const Welcome_pop_up=()=>
          sm:py-[70px]
          sm:px-[55px]
          py-[40px]
-         px-[8%]
+         px-[8%]  text-justify 
           md:py-[105px] md:px-[101px] 
          ">
           <h1 className="text-sky-950 font-bold  mb-5 md:text-5xl text-4xl">

@@ -9,7 +9,7 @@ export const Navbar=(props)=>
    {
          props.mode!=null?mod=props.mode : null
       }
-   return(<nav className={`flex  justify-end gap-x-7 list-none items-center   w-fit`}>
+   return(<nav className={`flex  justify-end gap-x-3 md:gap-x-7 list-none items-center   w-fit`}>
       
       <Btn_transparent mode={mod}  content="Log In"/>
 

@@ -6,7 +6,13 @@ export default {
 "./src/components/*.jsx"
 ],
   theme: {
-    extend: {},
+    extend: {
+
+      screens: {
+        'xs': '468px',
+        // => @media (min-width: 992px) { ... }
+      },
+    },
   },
   plugins: [],
 }

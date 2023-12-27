@@ -10,7 +10,7 @@ export const Forget_pop_up=(props)=>
     }
     return (
         <div className="lg:w-[60%] 
-        bg-white 
+        bg-white   text-justify 
          md:w-[60%] w-[85%] md:h-fit
          box-border rounded-[10px]
          sm:py-[70px]

@@ -3,10 +3,13 @@
 /* eslint-disable no-unused-vars */
 import { Input } from '../components/Input';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState ,useContext} from 'react';
+import AuthContext from '../context/AuthContext'
+
 export const Login =(props)=> {
   const [email, setEmail] = useState('');
   const [password,setPassword] = useState('');
+  const {loginUser} = useContext(AuthContext)
   const handleSetEmail = (value) => {
     console.log(email)
     setEmail(value);
@@ -17,10 +20,12 @@ const handleSetPassword=(value)=>
   setPassword(value);
   console.log(password)
 }
-const handleSubmit=()=>
-{
-
+const handleSubmit = () => {
+  email.length > 0 && loginUser(email, password)
+  console.log(email)
+  console.log(password)
 }
+
 const handleForget=()=>
 {
 
@@ -40,12 +45,14 @@ const handleSignUp=()=>
           <Input 
           setValue={handleSetEmail}
             placeholder="Email"
+            name="email"
           />
           
           <Input 
             setValue={handleSetPassword}
             placeholder="Password"
             type="password"
+            name="password"
           />
        <p className='lg:w-[450px] mx-auto text-right'>
           <button className="text-cyan-300 hover:underline text-[14px] sm:text-xl  text-right font-semibold font-['TT Commons'] w-[100%] mr-0">
@@ -53,7 +60,7 @@ const handleSignUp=()=>
           </button>   
             </p>   
    
-         <button onClick={handleForget} className="lg:w-[450px] h-[50px] sm:h-[70px]    bg-cyan-300 rounded-[10px] flex justify-center md:w-[300px] mx-auto items-center
+         <button onClick={handleSubmit} className="lg:w-[450px] h-[50px] sm:h-[70px]    bg-cyan-300 rounded-[10px] flex justify-center md:w-[300px] mx-auto items-center
           text-cyan-950 text-[23px] font-bold font-['TT Commons'] 
           sm:w-[300px]
           w-[258.4px] sm:px-4 box-content" >

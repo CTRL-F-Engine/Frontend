@@ -8,7 +8,7 @@ import { Navbar } from '../components/Navbar';
 import { Navbar2 } from '../components/Navbar2';
 import { Article } from '../components/Article';
 import img from '../assets/footer.svg';
-import { Appcontext2 } from '../App';
+import AuthContext from '../context/AuthContext'
 import pdp from '../assets/pdp.png'
 import { Btn } from '../components/Btn';
 export const Home =()=>
@@ -18,7 +18,7 @@ export const Home =()=>
     return pdp;
   }
 const [LittleNavVisible , setLittleNavVisible]=useState(false);
-const {isConnected} = useContext(Appcontext2)
+const {isConnected} = useContext(AuthContext)
 const [ref,setRef]=useState(null);
 const [search,setSearch]=useState('');
 const [isSticky, setIsSticky] = useState(false);

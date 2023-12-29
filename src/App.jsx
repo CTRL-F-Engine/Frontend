@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import './index.css'; 
-import { Otp } from './pages/OTP';
+import { Otp } from './pages/Otp';
 import {Login} from './pages/Login';
 import {Welcome} from './pages/Welcome'
 import { Route } from 'react-router-dom';
@@ -12,6 +12,7 @@ import {Home} from './pages/Home';
 import { useContext } from 'react'
 import { createContext } from 'react'
 import { useState } from 'react';  
+import { AuthProvider } from './context/AuthContext'
 export const Appcontext2=createContext();
 
 function App() {
@@ -20,9 +21,10 @@ function App() {
   return (
 
     <div className=' w-[100%] h-[100vh] '>     
-    <Appcontext2.Provider value={{isConnected , setIsConnected}}>
+    
 
      <Router>
+     <AuthProvider value={{isConnected , setIsConnected}}>
      <Routes> 
     <Route path='/Login' element={<Login/>}/>
     <Route path='/Login/Forget' element={<Forget/>}/>
@@ -30,10 +32,11 @@ function App() {
     <Route path='/Login/Otp' element={<Otp/>}/>
     <Route path='/Signup' element={<SignUp/>}/>
     <Route path='/' element={<Home/>}/>
-       </Routes>    
+       </Routes>   
+       </AuthProvider>  
     </Router>
       
-</Appcontext2.Provider> 
+
   </div>
   
   )

@@ -19,7 +19,15 @@ const handleSetPassword=(value)=>
 }
 const handleSubmit=()=>
 {
+if(!password || !email)
+{
+  alert("Please fill in all fields.");
 
+}
+else 
+{
+  // the logic for loging in 
+}
 }
 const handleForget=()=>
 {
@@ -53,7 +61,7 @@ const handleSignUp=()=>
           </button>   
             </p>   
    
-         <button onClick={handleForget} className="lg:w-[450px] h-[50px] sm:h-[70px]    bg-cyan-300 rounded-[10px] flex justify-center md:w-[300px] mx-auto items-center
+         <button onClick={handleSubmit} className="lg:w-[450px] h-[50px] sm:h-[70px]    bg-cyan-300 rounded-[10px] flex justify-center md:w-[300px] mx-auto items-center
           text-cyan-950 text-[23px] font-bold font-['TT Commons'] 
           sm:w-[300px]
           w-[258.4px] sm:px-4 box-content" >
@@ -66,7 +74,7 @@ const handleSignUp=()=>
            <p className='md:inline mr-3'>
           Don't have an account ?  
             </p> 
-          <button onClick={handleSubmit} className="text-cyan-300 sm:text-xl font-semibold  text-[14px] text-right hover:underline font-['TT Commons']">
+          <button className="text-cyan-300 sm:text-xl font-semibold  text-[14px] text-right hover:underline font-['TT Commons']">
           <Link to="/Signup"> Sign up</Link>     </button>   
             </p>  
 </div>

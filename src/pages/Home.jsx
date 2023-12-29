@@ -11,12 +11,14 @@ import img from '../assets/footer.svg';
 import { Appcontext2 } from '../App';
 import pdp from '../assets/pdp.png'
 import { Btn } from '../components/Btn';
+import Popup from '../components/PopupSearch';
 export const Home =()=>
 {
   const getPdp=()=>
   {
     return pdp;
   }
+const [showPopup , setShowPopup]=useState(true);
 const [LittleNavVisible , setLittleNavVisible]=useState(false);
 const {isConnected} = useContext(Appcontext2)
 const [ref,setRef]=useState(null);
@@ -24,9 +26,7 @@ const [search,setSearch]=useState('');
 const [isSticky, setIsSticky] = useState(false);
 const handleOffset = (data) => {
       setRef(data);
-      console.log('Ref immediately after setRef:', ref); // This might still show null
-    
-      // Use useEffect to log the ref value after it has been updated
+      console.log('Ref immediately after setRef:', ref); 
     
       console.log('Data:', data);
     };
@@ -35,15 +35,18 @@ const handleOffset = (data) => {
 
     },[isConnected])
      useEffect(() => {
-        console.log('Ref inside useEffect:', ref);
       }, [ref]);
      
       useEffect(() => {
         const handleScroll = () => {
-        
           const offset = window.scrollY;
           console.log(ref);
-          setIsSticky(offset > ref);
+          console.log(isSticky);
+          if(ref)
+          {
+               setIsSticky(offset > window.innerHeight);
+
+          }
         };
     
         window.addEventListener('scroll', handleScroll);
@@ -76,11 +79,11 @@ const handleOffset = (data) => {
 {(LittleNavVisible && isConnected) &&<LittleSideBar/>} 
 
     <div className=" w-[100%] h-[90vh] flex items-center justify-center ">
-       <Search_bar placeholder="search"/>
+       <Search_bar disabled={!isConnected}  placeholder="search"/>
     </div>
     <Navbar2 func={handleOffset} connected={isConnected} sticky={isSticky}/>
     <div className='relative  z-10  px-8'>
-     <input onChange={handleChange} onKeyUp={handleSearch}   className={`${(!isConnected)? 'xs:hidden' : 'block'} mt-10 w-full p-3 text-sm text-sky-950 border-[3px]  text-[15px]  rounded-[4px] bg-slate-200 focus:cyan-500 font-medium 
+     {/* <input onChange={handleChange} onKeyUp={handleSearch}   className={`${(!isConnected)? 'xs:hidden' : 'block'} mt-10 w-full p-3 text-sm text-sky-950 border-[3px]  text-[15px]  rounded-[4px] bg-slate-200 focus:cyan-500 font-medium 
    outline-none  z-10 placeholder:text-sky-900`}
     placeholder="Search" required/>
  <div className="absolute xs:hidden block inset-y-5 end-12  items-center ps-3 pointer-events-none">
@@ -89,7 +92,7 @@ const handleOffset = (data) => {
         </svg>
 
     
-    </div> 
+    </div>  */}
     </div>
       
   
@@ -127,9 +130,8 @@ const handleOffset = (data) => {
 
     </div>
     </div>
-    {/* <div className="w-[1920px] h-[2293px] bg-gradient-to-b from-neutral-50 via-neutral-50 to-neutral-50 " /> */}
-
-
+  
+    {!isConnected && window.scrollY>=400 &&<Popup />}
 <footer className='h-[70px] w-full'>
   <img src={img} />
 </footer>

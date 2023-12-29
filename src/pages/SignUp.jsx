@@ -7,21 +7,52 @@ import { useState } from 'react';
 export const SignUp =(props)=> {
   const [email, setEmail] = useState('');
   const [password,setPassword] = useState('');
+  const [fullName , setFullName]=useState('');
   const [signUp,setSignUp]=useState(false);
+  const [redirect , setRedirect]=useState(false);
   const handleSetEmail = (value) => {
     console.log(email)
     setEmail(value);
   };
+  function isValidEmail(email) {
+    // Define a regular expression pattern for a valid email address
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  
+    // Test the provided email against the regex pattern
+    return emailRegex.test(email);
+  }
 const handleSetPassword=(value)=>
 {
 
   setPassword(value);
   console.log(password)
 }
-const handleSubmit=()=>
+const handleSubmit=(e)=>
 {
+  e.preventDefault()
+  if(!password || !email || !fullName)
+{
+  alert("Please fill in all fields.");
+}
+else if (!isValidEmail(email))
+{
+  alert("Please enter a valid email");
+}
+else if(password.length<8)
+{
+  alert("Please , the password should have at least 8 characters");
+
+}
+else 
+{
+  setRedirect(true);
+}
   setSignUp(!signUp)
 
+}
+const handleSetFullName=(val)=>
+{
+setFullName(val)
 }
 const handleForget=()=>
 {
@@ -41,7 +72,7 @@ const handleSignUp=()=>
             </p> 
         
         <Input 
-          setValue={handleSetEmail}
+          setValue={handleSetFullName}
             placeholder="Full Name"
           />
         
@@ -57,13 +88,13 @@ const handleSignUp=()=>
           />
     
    
-         <button onClick={handleForget} className="lg:w-[450px] h-[50px] sm:h-[70px]    bg-cyan-300 rounded-[10px] flex justify-center md:w-[300px] mx-auto items-center
+         <button onClick={handleSubmit} className="lg:w-[450px] h-[50px] sm:h-[70px]    bg-cyan-300 rounded-[10px] flex justify-center md:w-[300px] mx-auto items-center
           text-cyan-950 text-[23px] font-bold font-['TT Commons'] 
           sm:w-[300px]
           w-[258.4px] sm:px-4 box-content" >
             <p>
-              <Link to="/Login/Otp"> Sign up</Link>
-            
+             { redirect && <Link to="/Login/Otp"> Sign up</Link>}
+            { !redirect &&'Sign up'}
             </p> 
           </button>
           <p className='text-violet-100 lg:w-[450px] 

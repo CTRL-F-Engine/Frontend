@@ -88,7 +88,9 @@ const handleSignUp=()=>
           />
     
    
-         <button onClick={handleSubmit} className="lg:w-[450px] h-[50px] sm:h-[70px]    bg-cyan-300 rounded-[10px] flex justify-center md:w-[300px] mx-auto items-center
+         <button onClick={(e)=>{ 
+          handleSubmit(e)
+        }} className="lg:w-[450px] h-[50px] sm:h-[70px]    bg-cyan-300 rounded-[10px] flex justify-center md:w-[300px] mx-auto items-center
           text-cyan-950 text-[23px] font-bold font-['TT Commons'] 
           sm:w-[300px]
           w-[258.4px] sm:px-4 box-content" >

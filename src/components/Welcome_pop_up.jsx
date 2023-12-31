@@ -6,7 +6,7 @@ export const Welcome_pop_up=()=>
         lg:w-[60%] 
         bg-white 
          md:w-[60%] w-[80%] md:h-fit
-         box-border rounded-[10px]
+         box-border rounded-[4px]
          sm:py-[70px]
          sm:px-[55px]
          py-[40px]

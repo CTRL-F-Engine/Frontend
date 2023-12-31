@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../App.css';
-import imag from '../assets/person.png'
+import imag from '../assets/pdp.png'
 import SidebarHeader from './SidebarHeader';
 import logg from '../assets/log-out.png';
 import List from '../assets/LIST.png'

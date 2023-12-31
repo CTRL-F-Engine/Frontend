@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Col1 from "../components/Col1S";
-import imag from '../assets/person.png';
+import imag from '../assets/pdp.png';
 import Col2 from "../components/Col2S";
 import Popup from "../components/popupS";
 import Sidebar from '../components/Sidebar';

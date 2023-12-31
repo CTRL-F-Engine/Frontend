@@ -25,7 +25,7 @@ export const Input_search = (props) => {
        sm:w-[75%] sm:mb-0 mb-6 text-[17px]
        pl-[20px]   text-gray-900  lg:text-xl py-2 
        border-sky-950  placeholder:opacity-75
-      focus:border-[2px]  focus:text-gray-900 placeholder:text-gray-900 rounded-[8px] mx-auto placeholder-TT-Commons box-border"
+      focus:border-[2px]  focus:text-gray-900 placeholder:text-gray-900 rounded-[4px] mx-auto placeholder-TT-Commons box-border"
       />
      
  

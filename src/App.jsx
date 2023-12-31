@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+
 import './index.css'; 
 import { Otp } from './pages/OTP';
 import {Login} from './pages/Login';
@@ -17,6 +18,7 @@ import Settings from './Pages/Settings';
 import ListeModerators from './Pages/ListeMod';
 import Add from './Pages/Add';
 import ModifyModerator from './Pages/Modify';
+import { Reset } from './pages/Reset';
 export const Appcontext2=createContext();
 function App() {
   const [isConnected , setIsConnected]=useState(true);
@@ -39,6 +41,7 @@ function App() {
     <Route path="/add" element={<Add />} />
   <Route path="/list" element={<ListeModerators />} />
   <Route path="/settings" element={<Settings />} />
+  <Route path="/reset" element={<Reset />} />
 
        </Routes>    
     </Router>

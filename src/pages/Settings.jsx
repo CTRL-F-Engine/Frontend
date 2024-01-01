@@ -72,7 +72,7 @@ function Content() {
 const [confirmPassword, setConfirmPassword] = useState('');
 
   return (
-    <div className='flex flex-row w-screen  '>
+    <div className='flex flex-row w-screen  bg-page-col'>
       <Sidebar />
     <div className="flex flex-auto flex-col  ml-[5%] mt-[3%] mr-[5%]">
       <h1 className="text-person-col text-[300%] ">Settings</h1>

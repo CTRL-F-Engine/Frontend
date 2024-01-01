@@ -14,10 +14,11 @@ export const Navbar2=(props)=>
   {
     return pdp;
   }
+const [ShowResulet ,setShowResult]=useState(false)
 const [LittleNavVisible , setLittleNavVisible]=useState(false);
 
     const [search,setSearch]=useState('');
-    const nav=useRef(null);
+    const nav=useRef();
     const [windowWidth,setWindowWidth]=useState(window.innerWidth);
     const handleReseize=()=>
     {
@@ -32,11 +33,14 @@ const [LittleNavVisible , setLittleNavVisible]=useState(false);
         window.removeEventListener('resize', handleReseize);
     }
     },[windowWidth])
-    useEffect(()=>
-    {
-  props.func(nav.current.getBoundingClientRect().top);
-  console.log(nav.current.getBoundingClientRect().top);
+    useEffect(() => {
+      console.log('inside navbar2')
+      if (nav.current) {
+        props.func(window.innerHeight);
+        console.log(nav.current.getBoundingClientRect().top);
+      }
     },[]);
+    
  const [isVisible, setVisible]=useState(true);
  let handleVisible = () => {
     setVisible(!isVisible);
@@ -55,13 +59,11 @@ const [LittleNavVisible , setLittleNavVisible]=useState(false);
         setSearch(e.target.value); 
     }
     return (
-      <div className="w-[100vw] z-20 relative">
-<div ref={nav} className={`   ${
+     ( <div className="w-[100vw] z-20 relative">
+{ (<div ref={nav} className={`   ${
         props.sticky && 'fixed top-0 left-0 w-full  shadow-lg ' 
-      }bg-neutral-50 h-[70px] flex  xs:justify-between px-8 xs:px-10 items-center  justify-between `}>
-    <h1 className="text-cyan-500 w-fit font-bold">
-    LOGO
-</h1>
+      } ${!props.sticky && 'hidden'} bg-neutral-50 h-[70px] flex  xs:justify-between px-8 xs:px-10 items-center  justify-between `}>
+    
 {(LittleNavVisible && props.connected)
  && <LittleSideBarWhite/>
 } 
@@ -79,15 +81,22 @@ const [LittleNavVisible , setLittleNavVisible]=useState(false);
         </div>}
   
     <div className="relative xs:block hidden border-cyan-500 w-[90%] xs:w-[40%]">
-      
-   {(isVisible && !props.connected) && <input onChange={handleChange} onKeyUp={handleSearch}   className="block w-full p-3 text-sm text-sky-950  border-[3px]  text-[15px]  rounded-[4px] bg-slate-200 focus:cyan-500 font-medium 
+     <div className="flex w-full justify-between gap-x-10 items-center">
+
+     <h1 className="text-cyan-500 w-fit font-bold">
+    LOGO
+</h1>  {(isVisible && props.connected) && <input onChange={handleChange} onKeyUp={handleSearch}   className="block w-full p-3 text-sm text-sky-950  border-[3px]  text-[15px]  rounded-[4px] bg-slate-200 focus:cyan-500 font-medium 
    outline-none   placeholder:text-sky-900"
     placeholder="Search" required/>}
-  { (isVisible && !props.connected) &&<div className="absolute inset-y-0 end-3 flex items-center ps-10 pointer-events-none">
+  { (isVisible && props.connected) &&<div className="absolute inset-y-0 end-3 flex items-center ps-10 pointer-events-none">
         <svg className="w-3 h-3 text-sky-950 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
         </svg>
     </div>}
+       </div> 
+
+
+ 
     
 </div>
 {(isVisible && !props.connected) &&<Navbar mode='dark'/>}
@@ -98,8 +107,8 @@ const [LittleNavVisible , setLittleNavVisible]=useState(false);
  bg-white cursor-pointer xs:w-[50px] xs:h-[50px] w-[35px] h-[35px]'>
  <img src={getPdp()}/>
 </div>}
-</div>
-      </div>
+</div>)}
+      </div>)
     
     
 

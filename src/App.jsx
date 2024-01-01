@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+
 import './index.css'; 
 import { Otp } from './pages/Otp';
 import {Login} from './pages/Login';
@@ -12,10 +13,16 @@ import {New_password} from './pages/new-password';
 import {Home} from './pages/Home';
 import { useContext } from 'react'
 import { createContext } from 'react'
+import { useState } from 'react'; 
+import Upload from './Pages/Upload';
+import Settings from './Pages/Settings';
+import ListeModerators from './Pages/ListeMod';
+import Add from './Pages/Add';
+import ModifyModerator from './Pages/Modify';
+import { Reset } from './pages/Reset';
 import { useState } from 'react';  
 import { AuthProvider } from './context/AuthContext'
 export const Appcontext2=createContext();
-
 function App() {
   const [isConnected , setIsConnected]=useState(true);
 
@@ -33,8 +40,13 @@ function App() {
     <Route path='/Otp' element={<Otp/>}/>
     <Route path='/Signup' element={<SignUp/>}/>
     <Route path='/' element={<Home/>}/>
-    <Route path='/password-reset-confirm/:uidb64/:token' element={<New_password/>}/>
-       </Routes>   
+      <Route path="/upload" element={<Upload />} />
+    <Route path="/modify-moderator" element={<ModifyModerator />} />
+    <Route path="/add" element={<Add />} />
+  <Route path="/list" element={<ListeModerators />} />
+  <Route path="/settings" element={<Settings />} />
+  <Route path='/password-reset-confirm/:uidb64/:token' element={<New_password/>}/> 
+    </Routes> 
        </AuthProvider>  
     </Router>
       

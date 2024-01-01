@@ -1,6 +1,9 @@
 import { useState } from "react";
 import axiosInstance from "../utils/AxiosInstance";
 import { useNavigate, useParams } from 'react-router-dom';
+import { Forget_pop_up } from "../components/Forget_pop_up"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const New_password = () => {
     const navigate = useNavigate();
@@ -12,6 +15,12 @@ export const New_password = () => {
         'uidb64': uidb64,
         'token': token
     }
+    const handleSetPassword=(value)=>
+{
+
+    setNewPassword(value);
+     
+}
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -28,26 +37,27 @@ export const New_password = () => {
 
             if (response.ok) {
                 const result = await response.json();
-                if (result.status === 200) {
+                    
+                    
                     navigate('/Login');
-                    alert(result.message);
-                }
+                    toast.success("Password changed successfully ! ")
+                    
             } else {
-                // Handle error cases
-                const result = await response.json();
+                if (newPassword.length<= 5){
+                    toast.error("Password must have at least 6 characters !")
+                }
+                const resulterror = await response.json();
                 console.log(result)
-                console.error('Error:', result.message);
+                console.error('Error:', resulterror.message);
             }
         } catch (error) {
             console.error('Error:', error.message);
         }
     }
 
-    return (
-        <form onSubmit={handleSubmit}>
-            <label>New Password:</label>
-            <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
-            <button type="submit">Submit</button>
-        </form>
-    );
+    return (<div className="flex app2 justify-center w-full
+    h-[100vh] items-center
+    ">
+<Forget_pop_up reset={true} onClick={handleSubmit} handleChange={handleSetPassword} type="password" placeholder="New password" content="Confirm" input={true} title="Write your new password  "/>
+    </div>)
 };

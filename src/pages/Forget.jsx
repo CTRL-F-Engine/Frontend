@@ -2,6 +2,8 @@ import { useState } from "react"
 import { Forget_pop_up } from "../components/Forget_pop_up"
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export const Forget =()=>
 {
     const navigate = useNavigate();
@@ -19,10 +21,12 @@ const handleOnClick =async()=>{
     try {
         const response = await axios.post('http://127.0.0.1:8000/password-reset/', { email });
         if (response.status===200){
-        console.log(response.data.message); // Display success message
+            toast.success("A link to reset you password has been sent to your email .")
+        
         }
       } catch (error) {
-        console.error('Error:', error.response.data);
+        toast.error("Please enter a valid email !")
+        
       }
     
 }

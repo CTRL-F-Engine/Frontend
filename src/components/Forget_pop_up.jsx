@@ -34,7 +34,9 @@ export const Forget_pop_up = (props) => {
                 {
                     props.input && <Input_search
                             handleChange={props.handleChange}
-                            placeholder={props.placeholder}/>
+                            placeholder={props.placeholder}
+                            type={props.type}/>
+                            
                 }
                 <Button onClick={props.onClick} content={props.content}/>
             </div>

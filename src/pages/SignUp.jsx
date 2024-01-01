@@ -5,6 +5,8 @@ import { Input } from '../components/Input';
 import { Link } from 'react-router-dom';
 import { useState ,useContext} from 'react';
 import AuthContext from '../context/AuthContext'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const SignUp =(props)=> {
   const [email, setEmail] = useState('');
@@ -79,6 +81,7 @@ const handleLogin=()=>
             
             </p> 
           </button>
+          
           <p className='text-violet-100 lg:w-[450px] 
           mx-auto sm:text-xl text-[14px] text-center'>
            <p className='md:inline mr-3'>

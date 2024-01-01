@@ -2,6 +2,8 @@ import { createContext, useState, useContext, useEffect } from 'react';
 import * as jwt_decode from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 import {decode} from '../utils/decode'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AuthContext = createContext();
 export default AuthContext;
@@ -53,9 +55,10 @@ export const AuthProvider = ({ children ,value}) => {
         localStorage.setItem("authTokens",JSON.stringify(data))
         navigate('/')
       }else{
+        toast.error("invalid credentials! Try again.")
         console.log(response.status);
         console.log("there was an issue");
-        alert("Something went wrong"+response.status);
+        
       }
     } catch (error) {
       console.error("Erreur lors de la connexion :", error);
@@ -85,7 +88,7 @@ export const AuthProvider = ({ children ,value}) => {
       } else {
         console.log(response.status);
         console.log("There was an issue");
-        alert("Something went wrong" + response.status);
+        toast.error("invalid credentials! Try again.")
       }
     } catch (error) {
       console.error("Error during registration:", error);
@@ -115,14 +118,15 @@ export const AuthProvider = ({ children ,value}) => {
       const data = await response.json();
       if(response.status===200){
         console.log("User verified successfuly")
-        alert("Woohoo ! User verified successfully ! ");
+        toast.success("Woohoo ! User verified successfully ! ");
         navigate('/Login')
       }else if (response.status===204){
         console.log(response.status);
         console.log("there was an issue");
+        toast.warning("Code is invalid, user already verified")
         alert("Code is invalid, user already verified "+response.status);
       }else{
-        alert("Passcode not provided !");
+        toast.error("Incorrect passcode! Please try again.")
       }
     } catch (error) {
       console.error("Erreur lors de la connexion :", error);

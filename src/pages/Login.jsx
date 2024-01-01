@@ -5,6 +5,8 @@ import { Input } from '../components/Input';
 import { Link } from 'react-router-dom';
 import { useState ,useContext} from 'react';
 import AuthContext from '../context/AuthContext'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const Login =(props)=> {
   const [email, setEmail] = useState('');
@@ -21,7 +23,7 @@ const handleSetPassword=(value)=>
   console.log(password)
 }
 const handleSubmit = () => {
-  email.length > 0 && loginUser(email, password)
+  loginUser(email, password)
   console.log(email)
   console.log(password)
 }
@@ -35,6 +37,7 @@ const handleSignUp=()=>
 {
 }
   return (
+    
     <div className=" flex flex-col-reverse  app md:flex-row  
     w-full items-center h-full
     justify-around   gap-y-9">
@@ -68,12 +71,13 @@ const handleSignUp=()=>
            Log in
             </p> 
           </button>
+          
           <p className='text-violet-100 lg:w-[450px] 
           mx-auto sm:text-xl text-[14px] text-center'>
            <p className='md:inline mr-3'>
           Don't have an account ?  
             </p> 
-          <button onClick={handleSubmit} className="text-cyan-300 sm:text-xl font-semibold  text-[14px] text-right hover:underline font-['TT Commons']">
+          <button  className="text-cyan-300 sm:text-xl font-semibold  text-[14px] text-right hover:underline font-['TT Commons']">
           <Link to="/Signup"> Sign up</Link>     </button>   
             </p>  
 </div>

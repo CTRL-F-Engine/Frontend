@@ -8,6 +8,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Routes } from 'react-router-dom';
 import { Forget } from './pages/Forget';
 import { SignUp } from './pages/SignUp';
+import {New_password} from './pages/new-password';
 import {Home} from './pages/Home';
 import { useContext } from 'react'
 import { createContext } from 'react'
@@ -29,9 +30,10 @@ function App() {
     <Route path='/Login' element={<Login/>}/>
     <Route path='/Login/Forget' element={<Forget/>}/>
     <Route path='/Welcome' element={<Welcome/>}/>
-    <Route path='/Login/Otp' element={<Otp/>}/>
+    <Route path='/Otp' element={<Otp/>}/>
     <Route path='/Signup' element={<SignUp/>}/>
     <Route path='/' element={<Home/>}/>
+    <Route path='/password-reset-confirm/:uidb64/:token' element={<New_password/>}/>
        </Routes>   
        </AuthProvider>  
     </Router>

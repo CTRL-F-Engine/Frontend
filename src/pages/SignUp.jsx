@@ -3,24 +3,35 @@
 /* eslint-disable no-unused-vars */
 import { Input } from '../components/Input';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState ,useContext} from 'react';
+import AuthContext from '../context/AuthContext'
+
 export const SignUp =(props)=> {
   const [email, setEmail] = useState('');
   const [password,setPassword] = useState('');
+  const {registerUser} = useContext(AuthContext)
+  const [username, setUsername] = useState("")
   const [signUp,setSignUp]=useState(false);
   const handleSetEmail = (value) => {
     console.log(email)
     setEmail(value);
   };
+  const handelSetUsername=(value)=>{
+    
+    setUsername(value);
+
+  }
 const handleSetPassword=(value)=>
 {
-
   setPassword(value);
-  console.log(password)
 }
 const handleSubmit=()=>
 {
-  setSignUp(!signUp)
+  console.log(email);
+  console.log(username);
+  console.log(password);
+  registerUser(email, username, password)
+  
 
 }
 const handleForget=()=>
@@ -28,7 +39,7 @@ const handleForget=()=>
 
 }
 // eslint-disable-next-line no-unused-vars
-const handleSignUp=()=>
+const handleLogin=()=>
 {
 }
   return (
@@ -41,13 +52,15 @@ const handleSignUp=()=>
             </p> 
         
         <Input 
-          setValue={handleSetEmail}
-            placeholder="Full Name"
+          setValue={handelSetUsername}
+            placeholder="Username"
+            name="username"
           />
         
           <Input 
           setValue={handleSetEmail}
             placeholder="Email"
+            name="email"
           />
           
           <Input 
@@ -57,12 +70,12 @@ const handleSignUp=()=>
           />
     
    
-         <button onClick={handleForget} className="lg:w-[450px] h-[50px] sm:h-[70px]    bg-cyan-300 rounded-[10px] flex justify-center md:w-[300px] mx-auto items-center
+         <button onClick={handleSubmit} className="lg:w-[450px] h-[50px] sm:h-[70px]    bg-cyan-300 rounded-[10px] flex justify-center md:w-[300px] mx-auto items-center
           text-cyan-950 text-[23px] font-bold font-['TT Commons'] 
           sm:w-[300px]
           w-[258.4px] sm:px-4 box-content" >
             <p>
-              <Link to="/Login/Otp"> Sign up</Link>
+              Sign up
             
             </p> 
           </button>
@@ -71,7 +84,7 @@ const handleSignUp=()=>
            <p className='md:inline mr-3'>
          Already have an account ?  
             </p> 
-          <button onClick={handleSubmit} className="text-cyan-300 sm:text-xl font-semibold  text-[14px] text-right hover:underline font-['TT Commons']">
+          <button onClick={handleLogin} className="text-cyan-300 sm:text-xl font-semibold  text-[14px] text-right hover:underline font-['TT Commons']">
           <Link to="/Login"> Log In</Link>
 
         

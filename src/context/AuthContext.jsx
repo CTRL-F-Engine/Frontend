@@ -18,29 +18,37 @@ export const AuthProvider = ({ children ,value}) => {
       : null
 
   })
+  
   const [loading,setLoading] = useState(true)
-  const isConnected = value?.isConnected || false;
-  const setIsConnected = value?.setIsConnected || (() => {});
+  const [isConnected,setIsConnected]=useState()
   const navigate = useNavigate();
   const loginUser = async (email, password) => {
+    const requestBody = {
+      email: email,
+      password: password
+    };
+    
     try {
       const response = await fetch("http://127.0.0.1:8000/login/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          email,
-          password
-        }),
+        body: JSON.stringify(requestBody),
       });
 
       const data = await response.json();
-      console.log(data);
+      console.log(data)
+      const User={
+        "email":response.email
+      }
+      
       if(response.status===200){
         console.log("logged in")
+        localStorage.setItem("User",JSON.stringify(User))
+        localStorage.setItem("access",JSON.stringify(response.access_token))
+        localStorage.setItem("refresh",JSON.stringify(response.refresh_token))
         setAuthTokens(data)
-        setUser(decode(data.access_token))
         setIsConnected(true)
         localStorage.setItem("authTokens",JSON.stringify(data))
         navigate('/')
@@ -54,25 +62,36 @@ export const AuthProvider = ({ children ,value}) => {
     }
   };
 
-  const registerUser =async(email,username,password) =>  {
-    const response = await fetch("http://127.0.0.1:8000/register/",{
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json"
-      },
-      body:JSON.stringify(
-        email,username,password
-      )
+
+  const registerUser = async (email, username, password) => {
+    const requestBody = {
+      email: email,
+      username: username,
+      password: password
+    };
+  
+    try {
+      const response = await fetch("http://127.0.0.1:8000/register/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(requestBody)
+      });
+  
+      if (response.status === 201) {
+        console.log("Registered successfully");
+        navigate('/Otp')
+      } else {
+        console.log(response.status);
+        console.log("There was an issue");
+        alert("Something went wrong" + response.status);
+      }
+    } catch (error) {
+      console.error("Error during registration:", error);
+      alert("Error during registration");
     }
-    )
-    if (response.status===201){
-      console.log("registred successfully")
-    }else{
-      console.log(response.status);
-      console.log("there was an issue");
-      alert("Something went wrong"+response.status);
-    }
-  }
+  };
   const logoutUser = ()=>{
     setAuthTokens(null)
     setUser(null)
@@ -81,6 +100,35 @@ export const AuthProvider = ({ children ,value}) => {
     navigate('/Login')
 
   }
+  const otpVerify = async (otp) => {
+    try {
+      const response = await fetch("http://127.0.0.1:8000/verifyEmail/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          otp
+        }),
+      });
+
+      const data = await response.json();
+      if(response.status===200){
+        console.log("User verified successfuly")
+        alert("Woohoo ! User verified successfully ! ");
+        navigate('/Login')
+      }else if (response.status===204){
+        console.log(response.status);
+        console.log("there was an issue");
+        alert("Code is invalid, user already verified "+response.status);
+      }else{
+        alert("Passcode not provided !");
+      }
+    } catch (error) {
+      console.error("Erreur lors de la connexion :", error);
+    }
+  };
+  
   const contextData = {
     user,
     setUser,
@@ -91,13 +139,17 @@ export const AuthProvider = ({ children ,value}) => {
     logoutUser,
     isConnected,
     setIsConnected,
+    otpVerify,
   }
   useEffect(()=>{
-    if (authTokens){
-      setUser(decode(authTokens.access_token))
+    const storedTokens = localStorage.getItem("authTokens");
+    if (storedTokens){
+      setIsConnected(true);
+      setAuthTokens(JSON.parse(storedTokens));
+      setUser(decode(storedTokens.access_token))
     }
     setLoading(false)
-  },[authTokens,loading])
+  },[])
   return (
     <AuthContext.Provider value={contextData}>
       {loading ? null : children}

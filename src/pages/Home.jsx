@@ -30,10 +30,7 @@ const handleOffset = (data) => {
     
       console.log('Data:', data);
     };
-    useEffect(()=>
-    {
-
-    },[isConnected])
+    
      useEffect(() => {
         console.log('Ref inside useEffect:', ref);
       }, [ref]);

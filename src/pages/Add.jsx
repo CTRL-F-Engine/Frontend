@@ -58,7 +58,7 @@ function Content() {
     setShowPopup(false);
   };
   return (
-    <div className='flex flex-row w-screen  '>
+    <div className='flex flex-row w-screen bg-page-col '>
       <Sidebar />
     <div className="flex flex-auto flex-col  ml-[3%] mt-[3%] mr-[3%]">
       <h1 className="text-person-col text-[300%] ">Add Moderator</h1>

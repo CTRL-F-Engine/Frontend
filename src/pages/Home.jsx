@@ -8,7 +8,7 @@ import { Navbar } from '../components/Navbar';
 import { Navbar2 } from '../components/Navbar2';
 import { Article } from '../components/Article';
 import img from '../assets/footer.svg';
-import { Appcontext2 } from '../App';
+import AuthContext from '../context/AuthContext'
 import pdp from '../assets/pdp.png'
 import { Btn } from '../components/Btn';
 import Popup from '../components/PopupSearch';
@@ -20,7 +20,7 @@ export const Home =()=>
   }
 const [showPopup , setShowPopup]=useState(true);
 const [LittleNavVisible , setLittleNavVisible]=useState(false);
-const {isConnected} = useContext(Appcontext2)
+const {isConnected} = useContext(AuthContext)
 const [ref,setRef]=useState(null);
 const [search,setSearch]=useState('');
 const [isSticky, setIsSticky] = useState(false);
@@ -30,10 +30,7 @@ const handleOffset = (data) => {
     
       console.log('Data:', data);
     };
-    useEffect(()=>
-    {
-
-    },[isConnected])
+    
      useEffect(() => {
       }, [ref]);
      

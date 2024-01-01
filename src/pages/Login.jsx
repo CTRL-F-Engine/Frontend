@@ -3,10 +3,15 @@
 /* eslint-disable no-unused-vars */
 import { Input } from '../components/Input';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState ,useContext} from 'react';
+import AuthContext from '../context/AuthContext'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 export const Login =(props)=> {
   const [email, setEmail] = useState('');
   const [password,setPassword] = useState('');
+  const {loginUser} = useContext(AuthContext)
   const handleSetEmail = (value) => {
     console.log(email)
     setEmail(value);
@@ -17,18 +22,12 @@ const handleSetPassword=(value)=>
   setPassword(value);
   console.log(password)
 }
-const handleSubmit=()=>
-{
-if(!password || !email)
-{
-  alert("Please fill in all fields.");
+const handleSubmit = () => {
+  loginUser(email, password)
+  console.log(email)
+  console.log(password)
+}
 
-}
-else 
-{
-  // the logic for loging in 
-}
-}
 const handleForget=()=>
 {
 
@@ -38,6 +37,7 @@ const handleSignUp=()=>
 {
 }
   return (
+    
     <div className=" flex flex-col-reverse  app md:flex-row  
     w-full items-center h-full
     justify-around   gap-y-9">
@@ -48,12 +48,14 @@ const handleSignUp=()=>
           <Input 
           setValue={handleSetEmail}
             placeholder="Email"
+            name="email"
           />
           
           <Input 
             setValue={handleSetPassword}
             placeholder="Password"
             type="password"
+            name="password"
           />
        <p className='lg:w-[450px] mx-auto text-right'>
           <button className="text-cyan-300 hover:underline text-[14px] sm:text-xl  text-right font-semibold font-['TT Commons'] w-[100%] mr-0">
@@ -69,12 +71,13 @@ const handleSignUp=()=>
            Log in
             </p> 
           </button>
+          
           <p className='text-violet-100 lg:w-[450px] 
           mx-auto sm:text-xl text-[14px] text-center'>
            <p className='md:inline mr-3'>
           Don't have an account ?  
             </p> 
-          <button className="text-cyan-300 sm:text-xl font-semibold  text-[14px] text-right hover:underline font-['TT Commons']">
+          <button  className="text-cyan-300 sm:text-xl font-semibold  text-[14px] text-right hover:underline font-['TT Commons']">
           <Link to="/Signup"> Sign up</Link>     </button>   
             </p>  
 </div>

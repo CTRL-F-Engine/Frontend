@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import myImage from '../assets/favor.svg';
+import myImage from '../assets/Favor.svg';
 import setting from '../assets/settings.svg';
 import { LogOut } from './LogOut';
 

@@ -9,7 +9,7 @@ function Col1({ props }) {
         <h2 className="text-[110%] text-person-col ">Full Name</h2>
       <div className="w-[100%]">
         <input
-          className="bg-page-col text-item-col sm:h-11 h-7 w-[100%] rounded-md pl-3"
+          className="bg-page-col outline-none text-item-col sm:h-11 h-7 w-[100%] rounded-md pl-3"
           value={user.title}
           onChange={(e) => handleInputChange("title", e.target.value)}
         />
@@ -20,7 +20,7 @@ function Col1({ props }) {
         <h2 className="text-[110%] text-person-col ">Username</h2>
       <div className="w-[100%]">
         <input
-          className="bg-page-col text-item-col sm:h-11 h-7 w-[100%] rounded-md pl-3"
+          className="bg-page-col outline-none text-item-col sm:h-11 h-7 w-[100%] rounded-md pl-3"
           value={user.username}
           onChange={(e) => handleInputChange("username", e.target.value)}
         />
@@ -30,7 +30,7 @@ function Col1({ props }) {
      <h2 className="text-[110%] text-person-col ">Email</h2>
       <div className="w-[100%]">
         <input
-          className="bg-page-col text-item-col sm:h-11 h-7 w-[100%] rounded-md pl-3"
+          className="bg-page-col outline-none text-item-col sm:h-11 h-7 w-[100%] rounded-md pl-3"
           value={user.Email}
           onChange={(e) => handleInputChange("Email", e.target.value)}
         />
@@ -38,7 +38,7 @@ function Col1({ props }) {
       <h2 className="text-[110%] text-person-col ">New Password</h2>
       <div className="w-[100%]">
         <input
-          className="bg-page-col text-item-col sm:h-11 h-7 w-[100%] rounded-md pl-3"
+          className="bg-page-col outline-none text-item-col sm:h-11 h-7 w-[100%] rounded-md pl-3"
           type="password"
           value={user.Password}
           onChange={(e) => handleInputChange("Password", e.target.value)}
@@ -47,7 +47,7 @@ function Col1({ props }) {
       <h2 className="text-[110%] text-person-col ">Confirm Password</h2>
       <div className="w-[100%]">
         <input
-          className="bg-page-col text-item-col sm:h-11 h-7 w-[100%] rounded-md pl-3"
+          className="bg-page-col outline-none text-item-col sm:h-11 h-7 w-[100%] rounded-md pl-3"
           type="password"
           value={user.confirmPassword}
           onChange={(e) => handleInputChange("confirmPassword", e.target.value)}

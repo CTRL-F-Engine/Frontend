@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import pdp from '../assets/pdp.png'
 import { LittleSideBarWhite } from "./LittleSideBarWhite";
 
-export const Navbar2=(props)=>
+export const Navbar3=(props)=>
 {
   const getPdp=()=>
   {

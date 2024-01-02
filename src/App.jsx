@@ -18,6 +18,7 @@ import Settings from './Pages/Settings';
 import ListeModerators from './Pages/ListeMod';
 import Add from './Pages/Add';
 import ModifyModerator from './Pages/Modify';
+import {ResultSearch} from './pages/ResultSearch';
 import { Reset } from './pages/Reset';
 export const Appcontext2=createContext();
 function App() {

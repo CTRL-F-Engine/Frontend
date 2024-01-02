@@ -21,6 +21,7 @@ import ModifyModerator from './Pages/Modify';
 import {ResultSearch} from './pages/ResultSearch';
 import {Favors} from './pages/Favors';
 import { Reset } from './pages/Reset';
+import {AffichageArticle} from './pages/AffichageArticle'
 export const Appcontext2=createContext();
 function App() {
   const [isConnected , setIsConnected]=useState(true);

@@ -5,6 +5,7 @@ import { Appcontext2 } from '../App';
 import pdp from '../assets/pdp.png'
 import { Navbar3 } from '../components/Navbar3';
 import Filter from '../components/Filter';
+import img from '../assets/footer.svg';
 
 export const Favors =()=>
 {
@@ -97,7 +98,9 @@ const handleOffset = (data) => {
 
     </div>
     </div>
-    
+    <footer className='h-[70px] w-full'>
+  <img src={img} />
+</footer> 
   
     </div>)
 }

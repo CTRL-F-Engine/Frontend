@@ -33,7 +33,7 @@ function Notcool() {
       <h1 className="text-person-col text-[300%]">List Of Moderators</h1>
       <div className="bg-sidebar space-y-8 mt-10 h-96 lg:h-[500px] md:h-[470px] w-[95%]  text-item-col rounded-md shadow p-9 pt-12 overflow-y-auto scrollbar-thin scrollbar-thumb-white">
         {ModeratorsList.map((moderator, index) => (
-          <div key={index} className="flex flex-row space-x-20 ">
+          <div key={index} className="flex flex-row sm:space-x-20 space-x-14 ">
             <div className="w-10 h-10 flex-shrink-0 ">
               <h3 className='mb-3'>Photo</h3>
               <img src={moderator.Photo} alt={moderator.Moderator} className="w-full h-full rounded-md mb-2" />

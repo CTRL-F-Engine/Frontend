@@ -58,11 +58,11 @@ function Content() {
     setShowPopup(false);
   };
   return (
-    <div className='flex flex-row w-screen bg-page-col '>
+    <div className='flex flex-row  w-screen bg-page-col '>
       <Sidebar />
-    <div className="flex flex-auto flex-col  ml-[3%] mt-[3%] mr-[3%]">
-      <h1 className="text-person-col text-[300%] ">Add Moderator</h1>
-      <div className="bg-sidebar mt-10 h-[60%]  rounded-md shadow p-9 pt-12 flex flex-row space-x-10">
+    <div className="flex flex-auto flex-col ml-[3%] mt-[3%] mr-[3%] relative">
+      <h1 className="text-person-col sm:text-[300%] text-[250%] ">Add Moderator</h1>
+      <div className="bg-sidebar sm:mt-10 mt-5 sm:h-[60%] h-[70%]  rounded-md shadow p-9 sm:pt-12 pt-6 flex sm:flex-row flex-col sm:space-x-10">
         <Col1
           fullName={fullName}
           setFullName={setFullName}
@@ -80,9 +80,10 @@ function Content() {
           setConfirmPassword={setConfirmPassword}
         />
       </div>
+      
       <button
-        className="absolute right-[3%] bottom-[10%] text-sidebar pl-12 text-[20px] flex items-center bg-person-col h-12 w-36"
-        onClick={handleAddModerator}
+        className="absolute right-0 sm:bottom-12 bottom-6 sm:w-[110px] w-[100%] box-border xs:h-[38px] h-[30px] text-[13px] sm:text-[15px] font-medium sm:font-bold  text-sidebar  bg-person-col font-['TT Commons'] sm:px-4 px-2 sm:rounded-[5px] rounded-[3px]"
+        onClick={handleAddModerator} 
       >
         Add
       </button>

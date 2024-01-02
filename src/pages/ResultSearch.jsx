@@ -1,13 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState, useContext } from 'react';
-import { Standard_button } from '../components/Standard_button';
-import { Button } from '../components/Button';
-import { LittleSideBar } from '../components/LittleSideBar';
-import { Search_bar } from '../components/Search_bar';
-import { Navbar } from '../components/Navbar';
-import { Navbar2 } from '../components/Navbar2';
 import { Article } from '../components/Article';
-import img from '../assets/footer.svg';
 import { Appcontext2 } from '../App';
 import pdp from '../assets/pdp.png'
 import { Navbar3 } from '../components/Navbar3';
@@ -15,10 +8,7 @@ import Filter from '../components/Filter';
 
 export const ResultSearch =()=>
 {
-  const getPdp=()=>
-  {
-    return pdp;
-  }
+
 const {isConnected} = useContext(Appcontext2)
 const [ref,setRef]=useState(null);
 const [search,setSearch]=useState('');
@@ -69,7 +59,6 @@ const handleOffset = (data) => {
       }
     return (
     <div  className='w-full h-screen flex flex-col'>
-
     <Navbar3 func={handleOffset} connected={true} sticky={true}/>
     <div className='flex flex-row space-x-[15%] mt-28  px-10'>
         <div className='w-[78%] h-7 bg-search-col relative'>

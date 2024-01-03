@@ -6,6 +6,7 @@ import pdp from '../assets/pdp.png'
 import { Navbar3 } from '../components/Navbar3';
 import Filter from '../components/Filter';
 import img from '../assets/footer.svg';
+import Bookmark2 from '../assets/Bookmark2.png';
 
 export const Favors =()=>
 {

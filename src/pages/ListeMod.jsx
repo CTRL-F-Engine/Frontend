@@ -25,7 +25,6 @@ function Notcool() {
     setSelectedModerator(moderatorName);
     setShowModal(true);
   };
-
   return (
     <div className='flex flex-row w-screen bg-page-col '>
       <Sidebar />
@@ -33,29 +32,39 @@ function Notcool() {
       <h1 className="text-person-col text-[300%]">List Of Moderators</h1>
       <div className="bg-sidebar space-y-8 mt-10 h-96 lg:h-[500px] md:h-[470px] w-[95%]  text-item-col rounded-md shadow p-9 pt-12 overflow-y-auto scrollbar-thin scrollbar-thumb-white">
         {ModeratorsList.map((moderator, index) => (
-          <div key={index} className="flex flex-row sm:space-x-20 space-x-14 ">
+          <div key={index} className="flex flex-row sm:space-x-14 space-x-14 ">
             <div className="w-10 h-10 flex-shrink-0 ">
-              <h3 className='mb-3'>Photo</h3>
+            {index === 0 ? (
+                  <h3 className='mb-3'>Photo</h3>
+                ) : null}
               <img src={moderator.Photo} alt={moderator.Moderator} className="w-full h-full rounded-md mb-2" />
             </div>
             
             <div className="w-40 flex-shrink-0">
-              <h3 className='mb-5'>Moderator</h3>
+            {index === 0 ? (
+                  <h3 className='mb-5'>Moderator</h3>
+                ) : null}
               <span className="text-person-col">{moderator.Moderator}</span>
             </div>
             
             <div className="w-52 flex-shrink-0">
-              <h3 className='mb-5'>Email</h3>
+            {index === 0 ? (
+                  <h3 className='mb-5'>Email</h3>
+                ) : null}
               <span className="text-person-col">{moderator.Email}</span>
             </div>
             
             <div className="w-40 flex-shrink-0">
-              <h3 className='mb-5'>Phone Number</h3>
+            {index === 0 ? (
+                  <h3 className='mb-5'>Phone Number</h3>
+                ) : null}
               <span className="text-person-col">{moderator.Phone}</span>
             </div>
             
             <div className="w-28 flex-shrink-0">
-              <h3 className='mb-5 pl-3'>Action</h3>
+            {index === 0 ? (
+                  <h3 className='mb-5 pl-3'>Action</h3>
+                ) : null}
               <div className="flex flex-row space-x-2">
                 <Link to="/modify-moderator">
                   <a href={moderator.link} target="_blank">

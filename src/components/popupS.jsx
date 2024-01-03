@@ -9,7 +9,7 @@ function Popup({ visible, onClose }) {
     <div className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center">
       <div className=" h-64 w-96 bg-white  rounded flex flex-col justify-center items-center">
       <button
-            className="place-self-end text-item-col text-md bg-sidebar " 
+            className="place-self-end text-item-col text-md bg-sidebar pr-5" 
             onClick={onClose}
           >
             x

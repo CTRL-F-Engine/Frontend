@@ -42,18 +42,26 @@ export const AuthProvider = ({ children ,value}) => {
       const data = await response.json();
       console.log(data)
       const User={
-        "email":response.email
+        "email":data.email,
+        "user_type":data.user_type
       }
       
       if(response.status===200){
         console.log("logged in")
         localStorage.setItem("User",JSON.stringify(User))
-        localStorage.setItem("access",JSON.stringify(response.access_token))
-        localStorage.setItem("refresh",JSON.stringify(response.refresh_token))
+        localStorage.setItem("access",JSON.stringify(data.access_token))
+        localStorage.setItem("refresh",JSON.stringify(data.refresh_token))
         setAuthTokens(data)
         setIsConnected(true)
         localStorage.setItem("authTokens",JSON.stringify(data))
-        navigate('/')
+        console.log('simpleeee')
+        if (data.user_type==="simple"){
+          
+          navigate('/')
+        }else if (data.user_type==="admin"){
+          navigate('/upload')
+        }
+        
       }else{
         toast.error("invalid credentials! Try again.")
         console.log(response.status);

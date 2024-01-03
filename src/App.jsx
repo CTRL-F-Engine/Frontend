@@ -13,13 +13,12 @@ import {New_password} from './pages/new-password';
 import {Home} from './pages/Home';
 import { useContext } from 'react'
 import { createContext } from 'react'
-import { useState } from 'react'; 
-import Upload from './Pages/Upload';
-import Settings from './Pages/Settings';
-import ListeModerators from './Pages/ListeMod';
-import Add from './Pages/Add';
-import ModifyModerator from './Pages/Modify';
-import { Reset } from './pages/Reset';
+
+import Upload from './pages/Upload';
+import Settings from './pages/Settings';
+import ListeModerators from './pages/ListeMod';
+import Add from './pages/Add';
+import ModifyModerator from './pages/Modify';
 import { useState } from 'react';  
 import { AuthProvider } from './context/AuthContext'
 export const Appcontext2=createContext();

@@ -12,13 +12,14 @@ function Col2({ props }) {
 
   return (
     <div className='flex flex-col relative'>
-      <img src={user.img} alt={user.title} className="lg:h-48 lg:w-48 md:h-32 md:w-32 h-24 w-24 rounded-full" />
+      <img src={`http://127.0.0.1:8000${user.photo}`} alt={user.FullName} className="lg:h-48 lg:w-48 md:h-32 md:w-32 h-24 w-24 rounded-full" />
       <input
         type="file"
         accept="image/*"
+        name="photo"
         style={{ display: 'none' }}
         ref={fileInputRef}
-        onChange={(e) => handleImageChange(e.target.files[0])}
+        onChange={(e) => handleImageChange(e)}
       />
       <img
         src={image}

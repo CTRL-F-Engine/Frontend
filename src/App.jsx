@@ -40,7 +40,7 @@ function App() {
     <Route path='/Signup' element={<SignUp/>}/>
     <Route path='/' element={<Home/>}/>
       <Route path="/upload" element={<Upload />} />
-    <Route path="/modify-moderator" element={<ModifyModerator />} />
+    <Route path="/modify-moderator/:id" element={<ModifyModerator />} />
     <Route path="/add" element={<Add />} />
   <Route path="/list" element={<ListeModerators />} />
   <Route path="/settings" element={<Settings />} />

@@ -112,7 +112,6 @@ function Content() {
       });
   
       if (response.status === 202) {
-        window.location.reload();
         setShowpopup(true);
       } else {
         const errorText = await response.text();

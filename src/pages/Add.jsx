@@ -44,7 +44,7 @@ function Content() {
           username,
         }),
       });
-      console.log("hellllooooooo")
+      console.log(response.status)
       if (response.status===201) {
         console.log("hellllooooooo")
         // Successfully added moderator to the database
@@ -52,7 +52,8 @@ function Content() {
         // You may also update the local state or perform any other actions
       } else {
         // Handle error
-        toast.error("There was an issue.")
+        const errorText = await response.text();
+        toast.error(errorText)
       }
     } catch (error) {
       toast.error("There was an issue.Please, try again .")

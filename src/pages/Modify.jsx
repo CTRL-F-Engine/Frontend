@@ -1,19 +1,62 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Col1 from "../components/Col1M";
 import Col2 from "../components/Col2M";
 import Popup from "../components/popupM";
 import Sidebar from '../components/Sidebar';
+import { useNavigate, useParams } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function Content() {
   // Initialize state with the moderator data
   const [moderator, setModerator] = useState({
-    fullName: 'Abla RABIA',
-    username: 'Abla_08',
+    FullName: '',
+    username: '',
     link: '',
-    description: 'Administrator',
-    email: 'la_rabii@esi.dz',
-    password: 'azerty',
-    phoneNumber: '+213561739469',
+    description: '',
+    email: '',
+    password: '',
+    PhoneNumber: '',
   });
+  
+  
+  const [isEditMode, setIsEditMode] = useState(false);
+  //l'affichage des infos de l'utilisateur 
+  const moderatorId=useParams()
+  const id =moderatorId.id
+  useEffect(() => {
+    
+    const fetchUserData = async () => {
+      
+      try {
+        
+        
+        const token=localStorage.getItem("access")
+      let token2 = token.replace(/"/g, '');
+        const response = await fetch(`http://127.0.0.1:8000/manage/modify-moderator/${id}`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token2}`,
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (response.ok) {
+          const userData = await response.json();
+          setModerator(userData);
+          
+          setIsEditMode(true); // Enable edit mode since you have fetched existing user data
+          console.log(userData)
+        } else {
+          // Handle error
+          console.error("Error fetching user data");
+        }
+      } catch (error) {
+        // Handle error
+        console.error("Error fetching user data:", error);
+      }
+    };
+    fetchUserData();
+  }, []);
 
   // Handle input changes
   const handleInputChange = (key, value) => {
@@ -26,11 +69,36 @@ function Content() {
   };
 
   // Handle save action
-  const handleSave = () => {
-   
-    setShowpopup(true);
-    // Add logic to save the moderator data (e.g., send it to a server)
-    console.log("Moderator data saved:", moderator);
+  const handleSave = async () => {
+    
+  
+    try {
+      const formData = new FormData();
+  
+      formData.append('email', moderator.email);
+      formData.append('username', moderator.username);
+      formData.append('FullName', moderator.FullName);
+      formData.append('PhoneNumber', moderator.PhoneNumber);
+      const token = localStorage.getItem('access');
+      let token2 = token.replace(/"/g, '');
+  
+      const response = await fetch(`http://127.0.0.1:8000/manage/modify-moderator/${id}`, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token2}`,
+        },
+        body: formData,
+      });
+      console.log(response.status)
+      if (response.status === 200) {
+        setShowpopup(true);
+      } else {
+        const errorText = await response.text();
+        toast.error(`${errorText}`);
+      }
+    } catch (error) {
+      toast.error("There was an issue. Please, try again.");
+    }
   };
 
   /****** 

@@ -13,11 +13,11 @@ import {Home} from './pages/Home';
 import { useContext } from 'react'
 import { createContext } from 'react'
 import { useState } from 'react'; 
-import Upload from './Pages/Upload';
-import Settings from './Pages/Settings';
-import ListeModerators from './Pages/ListeMod';
-import Add from './Pages/Add';
-import ModifyModerator from './Pages/Modify';
+import Upload from './pages/Upload';
+import Settings from './pages/Settings';
+import ListeModerators from './pages/ListeMod';
+import Add from './pages/Add';
+import ModifyModerator from './pages/Modify';
 import {ResultSearch} from './pages/ResultSearch';
 import {Favors} from './pages/Favors';
 import { Reset } from './pages/Reset';

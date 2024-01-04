@@ -58,11 +58,11 @@ function Content() {
     setShowPopup(false);
   };
   return (
-    <div className='flex flex-row  w-screen bg-page-col '>
+    <div className='flex flex-row w-screen  bg-page-col '>
       <Sidebar />
-    <div className="flex flex-auto flex-col ml-[3%] mt-[3%] mr-[3%] relative">
-      <h1 className="text-person-col sm:text-[300%] text-[250%] ">Add Moderator</h1>
-      <div className="bg-sidebar sm:mt-10 mt-5 sm:h-[60%] h-[70%]  rounded-md shadow p-9 sm:pt-12 pt-6 flex sm:flex-row flex-col sm:space-x-10">
+    <div className="flex flex-auto flex-col ml-[3%] mt-8 mr-[3%] ">
+      <h1 className="text-person-col text-5xl whitespace-nowrap">Add Moderator</h1>
+      <div className="bg-sidebar sm:mt-10 mt-5 sm:h-96 h-[475px]  rounded-md shadow p-9 sm:pt-12 pt-6 flex sm:flex-row flex-col -space-y-10 sm:space-y-0 sm:space-x-10">
         <Col1
           fullName={fullName}
           setFullName={setFullName}
@@ -81,12 +81,16 @@ function Content() {
         />
       </div>
       
+     
+      <div className="flex flex-auto flex-col place-items-end h-[21.5vh] sm:h-[31vh] " >
+      
       <button
-        className="absolute right-0 sm:bottom-12 bottom-6 sm:w-[110px] w-[100%] box-border xs:h-[38px] h-[30px] text-[13px] sm:text-[15px] font-medium sm:font-bold  text-sidebar  bg-person-col font-['TT Commons'] sm:px-4 px-2 sm:rounded-[5px] rounded-[3px]"
-        onClick={handleAddModerator} 
+        className="sm:mt-24 mt-5  sm:w-[110px] w-full box-border xs:h-[38px] h-[30px] text-[13px] sm:text-[15px] font-medium sm:font-bold  text-sidebar  bg-person-col font-['TT Commons'] sm:px-4 px-2 sm:rounded-[5px] rounded-[3px]"
+        onClick={handleAddModerator}  
       >
         Add
       </button>
+      </div>
       <Popup visible={showpopup} onClose={() => setShowpopup(false)} />
      
       

@@ -25,7 +25,7 @@ function Sidebar() {
   const [selectedItem, setSelectedItem] = useState(null);
 
   return (
-    <div className="flex flex-col h-full bg-sidebar p-0 lg:w-64 md:w-60 w-48 relative">
+    <div className="flex flex-col  bg-sidebar p-0 lg:w-64 md:w-60 w-48 relative">
       <SidebarHeader props={user} />
       <ul className="w-full list-none flex-col  items-start justify-start flex-end lg:mb-60 md:mb-48 mb-44">
       <Link to="/upload">

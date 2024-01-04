@@ -3,7 +3,7 @@ import React from "react";
 function Col2({ username, setUsername, phoneNumber, setPhoneNumber, confirmPassword, setConfirmPassword }) {
   return (
     <div className="col2 flex flex-auto flex-col sm:space-y-3 space-y-1 ">
-      <h2 className="text-[110%] text-person-col ">Username</h2>
+      <h2 className="text-lg text-person-col ">Username</h2>
       <div className="w-[100%]">
         <input
           className="bg-page-col outline-none text-item-col sm:h-11 h-7 w-[100%] rounded-md pl-3"
@@ -12,7 +12,7 @@ function Col2({ username, setUsername, phoneNumber, setPhoneNumber, confirmPassw
           placeholder="Abla08"
         />
       </div>
-      <h2 className="text-[110%] text-person-col ">Phone Number</h2>
+      <h2 className="text-lg text-person-col ">Phone Number</h2>
       <div className="w-[100%]">
         <input
           className="bg-page-col outline-none text-item-col sm:h-11 h-7 w-[100%] rounded-md pl-3"
@@ -21,7 +21,7 @@ function Col2({ username, setUsername, phoneNumber, setPhoneNumber, confirmPassw
           placeholder="+213561739469"
         />
       </div>
-      <h2 className="text-[110%] text-person-col ">Confirm Password</h2>
+      <h2 className="text-lg text-person-col ">Confirm Password</h2>
       <div className="w-[100%]">
         <input
           className="bg-page-col outline-none text-item-col sm:h-11 h-7 w-[100%] rounded-md pl-3"

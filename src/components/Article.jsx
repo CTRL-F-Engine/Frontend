@@ -7,7 +7,7 @@ import { KeyWord } from './KeyWord';
 import { ReadMore } from './ReadMore';
 
 export const Article = (props) => {
-  const [isBookmarked, setIsBookmarked] = useState(false);
+  const [isBookmarked, setIsBookmarked] = useState(props.isFavorPage);
 
   const handleSave = () => {
     setIsBookmarked(!isBookmarked);
@@ -29,13 +29,13 @@ export const Article = (props) => {
           <KeyWord content="NLP" />
         </div>
         <div className="flex justify-end gap-x-3">
-          <button onClick={handleSave}>
-            <img
-              className="sm:w-8 w-5"
-              src={props.isFavorPage ? Bookmark2 : isBookmarked ? Bookmark2 : myImage}
-              alt="Bookmark"
-            />
-          </button>
+        <button onClick={handleSave}>
+          <img
+            className="sm:w-8 w-5"
+            src={isBookmarked ? Bookmark2 : myImage}
+            alt="Bookmark"
+          />
+        </button>
           <ReadMore />
         </div>
       </div>

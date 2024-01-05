@@ -22,6 +22,7 @@ function Notcool() {
                   },
                 });
                 setModerators(response.data);
+                console.log(response.data)
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -85,11 +86,12 @@ function Notcool() {
                         </div>
                     </div>
 
-                    {moderators.map((moderator) => (
+                    {moderators.map((moderator) => ( 
                         <div key={moderator.id} className="flex flex-row space-x-20 ">
                             <div className="w-10 h-10 flex-shrink-0 ">
-		         	    <img src={moderator.Photo} alt={moderator.photo} 				className="w-full h-full rounded-md mb-2" />
+		         	    <img src={`http://127.0.0.1:8000${moderator.photo}`} 				className="w-full h-full rounded-md mb-2" />
             </div>
+            
             
             <div className="w-40 flex-shrink-0">
               
@@ -103,7 +105,7 @@ function Notcool() {
             
             <div className="w-40 flex-shrink-0">
               
-              <span className="text-person-col">{moderator.phone}</span>
+              <span className="text-person-col">{moderator.PhoneNumber}</span>
             </div>
             
 

@@ -8,8 +8,8 @@ function Col1({ props }) {
       <div className="w-[100%]">
       <input
           className="bg-page-col outline-none text-item-col h-11 w-[100%] rounded-md pl-3"
-          value={moderator.fullName}
-          onChange={(e) => handleInputChange("fullName", e.target.value)}
+          value={moderator.FullName}
+          onChange={(e) => handleInputChange("FullName", e.target.value)}
         />
       </div>
       <h2 className="text-[110%] text-person-col ">Email</h2>

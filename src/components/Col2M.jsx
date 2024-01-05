@@ -16,8 +16,8 @@ function Col2({ props }) {
       <div className="w-[100%]">
         <input
           className="bg-page-col outline-none text-item-col h-11 w-[100%] rounded-md pl-3"
-          value={moderator.phoneNumber}
-          onChange={(e) => handleInputChange("phoneNumber", e.target.value)}
+          value={moderator.PhoneNumber}
+          onChange={(e) => handleInputChange("PhoneNumber", e.target.value)}
         />
       </div>
       

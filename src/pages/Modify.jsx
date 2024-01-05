@@ -42,6 +42,7 @@ function Content() {
 
         if (response.ok) {
           const userData = await response.json();
+          
           setModerator(userData);
           
           setIsEditMode(true); // Enable edit mode since you have fetched existing user data

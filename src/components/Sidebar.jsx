@@ -1,4 +1,4 @@
-import React, { useState,useContext } from 'react';
+import React, { useState,useContext,useEffect } from 'react';
 import '../App.css';
 import imag from '../assets/pdp.png'
 import SidebarHeader from './SidebarHeader';
@@ -16,16 +16,17 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 const user1 = [
   {
-    title: 'Abla RABIA',
+    title: '',
     img: imag, 
     link: '',
-    description: 'Administrator',
+    description: '',
     Email:'',
     Password:'',
   },
 ];
 
 function Sidebar() {
+  
   // Initial state for selected item
   const [selectedItem, setSelectedItem] = useState(null);
   const navigate = useNavigate();
@@ -42,7 +43,7 @@ function Sidebar() {
 }
   return (
     <div className="flex flex-col h-full bg-sidebar p-0 lg:w-64 md:w-60 w-48 relative">
-      <SidebarHeader props={user1} />
+      <SidebarHeader />
       <ul className="w-full list-none flex-col  items-start justify-start flex-end lg:mb-60 md:mb-48 mb-44">
       <Link to="/upload">
       <li

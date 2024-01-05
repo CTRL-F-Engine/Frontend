@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function Content() {
   const [showpopup, setShowpopup]=useState(false);
+  const [photoChanged,setphotoChanged]=useState(false);
   const [user, setuser] = useState({
     FullName: '',
     username: '',
@@ -24,6 +25,7 @@ function Content() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
+        
         const token=localStorage.getItem("access")
       let token2 = token.replace(/"/g, '');
         const response = await fetch("http://127.0.0.1:8000/manage/settings/", {
@@ -33,7 +35,7 @@ function Content() {
             "Content-Type": "application/json",
           },
         });
-
+        
         if (response.ok) {
           const userData = await response.json();
           setuser(userData);
@@ -68,6 +70,7 @@ function Content() {
       }));
     }
   };
+  const [imgUrl,setimgUrl]=useState('')
   const handleImageChange = (e) => {
     const file = e.target.files[0];
   
@@ -78,6 +81,8 @@ function Content() {
         photo: file, // Store the actual file, not the data URL
       }));
     };
+    setimgUrl(`http://127.0.0.1:8000/profile_pictures/profile_pictures/${file.name}`)
+    setphotoChanged(true)
   
     reader.readAsDataURL(file);
     console.log(file)
@@ -98,7 +103,10 @@ function Content() {
       formData.append('username', user.username);
       formData.append('password', user.password || '');  // Password can be empty if not changed
       formData.append('FullName', user.FullName);
-      formData.append('photo', user.photo);  // Append the actual file
+      if (photoChanged){
+        formData.append('photo', user.photo);  // Append the actual file
+      }
+      
       console.log(user.photo)
       const token = localStorage.getItem('access');
       let token2 = token.replace(/"/g, '');
@@ -144,7 +152,7 @@ function Content() {
       <h1 className="text-person-col text-[300%] ">Settings</h1>
       <div className="bg-sidebar sm:mt-10 sm:h-[70%]  rounded-md shadow p-9 sm:pt-12 pt-6 flex flex-row space-x-24">
         <Col1 props={{user,handleInputChange}} />
-        <Col2 props={{ user, handleImageChange }} />
+        <Col2 props={{ user, handleImageChange ,imgUrl}} />
       </div>
       
       <button

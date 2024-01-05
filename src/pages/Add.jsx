@@ -7,18 +7,20 @@ import Sidebar from '../components/Sidebar';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+
 function Content() {
-  const [fullName, setFullName] = useState("");
+  const [FullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  
+  const [PhoneNumber, setPhoneNumber] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPopup, setShowPopup] = useState(false);
 
   const handleAddModerator = async () => {
     if ( !email ||  !username ) {
-      alert("Please fill in all fields.");
+      alert("Please fill in required fields.");
       return;
     }
 
@@ -27,7 +29,14 @@ function Content() {
       return;
     }
 
+
     try {
+      const formData = new FormData();
+      formData.append('email', email);
+      formData.append('username', username);
+      formData.append('FullName', FullName);
+      formData.append('PhoneNumber', PhoneNumber);
+      
       
       const token=localStorage.getItem("access")
       let token2 = token.replace(/"/g, '');
@@ -37,12 +46,9 @@ function Content() {
         method: "POST",
         headers: {
           "Authorization": `Bearer ${token2}`,
-          "Content-Type": "application/json",
+          
         },
-        body: JSON.stringify({
-          email,
-          username,
-        }),
+        body: formData,
       });
       console.log(response.status)
       if (response.status===201) {
@@ -70,7 +76,7 @@ function Content() {
       <h1 className="text-person-col sm:text-[300%] text-[250%] ">Add Moderator</h1>
       <div className="bg-sidebar sm:mt-10 mt-5 sm:h-[60%] h-[70%]  rounded-md shadow p-9 sm:pt-12 pt-6 flex sm:flex-row flex-col sm:space-x-10">
         <Col1
-          fullName={fullName}
+          FullName={FullName}
           setFullName={setFullName}
           email={email}
           setEmail={setEmail}
@@ -80,7 +86,7 @@ function Content() {
         <Col2
           username={username}
           setUsername={setUsername}
-          phoneNumber={phoneNumber}
+          PhoneNumber={PhoneNumber}
           setPhoneNumber={setPhoneNumber}
           confirmPassword={confirmPassword}
           setConfirmPassword={setConfirmPassword}

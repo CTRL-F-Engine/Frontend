@@ -1,13 +1,19 @@
 // Content component (content.js)
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState ,useContext,useEffect} from "react";
 import LinkAdded from "../components/LinkAdded";
 import Popup from "../components/popupU";
 import Sidebar from '../components/Sidebar';
+import { useNavigate } from 'react-router-dom';
+import AuthContext from '../context/AuthContext';
+import { toast } from "react-toastify";
 function Content() {
+  const navigate = useNavigate();
   const [newLink, setNewLink] = useState("");
   const [LinksUploaded, setLinksUploaded] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
-
+  
+ 
+  
   const handleChange = (event) => {
     setNewLink(event.target.value);
   };

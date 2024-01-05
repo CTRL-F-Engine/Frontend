@@ -26,11 +26,27 @@ const user1 = [
 ];
 
 function Sidebar() {
+  const {isConnected,setIsConnected} = useContext(AuthContext)
+  const storedUser = JSON.parse(localStorage.getItem('User'));
+  const user_type = storedUser ? storedUser.user_type : null;
+  useEffect(()=>{
+    if (!isConnected  || user_type!=='admin'){
+      if (!isConnected){
+        navigate('/Login')
+      }else{
+        navigate('/')
+        toast.error("You do not permissions to access to this link !")
+      }
+      
+      
+    }
+    
+  },[])
   
   // Initial state for selected item
   const [selectedItem, setSelectedItem] = useState(null);
   const navigate = useNavigate();
-    const {isConnected,setIsConnected} = useContext(AuthContext)
+    
     const {AuthTokens,setAuthTokens} = useContext(AuthContext)
     const {user,setUser} = useContext(AuthContext)
   const handleLogout=async()=>{

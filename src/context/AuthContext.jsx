@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const AuthContext = createContext();
 export default AuthContext;
-export const AuthProvider = ({ children ,value}) => {
+export const AuthProvider = ({ children }) => {
   
   const [authTokens, setAuthTokens] = useState(()=>{
     localStorage.getItem("authTokens")
@@ -22,7 +22,7 @@ export const AuthProvider = ({ children ,value}) => {
   })
   
   const [loading,setLoading] = useState(true)
-  const [isConnected,setIsConnected]=useState()
+  const [isConnected,setIsConnected]=useState(false)
   const navigate = useNavigate();
   const loginUser = async (email, password) => {
     const requestBody = {
@@ -54,11 +54,12 @@ export const AuthProvider = ({ children ,value}) => {
         setAuthTokens(data)
         setIsConnected(true)
         localStorage.setItem("authTokens",JSON.stringify(data))
-        console.log('simpleeee')
+        
         if (data.user_type==="simple"){
           
           navigate('/')
         }else if (data.user_type==="admin"){
+          
           navigate('/upload')
         }
         
@@ -108,6 +109,7 @@ export const AuthProvider = ({ children ,value}) => {
     setUser(null)
     setIsConnected(false)
     localStorage.removeItem("authTokens")
+    localStorage.removeItem("User")
     navigate('/Login')
 
   }
@@ -152,6 +154,7 @@ export const AuthProvider = ({ children ,value}) => {
     isConnected,
     setIsConnected,
     otpVerify,
+    
   }
   useEffect(()=>{
     const storedTokens = localStorage.getItem("authTokens");

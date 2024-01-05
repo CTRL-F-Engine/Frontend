@@ -12,6 +12,7 @@ import AuthContext from '../context/AuthContext'
 import pdp from '../assets/pdp.png'
 import { Btn } from '../components/Btn';
 import Popup from '../components/PopupSearch';
+import { useNavigate } from 'react-router-dom';
 export const Home =()=>
 {
   const getPdp=()=>
@@ -23,7 +24,18 @@ const [LittleNavVisible , setLittleNavVisible]=useState(false);
 const {isConnected} = useContext(AuthContext)
 const [ref,setRef]=useState(null);
 const [search,setSearch]=useState('');
+const navigate = useNavigate();
 const [isSticky, setIsSticky] = useState(false);
+  const storedUser = JSON.parse(localStorage.getItem('User'));
+  const user_type = storedUser ? storedUser.user_type : null;
+  useEffect(()=>{
+    if (isConnected  && user_type!=='simple'){
+      navigate('/upload')
+      //toast.error("You do not permissions to access to this link !")
+    }
+    
+  },[])
+
 const handleOffset = (data) => {
       setRef(data);
       console.log('Ref immediately after setRef:', ref); 

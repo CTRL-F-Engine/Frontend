@@ -22,6 +22,7 @@ import {ResultSearch} from './pages/ResultSearch';
 import {Favors} from './pages/Favors';
 import { Reset } from './pages/Reset';
 import {AffichageArticle} from './pages/AffichageArticle'
+import {UserSettings} from './pages/UserSettings'
 export const Appcontext2=createContext();
 function App() {
   const [isConnected , setIsConnected]=useState(true);
@@ -38,7 +39,7 @@ function App() {
     <Route path='/Welcome' element={<Welcome/>}/>
     <Route path='/Login/Otp' element={<Otp/>}/>
     <Route path='/Signup' element={<SignUp/>}/>
-    <Route path='/' element={<Home/>}/>
+    <Route path='/' element={<Upload/>}/>
     <Route path="/upload" element={<Upload />} />
     <Route path="/modify-moderator" element={<ModifyModerator />} />
     <Route path="/add" element={<Add />} />

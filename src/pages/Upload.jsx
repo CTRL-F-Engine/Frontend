@@ -32,7 +32,7 @@ function Content() {
   const [showpopup, setShowpopup]=useState(false);
 
   return (
-    <div className='flex flex-row w-screen  bg-page-col '>
+    <div className='flex flex-row w-screen h-[100vh] bg-page-col '>
       <Sidebar />
     <div className={`flex flex-auto flex-col ml-[3%] mt-8 mr-[3%]  `}>
       <h1 className="text-person-col text-5xl">Upload Articles</h1>
@@ -47,10 +47,10 @@ function Content() {
           />
         </div>
       </div>
-      <div className="flex flex-auto flex-col place-items-end h-[55.165vh]" >
+      <div className="flex flex-auto flex-col place-items-end" >
       
       <button
-        className="sm:mt-64 mt-24  sm:w-[110px] w-fit box-border xs:h-[38px] h-[30px] text-[13px] sm:text-[15px] font-medium sm:font-bold  text-sidebar  bg-person-col font-['TT Commons'] sm:px-4 px-2 sm:rounded-[5px] rounded-[3px]"
+        className="mt-[20%] sm:w-[110px] w-fit box-border xs:h-[38px] h-[30px] text-[13px] sm:text-[15px] font-medium sm:font-bold  text-sidebar  bg-person-col font-['TT Commons'] sm:px-4 px-2 sm:rounded-[5px] rounded-[3px]"
         onClick={addLink} 
       >
         Upload

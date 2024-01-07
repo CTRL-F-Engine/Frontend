@@ -49,7 +49,7 @@ function Content() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showpopup, setShowpopup]=useState(false);
   return (
-    <div className='flex flex-row w-screen  bg-page-col'>
+    <div className='flex flex-row w-screen  bg-page-col h-[100vh]'>
       <Sidebar />
     <div className="flex flex-auto flex-col  ml-[3%] mt-8 mr-[3%] ">
       <h1 className="text-person-col text-5xl whitespace-nowrap">Modify Moderator</h1>
@@ -58,10 +58,10 @@ function Content() {
         <Col2 props={{ moderator, handleInputChange }} />
       </div>
     
-      <div className="flex flex-auto flex-col place-items-end h-[34vh] sm:h-[40vh] " >
+      <div className="flex flex-auto flex-col place-items-end  " >
       
       <button
-        className="sm:mt-24 mt-5  sm:w-[110px] w-full box-border xs:h-[38px] h-[30px] text-[13px] sm:text-[15px] font-medium sm:font-bold  text-sidebar  bg-person-col font-['TT Commons'] sm:px-4 px-2 sm:rounded-[5px] rounded-[3px]"
+        className="mt-[8%]  sm:w-[110px] w-full box-border xs:h-[38px] h-[30px] text-[13px] sm:text-[15px] font-medium sm:font-bold  text-sidebar  bg-person-col font-['TT Commons'] sm:px-4 px-2 sm:rounded-[5px] rounded-[3px]"
         onClick={handleSave}  
       >
         Save

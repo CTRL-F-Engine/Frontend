@@ -26,13 +26,13 @@ function Notcool() {
     setShowModal(true);
   };
   return (
-    <div className='flex flex-row w-screen bg-page-col '>
+    <div className='flex flex-row w-screen bg-page-col h-[100vh]'>
       <Sidebar />
     <div className="flex flex-auto flex-col ml-[5%] mt-8 mr-[5%] overflow-x-auto scrollbar-thin scrollbar-thumb-white ">
       <h1 className="text-person-col text-5xl whitespace-nowrap">List Of Moderators</h1>
-      <div className="bg-sidebar space-y-8 mt-10 h-96 sm:h-[500px]  w-[95%]  text-item-col rounded-md shadow p-9 pt-12 overflow-y-auto scrollbar-thin scrollbar-thumb-white">
+      <div className="bg-sidebar space-y-8 mt-10 h-96 sm:h-[500px]  w-[70%]  text-item-col rounded-md shadow p-9 pt-12 overflow-y-auto scrollbar-thin scrollbar-thumb-white">
         {ModeratorsList.map((moderator, index) => (
-          <div key={index} className="flex flex-row sm:space-x-14 space-x-10 ">
+          <div key={index} className="flex flex-row sm:space-x-5 space-x-3 ">
             <div className="w-10 h-10 flex-shrink-0 ">
             {index === 0 ? (
                   <h3 className='mb-3'>Photo</h3>
@@ -40,21 +40,21 @@ function Notcool() {
               <img src={moderator.Photo} alt={moderator.Moderator} className="w-full h-full rounded-md mb-2" />
             </div>
             
-            <div className="w-40 flex-shrink-0">
+            <div className="w-36 flex-shrink-0">
             {index === 0 ? (
                   <h3 className='mb-5'>Moderator</h3>
                 ) : null}
               <span className="text-person-col">{moderator.Moderator}</span>
             </div>
             
-            <div className="w-52 flex-shrink-0">
+            <div className="w-44 flex-shrink-0">
             {index === 0 ? (
                   <h3 className='mb-5'>Email</h3>
                 ) : null}
               <span className="text-person-col">{moderator.Email}</span>
             </div>
             
-            <div className="w-40 flex-shrink-0">
+            <div className="w-36 flex-shrink-0">
             {index === 0 ? (
                   <h3 className='mb-5'>Phone Number</h3>
                 ) : null}

@@ -2,24 +2,16 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Article } from '../components/Article';
 import { Appcontext2 } from '../App';
-import pdp from '../assets/pdp.png'
 import { Navbar3 } from '../components/Navbar3';
-import Filter from '../components/Filter';
 import img from '../assets/footer.svg';
-import Bookmark2 from '../assets/Bookmark2.png';
 
 export const Favors =()=>
 {
 
 const {isConnected} = useContext(Appcontext2)
 const [ref,setRef]=useState(null);
-const [search,setSearch]=useState('');
 const [isSticky, setIsSticky] = useState(false);
-const [isFilterVisible, setIsFilterVisible] = useState(false);
 
-const handleFilterClick = () => {
-  setIsFilterVisible(!isFilterVisible);
-};
 const handleOffset = (data) => {
       setRef(data);
       console.log('Ref immediately after setRef:', ref); 
@@ -51,14 +43,7 @@ const handleOffset = (data) => {
           window.removeEventListener('scroll', handleScroll);
         };
       }, [ref]);
-      const handleSearch=(e)=>
-      {
-      e.key==="Enter"?console.log(search):"";
-      }
-      const handleChange=(e)=>
-      {
-          setSearch(e.target.value); 
-      }
+     
     return (
     <div  className='w-full h-screen flex flex-col'>
 

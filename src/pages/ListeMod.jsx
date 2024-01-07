@@ -30,7 +30,7 @@ function Notcool() {
       <Sidebar />
     <div className="flex flex-auto flex-col ml-[5%] mt-8 mr-[5%] overflow-x-auto scrollbar-thin scrollbar-thumb-white ">
       <h1 className="text-person-col text-5xl whitespace-nowrap">List Of Moderators</h1>
-      <div className="bg-sidebar space-y-8 mt-10 h-96 sm:h-[500px]  w-[70%]  text-item-col rounded-md shadow p-9 pt-12 overflow-y-auto scrollbar-thin scrollbar-thumb-white">
+      <div className="bg-sidebar space-y-8 mt-10 h-96 sm:h-[500px]  w-[80%]  text-item-col rounded-md shadow p-9 pt-12 overflow-y-auto scrollbar-thin scrollbar-thumb-white">
         {ModeratorsList.map((moderator, index) => (
           <div key={index} className="flex flex-row sm:space-x-5 space-x-3 ">
             <div className="w-10 h-10 flex-shrink-0 ">

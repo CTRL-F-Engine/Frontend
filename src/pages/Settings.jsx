@@ -84,7 +84,7 @@ const [confirmPassword, setConfirmPassword] = useState('');
       <div className="flex flex-auto flex-col place-items-end" >
       
       <button
-        className="mt-[8%] sm:w-[110px] w-full box-border xs:h-[38px] h-[30px] text-[13px] sm:text-[15px] font-medium sm:font-bold  text-sidebar  bg-person-col font-['TT Commons'] sm:px-4 px-2 sm:rounded-[5px] rounded-[3px]"
+        className="mt-[3%] sm:w-[110px] w-full box-border xs:h-[38px] h-[30px] text-[13px] sm:text-[15px] font-medium sm:font-bold  text-sidebar  bg-person-col font-['TT Commons'] sm:px-4 px-2 sm:rounded-[5px] rounded-[3px]"
         onClick={handleSave} 
       >
         Save

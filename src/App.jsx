@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+
 import './index.css'; 
 import { Otp } from './pages/OTP';
 import {Login} from './pages/Login';
@@ -12,11 +13,16 @@ import {Home} from './pages/Home';
 import { useContext } from 'react'
 import { createContext } from 'react'
 import { useState } from 'react'; 
-import Upload from './Pages/Upload';
-import Settings from './Pages/Settings';
-import ListeModerators from './Pages/ListeMod';
-import Add from './Pages/Add';
-import ModifyModerator from './Pages/Modify';
+import Upload from './pages/Upload';
+import Settings from './pages/Settings';
+import ListeModerators from './pages/ListeMod';
+import Add from './pages/Add';
+import ModifyModerator from './pages/Modify';
+import {ResultSearch} from './pages/ResultSearch';
+import {Favors} from './pages/Favors';
+import { Reset } from './pages/Reset';
+import {AffichageArticle} from './pages/AffichageArticle'
+import {UserSettings} from './pages/UserSettings'
 export const Appcontext2=createContext();
 function App() {
   const [isConnected , setIsConnected]=useState(true);
@@ -39,7 +45,9 @@ function App() {
     <Route path="/add" element={<Add />} />
   <Route path="/list" element={<ListeModerators />} />
   <Route path="/settings" element={<Settings />} />
-
+  <Route path="/ResultSearch" element={<ResultSearch />} />
+  <Route path="/Favors" element={<Favors />} />
+  <Route path="/AffichageArticle" element={<AffichageArticle />} />
        </Routes>    
     </Router>
       

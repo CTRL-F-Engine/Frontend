@@ -27,7 +27,7 @@ const {isConnected} = useContext(Appcontext2)
 const [ref,setRef]=useState(null);
 const [search,setSearch]=useState('');
 const [isSticky, setIsSticky] = useState(false);
-const handleSetPopUp=()=>
+const handleSetPopUp=(val1)=>
 {
   setShowPopup((val1) => !val1);
  console.log(showPopup);
@@ -85,7 +85,7 @@ const handleOffset = (data) => {
 {(LittleNavVisible && isConnected) &&<LittleSideBar/>} 
 
     <div className=" w-[100%] h-[90vh] flex items-center justify-center ">
-       <Search_bar  disabled={!isConnected}  placeholder="search"/>
+       <Search_bar func={handleSetPopUp}  disabled={!isConnected}  placeholder="search"/>
     </div>
     <Navbar2 func={handleOffset} connected={isConnected} sticky={isSticky}/>
     <div className='relative  z-10  px-8'>
@@ -124,6 +124,7 @@ const handleOffset = (data) => {
     </div>
     </div>
 {!isConnected && window.scrollY>=400 &&<Popup />}
+{!isConnected && showPopup &&<Popup />}
 <footer className='h-[70px] w-full'>
   <img src={img} />
 </footer>

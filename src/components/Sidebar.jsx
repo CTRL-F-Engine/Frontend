@@ -25,9 +25,9 @@ function Sidebar() {
   const [selectedItem, setSelectedItem] = useState(null);
 
   return (
-    <div className="flex flex-col h-screen bg-sidebar p-0 lg:w-64 md:w-60 w-48">
+    <div className="flex flex-col  bg-sidebar p-0 lg:w-64 md:w-60 w-48 h-[100vh]">
       <SidebarHeader props={user} />
-      <ul className="w-full list-none flex-col  items-start justify-start flex-end lg:mb-60 md:mb-48 mb-44">
+      <ul className="w-full list-none flex-col  items-start justify-start flex-end ">
       <Link to="/upload">
       <li
           key="upload"
@@ -85,17 +85,17 @@ function Sidebar() {
           <div className='lg:w-[80%] lg:text-[17px] md:w-[85%] md:text-[15px] w-[80%] text-[13px]'>Settings</div>
         </li>
        </Link>
-        </ul>
+       </ul>
+       <ul className="w-full list-none flex-col  items-start justify-start mt-[60%]">
 
-       <ul>
         <li
           className={`w-full cursor-pointer m-0 h-12 space-x-4 flex flex-row justify-center items-center  hover:border-l-4 hover:border-black text-item-col opacity-50 hover:opacity-100 ${selectedItem === 'logout' ? 'bg-page-col border-l-4 border-black': ''}`}
           onClick={() => {
             setSelectedItem('logout');
           }}
         >
-          <img src={logg}className="lg:w-[24px] lg:h-[24px]  h-[16px] w-[16px] md:h-[20px] md:w-[20px] " />
-          <div className=' w-[60%] text-[13px] lg:w-[60%] lg:text-[17px] md:w-[65%] md:text-[15px]'>Log Out</div>
+          <img src={logg}className="lg:w-[24px] lg:h-[24px] md:h-[20px] md:w-[20px] h-[16px] w-[16px]" />
+          <div className='lg:w-[80%] lg:text-[17px] md:w-[85%] md:text-[15px] w-[80%] text-[13px]'>Log Out</div>
         </li>
       </ul>
     </div>

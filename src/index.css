@@ -1,8 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* font.css */
 
+@font-face {
+    font-family: 'TTCommons-Medium';
+    src: local('TTCommons-Medium'), url('./Font/TT Commons Medium.otf') format('woff2');
+    /* Add additional font formats if necessary */
+  }
+body
+{
+    font-family: 'TTCommons-Medium';
+}
   
+  /* Frontend\src\Font\TT Commons Medium.otf */
 @keyframes big 
 {
     0%

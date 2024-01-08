@@ -25,37 +25,46 @@ function Notcool() {
     setSelectedModerator(moderatorName);
     setShowModal(true);
   };
-
   return (
-    <div className='flex flex-row w-screen  '>
+    <div className='flex flex-row w-screen bg-page-col h-[100vh]'>
       <Sidebar />
-    <div className="flex flex-auto flex-col ml-[5%] mt-[3%] mr-[5%] overflow-x-auto scrollbar-thin scrollbar-thumb-white ">
-      <h1 className="text-person-col text-[300%]">List Of Moderators</h1>
-      <div className="bg-sidebar space-y-8 mt-10 h-96 lg:h-[500px] md:h-[470px] w-[95%]  text-item-col rounded-md shadow p-9 pt-12 overflow-y-auto scrollbar-thin scrollbar-thumb-white">
+    <div className="flex flex-auto flex-col ml-[5%] mt-8 mr-[5%] overflow-x-auto scrollbar-thin scrollbar-thumb-white ">
+      <h1 className="text-person-col text-5xl whitespace-nowrap">List Of Moderators</h1>
+      <div className="bg-sidebar space-y-8 mt-10 h-96 sm:h-[500px]  w-[80%]  text-item-col rounded-md shadow p-9 pt-12 overflow-y-auto scrollbar-thin scrollbar-thumb-white">
         {ModeratorsList.map((moderator, index) => (
-          <div key={index} className="flex flex-row space-x-20 ">
+          <div key={index} className="flex flex-row sm:space-x-5 space-x-3 ">
             <div className="w-10 h-10 flex-shrink-0 ">
-              <h3 className='mb-3'>Photo</h3>
+            {index === 0 ? (
+                  <h3 className='mb-3'>Photo</h3>
+                ) : null}
               <img src={moderator.Photo} alt={moderator.Moderator} className="w-full h-full rounded-md mb-2" />
             </div>
             
-            <div className="w-40 flex-shrink-0">
-              <h3 className='mb-5'>Moderator</h3>
+            <div className="w-36 flex-shrink-0">
+            {index === 0 ? (
+                  <h3 className='mb-5'>Moderator</h3>
+                ) : null}
               <span className="text-person-col">{moderator.Moderator}</span>
             </div>
             
-            <div className="w-52 flex-shrink-0">
-              <h3 className='mb-5'>Email</h3>
+            <div className="w-44 flex-shrink-0">
+            {index === 0 ? (
+                  <h3 className='mb-5'>Email</h3>
+                ) : null}
               <span className="text-person-col">{moderator.Email}</span>
             </div>
             
-            <div className="w-40 flex-shrink-0">
-              <h3 className='mb-5'>Phone Number</h3>
+            <div className="w-36 flex-shrink-0">
+            {index === 0 ? (
+                  <h3 className='mb-5'>Phone Number</h3>
+                ) : null}
               <span className="text-person-col">{moderator.Phone}</span>
             </div>
             
             <div className="w-28 flex-shrink-0">
-              <h3 className='mb-5 pl-3'>Action</h3>
+            {index === 0 ? (
+                  <h3 className='mb-5 pl-3'>Action</h3>
+                ) : null}
               <div className="flex flex-row space-x-2">
                 <Link to="/modify-moderator">
                   <a href={moderator.link} target="_blank">
@@ -73,6 +82,7 @@ function Notcool() {
           </div>
         ))}
       </div>
+      <div  className="flex  h-[31.2vh] sm:h-[15.4vh] " ></div>
       <Modal visible={showModal} onClose={() => setShowModal(false)} moderatorName={selectedModerator} />
     </div>
     </div>

@@ -2,7 +2,7 @@
 import myImage from '../assets/favor.svg';
 import setting from '../assets/settings.svg';
 import { LogOut } from './LogOut';
-
+import { Link } from 'react-router-dom';
 export const LittleSideBar=()=>
 {
  
@@ -17,13 +17,14 @@ const handleChangeSettings=()=>
 }
 return( <div className='absolute right-0 px-8'>
   <div className='bg-sky-950 rounded-[5px] box-content px-4 xs:w-[120px] h-[150px] w-[100px]  ml-auto grid xs:py-4 pb-2 gap-y-3'>
+  <Link to="/Favors">
 <div className='flex items-center gap-x-2'>
    <button onClick={handleSave}>
 <img className=' sm:w-5 w-5 ' src={myImage} />  </button> 
 <h1 className='text-white font-medium'>
     Favors</h1> 
 </div>
-
+</Link>
    <hr className='border-1  border-cyan-300'></hr>
   
 

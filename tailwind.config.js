@@ -12,6 +12,10 @@ export default {
         "sidebar":"#FCF9FC",
         "item-col":"#132D46",
         "person-col":"#191E29",
+        "delete":"#CD2929",
+        "search-col":"#E4EEF2",
+        "filter":"#25546D",
+        "filter-after":"#183646",
       },
       screens: {
         'xs': '468px',

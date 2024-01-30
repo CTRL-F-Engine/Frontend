@@ -29,7 +29,7 @@ const [isSticky, setIsSticky] = useState(false);
   const storedUser = JSON.parse(localStorage.getItem('User'));
   const user_type = storedUser ? storedUser.user_type : null;
   useEffect(()=>{
-    if (isConnected  && user_type!=='simple'){
+    if (isConnected  && user_type==='admin'){
       navigate('/upload')
       //toast.error("You do not permissions to access to this link !")
     }

@@ -16,6 +16,7 @@ export default {
         "search-col":"#E4EEF2",
         "filter":"#25546D",
         "filter-after":"#183646",
+         "settings-col":" #173857",
       },
       screens: {
         'xs': '468px',

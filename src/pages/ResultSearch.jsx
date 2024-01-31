@@ -95,7 +95,7 @@ const handleOffset = (data) => {
       </div>
       {isFilterVisible && <Filter />}
   
-    <h1 className='px-10 mt-8 font-semibold text-2xl text-blue-950 mb-8'>
+    <h1 className='px-4 sm:px-10 mt-8 font-semibold text-2xl text-blue-950 mb-8'>
     Result
     </h1>
     <div className='px-4 sm:px-10'>

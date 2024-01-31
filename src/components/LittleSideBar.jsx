@@ -28,14 +28,14 @@ return( <div className='absolute right-0 px-8'>
    <hr className='border-1  border-cyan-300'></hr>
   
 
-
+   <Link  to="/UserSettings">
    <div className='flex items-center gap-x-2'>
    <button onClick={handleChangeSettings}>
 <img className=' sm:w-5 w-5 ' src={setting} />  </button> 
 <h1 className='text-white font-medium'>
     Settings</h1> 
 </div>
-
+  </Link>
    <hr className='border-1  border-cyan-300'></hr>
 <LogOut mode='light'/>
 </div>

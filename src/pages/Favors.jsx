@@ -50,7 +50,7 @@ const handleOffset = (data) => {
     <Navbar3 func={handleOffset} connected={true} sticky={true}/>
        
   
-       <h1 className='px-10 mt-28 font-semibold text-2xl text-blue-950 mb-8'>
+       <h1 className='px-4 sm:px-10 mt-28 font-semibold text-2xl text-blue-950 mb-8'>
     Favors
     </h1>
     <div className='px-4 sm:px-10'>

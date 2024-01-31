@@ -26,6 +26,9 @@ import {UserSettings} from './pages/UserSettings'
 import { ChangeName } from './pages/ChangeName';
 import {ChangePw} from './pages/ChangePw';
 import {ChangePictr} from './pages/ChangePictr';
+import ModeratorSettings from './pages/ModeratorSettings';
+import ArticlesList from './pages/ArticlesList';
+//import Article-editing from "./Pages Article_editing"
 
 export const Appcontext2=createContext();
 function App() {
@@ -56,6 +59,9 @@ function App() {
   <Route path="/ChangePw" element={<ChangePw />} />
   <Route path="/ChangePictr" element={<ChangePictr />} />
   <Route path="//UserSettings" element={<UserSettings />} />
+  <Route path="//ModeratorSettings" element={<ModeratorSettings/>}/>
+  <Route path="//ArticlesList" element ={<ArticlesList/>}/>
+  <Route path ='//EditArticles' element = {<Article_editing/>}/>
 
        </Routes>    
     </Router>

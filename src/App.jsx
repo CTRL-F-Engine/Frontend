@@ -23,6 +23,10 @@ import {Favors} from './pages/Favors';
 import { Reset } from './pages/Reset';
 import {AffichageArticle} from './pages/AffichageArticle'
 import {UserSettings} from './pages/UserSettings'
+import { ChangeName } from './pages/ChangeName';
+import {ChangePw} from './pages/ChangePw';
+import {ChangePictr} from './pages/ChangePictr';
+
 export const Appcontext2=createContext();
 function App() {
   const [isConnected , setIsConnected]=useState(true);
@@ -48,6 +52,11 @@ function App() {
   <Route path="/ResultSearch" element={<ResultSearch />} />
   <Route path="/Favors" element={<Favors />} />
   <Route path="/AffichageArticle" element={<AffichageArticle />} />
+        <Route path="/ChangeName" element={<ChangeName />} />
+  <Route path="/ChangePw" element={<ChangePw />} />
+  <Route path="/ChangePictr" element={<ChangePictr />} />
+  <Route path="//UserSettings" element={<UserSettings />} />
+
        </Routes>    
     </Router>
       

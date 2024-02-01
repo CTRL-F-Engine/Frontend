@@ -1,6 +1,6 @@
 import React , { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import ScrollProgressBar from 'react-scroll-progress-bar';
+import ScrollProgressBar from "react-scroll-progress-bar";
 import "../index.css"
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -25,15 +25,22 @@ const Article = () => {
       content: content,
      });
     };
+    const handleTitleChange = (title) => {
+      setArticleData({
+       ...articleData,
+       title: title,
+      });
+     };
   return (
-    <div  className="bg-sidebar space-y-8 mt-10 h-96 sm:h-[500px]  w-[80%]  text-item-col rounded-md shadow p-9 pt-12 overflow-y-auto scrollbar-thin scrollbar-thumb-white">
+    <div  className="flex flex-col bg-sidebar h-96 sm:h-[500px]  w-[80%]  text-item-col rounded-md shadow  overflow-y-auto scrollbar-thin scrollbar-thumb-white">
       <ScrollProgressBar className=" bg-[#01C38D] h-1 w-full" />
+
         <label>Title:</label>
-      <input
-        type="text"
-        name="title"
+      <ReactQuill
         value={articleData.title}
-        onChange={(e) => setArticleData({ ...articleData, title: e.target.value })}
+        onChange={handleContentChange}
+        modules={{ toolbar: true }}
+        theme="snow"
       />
 
       <label>Content:</label>

@@ -20,11 +20,11 @@ const Article_editing = () => {
 
 
   return (
-    <div className='flex flex-row bg-admin-bg'>
+    <div className='flex flex-row bg-admin-bg w-screen h-[100vh]'>
       <ModeratorSidebar/>
-      <div className='flex flex-auto flex-col relative ml-[5%] mt-8 mr-[5%]'>
+      <div className="flex flex-auto flex-col ml-[5%] mt-8 mr-[5%] overflow-x-auto scrollbar-thin scrollbar-thumb-white">
         <h1 className='text-text-col text-5xl whitespace-nowrap'>Article Editing</h1>
-        <div  className="bg-sidebar space-y-8 mt-10 h-96 sm:h-[500px]  w-[80%] ">
+        <div  className="bg-sidebar  h-96 sm:h-[500px]  w-[80%] rounded-md shadow ">
           <Article/>
         </div>    
         <div className="flex flex-auto flex-row space-x-1" >

@@ -30,9 +30,8 @@ function App() {
   return (
 
     <div className=' w-[100%] h-[100vh] '>     
-    <Appcontext2.Provider value={{isConnected , setIsConnected}}>
-
-     <Router>
+  <Appcontext2.Provider value={{isConnected , setIsConnected}}>
+  <Router>
      <Routes> 
     <Route path='/Login' element={<Login/>}/>
     <Route path='/Login/Forget' element={<Forget/>}/>

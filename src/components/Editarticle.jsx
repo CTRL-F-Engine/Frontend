@@ -38,7 +38,7 @@ const Article = () => {
         <label>Title:</label>
       <ReactQuill
         value={articleData.title}
-        onChange={handleContentChange}
+        onChange={handleTitleChange}
         modules={{ toolbar: true }}
         theme="snow"
       />

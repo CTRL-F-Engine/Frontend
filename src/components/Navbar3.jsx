@@ -5,8 +5,11 @@ import { useRef } from "react";
 import { useEffect } from "react";
 import pdp from '../assets/pdp.png'
 import { LittleSideBarWhite } from "./LittleSideBarWhite";
+import { Navbar } from "./Navbar";
+import { Link } from 'react-router-dom';
 
-export const Navbar2=(props)=>
+
+export const Navbar3=(props)=>
 {
   const getPdp=()=>
   {
@@ -79,16 +82,17 @@ const [LittleNavVisible , setLittleNavVisible]=useState(false);
   
     <div className="relative xs:block hidden border-cyan-500 w-[90%] xs:w-[40%]">
      <div className="flex w-full justify-between gap-x-10 items-center">
-
-     <h1 className="text-cyan-500 w-fit font-bold">
+   <Link to="/">
+     <h1 className="text-cyan-500 w-fit font-bold cursor-pointer">
     LOGO
-</h1> 
+</h1> </Link>
        </div> 
 
 
  
     
 </div>
+{(isVisible && !props.connected) &&<Navbar mode='dark'/>}
 { props.connected&&<div onClick={()=>
 {
   setLittleNavVisible(!LittleNavVisible);

@@ -6,7 +6,14 @@ function Col1({ props }) {
    <div className="flex flex-auto flex-col sm:space-y-3 space-y-1">
      <div className="TwoInPut  sm:space-x-10 flex sm:flex-row flex-col ">
     <div className="space-y-3 w-[100%]"> 
-        <h2 className="text-[110%] text-person-col ">Full Name</h2>
+
+        <h2 className="text-lg text-person-col ">Full Name</h2>
+      <div className="w-[100%]">
+        <input
+          className="bg-page-col outline-none text-item-col sm:h-11 h-7 w-[100%] rounded-md pl-3"
+          value={user.title}
+          onChange={(e) => handleInputChange("title", e.target.value)}
+        <h2 className="text-lg text-person-col ">Full Name</h2>
       <div className="w-[100%]">
         <input
           className="bg-page-col outline-none text-item-col sm:h-11 h-7 w-[100%] rounded-md pl-3"
@@ -17,7 +24,9 @@ function Col1({ props }) {
       </div>
       </div>
      <div className="space-y-3 w-[100%]">
-        <h2 className="text-[110%] text-person-col ">Username</h2>
+
+        <h2 className="text-lg text-person-col ">Username</h2>
+
       <div className="w-[100%]">
         <input
           className="bg-page-col outline-none text-item-col sm:h-11 h-7 w-[100%] rounded-md pl-3"
@@ -27,7 +36,8 @@ function Col1({ props }) {
       </div>
       </div> 
      </div>
-     <h2 className="text-[110%] text-person-col ">Email</h2>
+
+     <h2 className="text-lg text-person-col ">Email</h2>
       <div className="w-[100%]">
         <input
           className="bg-page-col outline-none text-item-col sm:h-11 h-7 w-[100%] rounded-md pl-3"
@@ -35,7 +45,7 @@ function Col1({ props }) {
           onChange={(e) => handleInputChange("email", e.target.value)}
         />
       </div>
-      <h2 className="text-[110%] text-person-col ">New Password</h2>
+      <h2 className="text-lg text-person-col ">New Password</h2>
       <div className="w-[100%]">
         <input
           className="bg-page-col outline-none text-item-col sm:h-11 h-7 w-[100%] rounded-md pl-3"
@@ -45,7 +55,9 @@ function Col1({ props }) {
           onChange={(e) => handleInputChange("password", e.target.value)}
         />
       </div>
-      <h2 className="text-[110%] text-person-col ">Confirm Password</h2>
+
+      <h2 className="text-lg text-person-col ">Confirm Password</h2>
+
       <div className="w-[100%]">
         <input
           className="bg-page-col outline-none text-item-col sm:h-11 h-7 w-[100%] rounded-md pl-3"

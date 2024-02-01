@@ -12,20 +12,25 @@ import AuthContext from '../context/AuthContext'
 import pdp from '../assets/pdp.png'
 import { Btn } from '../components/Btn';
 import Popup from '../components/PopupSearch';
+
+import Wait from '../components/Wait';
+
 import { useNavigate } from 'react-router-dom';
 export const Home =()=>
 {
+  const navigate = useNavigate();
   const getPdp=()=>
   {
     return pdp;
   }
-const [showPopup , setShowPopup]=useState(true);
+const [showPopup , setShowPopup]=useState(false);
 const [LittleNavVisible , setLittleNavVisible]=useState(false);
 const {isConnected} = useContext(AuthContext)
 const [ref,setRef]=useState(null);
 const [search,setSearch]=useState('');
 const navigate = useNavigate();
 const [isSticky, setIsSticky] = useState(false);
+
   const storedUser = JSON.parse(localStorage.getItem('User'));
   const user_type = storedUser ? storedUser.user_type : null;
   useEffect(()=>{
@@ -36,10 +41,10 @@ const [isSticky, setIsSticky] = useState(false);
     
   },[])
 
+
 const handleOffset = (data) => {
       setRef(data);
       console.log('Ref immediately after setRef:', ref); 
-    
       console.log('Data:', data);
     };
     
@@ -57,9 +62,8 @@ const handleOffset = (data) => {
 
           }
         };
-    
+
         window.addEventListener('scroll', handleScroll);
-    
         return () => {
           window.removeEventListener('scroll', handleScroll);
         };
@@ -88,20 +92,11 @@ const handleOffset = (data) => {
 {(LittleNavVisible && isConnected) &&<LittleSideBar/>} 
 
     <div className=" w-[100%] h-[90vh] flex items-center justify-center ">
-       <Search_bar disabled={!isConnected}  placeholder="search"/>
+       <Search_bar func={handleSetPopUp}  disabled={!isConnected}  placeholder="search"/>
     </div>
     <Navbar2 func={handleOffset} connected={isConnected} sticky={isSticky}/>
     <div className='relative  z-10  px-8'>
-     {/* <input onChange={handleChange} onKeyUp={handleSearch}   className={`${(!isConnected)? 'xs:hidden' : 'block'} mt-10 w-full p-3 text-sm text-sky-950 border-[3px]  text-[15px]  rounded-[4px] bg-slate-200 focus:cyan-500 font-medium 
-   outline-none  z-10 placeholder:text-sky-900`}
-    placeholder="Search" required/>
- <div className="absolute xs:hidden block inset-y-5 end-12  items-center ps-3 pointer-events-none">
-        <svg className="w-3 h-3 text-sky-950 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-        </svg>
 
-    
-    </div>  */}
     </div>
       
   
@@ -111,7 +106,6 @@ const handleOffset = (data) => {
     <div className='px-4 sm:px-10'>
    <hr className='border-2 mb-10 border-blue-950'></hr>
     </div> 
-  
     <div className=' grid gap-y-12'>
       <Article date='05 Dec' title = 'Article 01' content='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute ....'/>
       <div className='px-4 sm:px-10'>
@@ -127,8 +121,6 @@ const handleOffset = (data) => {
    <Article date='05 Dec' title = 'Article 01' content='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute ....'/>
    <div className='px-4 sm:px-10'>   <hr className='border-2 border-blue-950'></hr>
     </div> 
-  
-   
    <Article date='05 Dec' title = 'Article 01' content='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute ....'/>
    <div className='px-4 sm:px-10'>   <hr className='border-2 border-blue-950'></hr>
     </div> 
@@ -136,11 +128,10 @@ const handleOffset = (data) => {
    <div className='px-4 sm:px-10'>   <hr className='border-2 border-blue-950'></hr>
     </div> 
     <div className='h-[70px]'>
-
     </div>
     </div>
-  
-    {!isConnected && window.scrollY>=400 &&<Popup />}
+{!isConnected && window.scrollY>=400 &&<Popup />}
+{!isConnected && showPopup &&<Popup />}
 <footer className='h-[70px] w-full'>
   <img src={img} />
 </footer>

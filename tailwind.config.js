@@ -12,6 +12,13 @@ export default {
         "sidebar":"#FCF9FC",
         "item-col":"#132D46",
         "person-col":"#191E29",
+        "delete":"#CD2929",
+        "search-col":"#E4EEF2",
+        "filter":"#25546D",
+        "filter-after":"#183646",
+         "settings-col":" #173857",
+         "admin-bg":"#E4EEF2",
+         "text-col":"#191E29",
       },
       screens: {
         'xs': '468px',

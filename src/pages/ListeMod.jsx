@@ -50,6 +50,7 @@ function Notcool() {
           console.error('Error deleting moderator:', error);
       }
   };
+
   
 
     const handleEdit = (moderatorId) => {
@@ -63,10 +64,14 @@ function Notcool() {
     };
 
     return (
-        <div className='flex flex-row w-screen bg-page-col '>
+        <div className='flex flex-row w-screen bg-page-col h-[100vh]'>
             <Sidebar />
+      
+      
+      
+      
             <div className="flex flex-auto flex-col ml-[5%] mt-[3%] mr-[5%] overflow-x-auto scrollbar-thin scrollbar-thumb-white ">
-                <h1 className="text-person-col text-[300%]">List Of Moderators</h1>
+                <h1 className="text-person-col text-5xl whitespace-nowrap">List Of Moderators</h1>
                 <div className="bg-sidebar space-y-8 mt-10 h-96 lg:h-[500px] md:h-[470px] w-[95%]  text-item-col rounded-md shadow p-9 pt-12 overflow-y-auto scrollbar-thin scrollbar-thumb-white">
                 <div className="flex flex-row space-x-20">
                         <div className="w-10 h-10 flex-shrink-0">
@@ -130,6 +135,7 @@ function Notcool() {
             </div>
         </div>
     );
+
 }
 
 export default Notcool;

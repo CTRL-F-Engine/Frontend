@@ -13,13 +13,26 @@ import {New_password} from './pages/new-password';
 import {Home} from './pages/Home';
 import { useContext } from 'react'
 import { createContext } from 'react'
+
+import { useState } from 'react'; 
 import Upload from './pages/Upload';
 import Settings from './pages/Settings';
 import ListeModerators from './pages/ListeMod';
 import Add from './pages/Add';
 import ModifyModerator from './pages/Modify';
-import { useState } from 'react';  
+
+import {ResultSearch} from './pages/ResultSearch';
+import {Favors} from './pages/Favors';
+import { Reset } from './pages/Reset';
+import {AffichageArticle} from './pages/AffichageArticle'
+import {UserSettings} from './pages/UserSettings'
+import { ChangeName } from './pages/ChangeName';
+import {ChangePw} from './pages/ChangePw';
+import {ChangePictr} from './pages/ChangePictr';
+import ModeratorSettings from './pages/ModeratorSettings';
+import ArticlesList from './pages/ArticlesList';
 import { AuthProvider } from './context/AuthContext'
+//import Article-editing from "./Pages Article_editing"
 
 export const Appcontext2=createContext();
 function App() {
@@ -45,10 +58,20 @@ function App() {
     <Route path='/' element={<Home/>}/>
     
       
-    <Route path="/modify-moderator/:id" element={<ModifyModerator />} />
-    <Route path="/add" element={<Add />} />
+  <Route path="/modify-moderator/:id" element={<ModifyModerator />} />
+  <Route path="/add" element={<Add />} />
   <Route path="/list" element={<ListeModerators />} />
   <Route path="/settings" element={<Settings />} />
+  <Route path="/ResultSearch" element={<ResultSearch />} />
+  <Route path="/Favors" element={<Favors />} />
+  <Route path="/AffichageArticle" element={<AffichageArticle />} />
+  <Route path="/ChangeName" element={<ChangeName />} />
+  <Route path="/ChangePw" element={<ChangePw />} />
+  <Route path="/ChangePictr" element={<ChangePictr />} />
+  <Route path="//UserSettings" element={<UserSettings />} />
+  <Route path="//ModeratorSettings" element={<ModeratorSettings/>}/>
+  <Route path="//ArticlesList" element ={<ArticlesList/>}/>
+  <Route path ='//EditArticles' element = {<Article_editing/>}/>
   <Route path='/password-reset-confirm/:uidb64/:token' element={<New_password/>}/> 
   <Route path="/upload" element={<Upload />} />
     </Routes> 

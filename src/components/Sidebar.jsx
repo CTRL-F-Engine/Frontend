@@ -58,9 +58,11 @@ function Sidebar() {
     navigate('/Login')
 }
   return (
-    <div className="flex flex-col h-full bg-sidebar p-0 lg:w-64 md:w-60 w-48 relative">
+
+    <div className="flex flex-col  bg-sidebar p-0 lg:w-64 md:w-60 w-48 h-[100vh]">
       <SidebarHeader />
-      <ul className="w-full list-none flex-col  items-start justify-start flex-end lg:mb-60 md:mb-48 mb-44">
+      <ul className="w-full list-none flex-col  items-start justify-start flex-end ">
+
       <Link to="/upload">
       <li
           key="upload"
@@ -119,7 +121,9 @@ function Sidebar() {
         </li>
        </Link>
        </ul>
-       <ul className="w-full list-none flex-col  items-start justify-start flex-end mb-8">
+
+       <ul className="w-full list-none flex-col  items-start justify-start mt-[60%]">
+
 
         <li
           className={`w-full cursor-pointer m-0 h-12 space-x-4 flex flex-row justify-center items-center  hover:border-l-4 hover:border-black text-item-col opacity-50 hover:opacity-100 ${selectedItem === 'logout' ? 'bg-page-col border-l-4 border-black': ''}`}

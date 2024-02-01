@@ -8,14 +8,10 @@ import '../index.css'
 const Article_editing = () => {
   // Handle finish
   const handleFinish = () => {
-   
     setShowpopup(true);
-    // Add logic to save the edited article
-    console.log("article edited:", articleData);
   };
   const handleSave = () => {
     //deleting logique
-    setSelectedArticle(articleData);
     setShowDPopup(true);
   };
     
@@ -46,7 +42,7 @@ const Article_editing = () => {
       </button>
       </div>
       <Popup visible={showpopup} onClose={() => setShowpopup(false)} />
-      <DPopup visible={showModal} onClose={() => setShowDPopup(false)} articleData={selectedArticle} />
+      <DPopup visible={showDPopup} onClose={() => setShowDPopup(false)}  />
 
     </div>
   )

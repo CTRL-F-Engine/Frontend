@@ -1,92 +1,141 @@
-import React, { useState } from 'react';
-import { ModeratorsList } from '../components/ModeratorsList';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 import editIcon from '../assets/edit.png';
 import trashIcon from '../assets/trash.png';
 import Modal from '../components/modal';
-import { Link } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
-// Import the custom CSS
-import '../App.css';
 
 function Notcool() {
-  const [showModal, setShowModal] = useState(false);
-  const [selectedModerator, setSelectedModerator] = useState('');
+    const [moderators, setModerators] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [selectedModerator, setSelectedModerator] = useState('');
 
-  const handleSave = (moderatorName) => {
-    const moderatorIndex = ModeratorsList.findIndex((moderator) => moderator.Moderator === moderatorName);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const token=localStorage.getItem("access")
+                let token2 = token.replace(/"/g, '');
+                const response = await axios.get('http://127.0.0.1:8000/manage/moderators/',{
+                  headers:{
+                    Authorization:`Bearer ${token2}`,
+                  },
+                });
+                setModerators(response.data);
+                console.log(response.data)
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
 
-    if (moderatorIndex !== -1) {
-      const updatedModeratorsList = [...ModeratorsList];
-      updatedModeratorsList.splice(moderatorIndex, 1);
-      ModeratorsList.length = 0;
-      ModeratorsList.push(...updatedModeratorsList);
-    }
+        fetchData();
+    }, []); // Empty dependency array ensures the effect runs only once
 
-    setSelectedModerator(moderatorName);
-    setShowModal(true);
+    const handleDelete = async (moderatorId,moderatorUsername) => {
+      try {
+          const token = localStorage.getItem("access");
+          let token2 = token.replace(/"/g, '');
+          await axios.delete(`http://127.0.0.1:8000/manage/delete-moderator/${moderatorId}`, {
+              headers: {
+                  Authorization: `Bearer ${token2}`,
+              },
+          });
+  
+          // Update the state based on the previous state
+          setSelectedModerator(moderatorUsername);
+          setShowModal(true);
+          setModerators((prevModerators) => prevModerators.filter((moderator) => moderator.id !== moderatorId));
+
+      } catch (error) {
+          console.error('Error deleting moderator:', error);
+      }
   };
-  return (
-    <div className='flex flex-row w-screen bg-page-col h-[100vh]'>
-      <Sidebar />
-    <div className="flex flex-auto flex-col ml-[5%] mt-8 mr-[5%] overflow-x-auto scrollbar-thin scrollbar-thumb-white ">
-      <h1 className="text-person-col text-5xl whitespace-nowrap">List Of Moderators</h1>
-      <div className="bg-sidebar space-y-8 mt-10 h-96 sm:h-[500px]  w-[80%]  text-item-col rounded-md shadow p-9 pt-12 overflow-y-auto scrollbar-thin scrollbar-thumb-white">
-        {ModeratorsList.map((moderator, index) => (
-          <div key={index} className="flex flex-row sm:space-x-5 space-x-3 ">
-            <div className="w-10 h-10 flex-shrink-0 ">
-            {index === 0 ? (
-                  <h3 className='mb-3'>Photo</h3>
-                ) : null}
-              <img src={moderator.Photo} alt={moderator.Moderator} className="w-full h-full rounded-md mb-2" />
+
+  
+
+    const handleEdit = (moderatorId) => {
+        // Implement the edit functionality or navigate to the edit page
+        
+    };
+
+    const handleSave = (moderatorUsername) => {
+        setSelectedModerator(moderatorName);
+        setShowModal(true);
+    };
+
+    return (
+        <div className='flex flex-row w-screen bg-page-col h-[100vh]'>
+            <Sidebar />
+      
+      
+      
+      
+            <div className="flex flex-auto flex-col ml-[5%] mt-[3%] mr-[5%] overflow-x-auto scrollbar-thin scrollbar-thumb-white ">
+                <h1 className="text-person-col text-5xl whitespace-nowrap">List Of Moderators</h1>
+                <div className="bg-sidebar space-y-8 mt-10 h-96 lg:h-[500px] md:h-[470px] w-[95%]  text-item-col rounded-md shadow p-9 pt-12 overflow-y-auto scrollbar-thin scrollbar-thumb-white">
+                <div className="flex flex-row space-x-20">
+                        <div className="w-10 h-10 flex-shrink-0">
+                            <h3 className='mb-3'>Photo</h3>
+                        </div>
+                        <div className="w-40 flex-shrink-0">
+                            <h3 className='mb-5'>Moderator</h3>
+                        </div>
+                        <div className="w-52 flex-shrink-0">
+                            <h3 className='mb-5'>Email</h3>
+                        </div>
+                        <div className="w-40 flex-shrink-0">
+                            <h3 className='mb-5'>Phone Number</h3>
+                        </div>
+                        <div className="w-28 flex-shrink-0">
+                            <h3 className='mb-5 pl-3'>Action</h3>
+                        </div>
+                    </div>
+
+                    {moderators.map((moderator) => ( 
+                        <div key={moderator.id} className="flex flex-row space-x-20 ">
+                            <div className="w-10 h-10 flex-shrink-0 ">
+		         	    <img src={`http://127.0.0.1:8000${moderator.photo}`} 				className="w-full h-full rounded-md mb-2" />
             </div>
             
-            <div className="w-36 flex-shrink-0">
-            {index === 0 ? (
-                  <h3 className='mb-5'>Moderator</h3>
-                ) : null}
-              <span className="text-person-col">{moderator.Moderator}</span>
+            
+            <div className="w-40 flex-shrink-0">
+              
+              <span className="text-person-col">{moderator.username}</span>
             </div>
             
-            <div className="w-44 flex-shrink-0">
-            {index === 0 ? (
-                  <h3 className='mb-5'>Email</h3>
-                ) : null}
-              <span className="text-person-col">{moderator.Email}</span>
+            <div className="w-52 flex-shrink-0">
+              
+              <span className="text-person-col">{moderator.email}</span>
             </div>
             
-            <div className="w-36 flex-shrink-0">
-            {index === 0 ? (
-                  <h3 className='mb-5'>Phone Number</h3>
-                ) : null}
-              <span className="text-person-col">{moderator.Phone}</span>
+            <div className="w-40 flex-shrink-0">
+              
+              <span className="text-person-col">{moderator.PhoneNumber}</span>
             </div>
             
-            <div className="w-28 flex-shrink-0">
-            {index === 0 ? (
-                  <h3 className='mb-5 pl-3'>Action</h3>
-                ) : null}
-              <div className="flex flex-row space-x-2">
-                <Link to="/modify-moderator">
-                  <a href={moderator.link} target="_blank">
-                    <img src={editIcon} alt="Edit" className="w-8 h-6 cursor-pointer" />
-                  </a>
-                </Link>
-                <img
-                  src={trashIcon}
-                  alt="Delete"
-                  className="w-6 h-6 cursor-pointer"
-                  onClick={() => handleSave(moderator.Moderator)}
-                />
-              </div>
+
+                            <div className="w-28 flex-shrink-0">
+                                
+                                <div className="flex flex-row space-x-2">
+                                    <Link to={`/modify-moderator/${moderator.id}`}>
+                                        <img src={editIcon} alt="Edit" className="w-8 h-6 cursor-pointer" />
+                                    </Link>
+                                    <img
+                                        src={trashIcon}
+                                        alt="Delete"
+                                        className="w-6 h-6 cursor-pointer"
+                                        onClick={() => handleDelete(moderator.id,moderator.username)}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+                <Modal visible={showModal} onClose={() => setShowModal(false)} moderatorName={selectedModerator} />
             </div>
-          </div>
-        ))}
-      </div>
-      <div  className="flex  h-[31.2vh] sm:h-[15.4vh] " ></div>
-      <Modal visible={showModal} onClose={() => setShowModal(false)} moderatorName={selectedModerator} />
-    </div>
-    </div>
-  );
+        </div>
+    );
+
 }
 
 export default Notcool;

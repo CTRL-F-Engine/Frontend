@@ -8,11 +8,13 @@ import { Navbar } from '../components/Navbar';
 import { Navbar2 } from '../components/Navbar2';
 import { Article } from '../components/Article';
 import img from '../assets/footer.svg';
-import { Appcontext2 } from '../App';
+import AuthContext from '../context/AuthContext'
 import pdp from '../assets/pdp.png'
 import { Btn } from '../components/Btn';
 import Popup from '../components/PopupSearch';
+
 import Wait from '../components/Wait';
+
 import { useNavigate } from 'react-router-dom';
 export const Home =()=>
 {
@@ -23,24 +25,29 @@ export const Home =()=>
   }
 const [showPopup , setShowPopup]=useState(false);
 const [LittleNavVisible , setLittleNavVisible]=useState(false);
-const {isConnected} = useContext(Appcontext2)
+const {isConnected} = useContext(AuthContext)
 const [ref,setRef]=useState(null);
 const [search,setSearch]=useState('');
+const navigate = useNavigate();
 const [isSticky, setIsSticky] = useState(false);
-const handleSetPopUp=(val1)=>
-{
-  setShowPopup((val1) => !val1);
- console.log(showPopup);
-}
+
+  const storedUser = JSON.parse(localStorage.getItem('User'));
+  const user_type = storedUser ? storedUser.user_type : null;
+  useEffect(()=>{
+    if (isConnected  && user_type==='admin'){
+      navigate('/upload')
+      //toast.error("You do not permissions to access to this link !")
+    }
+    
+  },[])
+
+
 const handleOffset = (data) => {
       setRef(data);
       console.log('Ref immediately after setRef:', ref); 
       console.log('Data:', data);
     };
-    useEffect(()=>
-    {
-
-    },[isConnected])
+    
      useEffect(() => {
       }, [ref]);
      

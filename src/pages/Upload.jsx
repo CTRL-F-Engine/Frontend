@@ -1,13 +1,19 @@
 // Content component (content.js)
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState ,useContext,useEffect} from "react";
 import LinkAdded from "../components/LinkAdded";
 import Popup from "../components/popupU";
 import Sidebar from '../components/Sidebar';
+import { useNavigate } from 'react-router-dom';
+import AuthContext from '../context/AuthContext';
+import { toast } from "react-toastify";
 function Content() {
+  const navigate = useNavigate();
   const [newLink, setNewLink] = useState("");
   const [LinksUploaded, setLinksUploaded] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
-
+  
+ 
+  
   const handleChange = (event) => {
     setNewLink(event.target.value);
   };
@@ -34,8 +40,10 @@ function Content() {
   return (
     <div className='flex flex-row w-screen h-[100vh] bg-page-col '>
       <Sidebar />
+
     <div className={`flex flex-auto flex-col ml-[3%] mt-8 mr-[3%]  `}>
       <h1 className="text-person-col text-5xl">Upload Articles</h1>
+
       <div className="bg-sidebar mt-10 h-52 rounded-md shadow p-9 pt-12">
         <h3 className=" text-[25px] text-person-col mb-4">Paste here your articles URL</h3>
         <div className="AddArticle w-[100%]">
@@ -50,7 +58,9 @@ function Content() {
       <div className="flex flex-auto flex-col place-items-end" >
       
       <button
-        className="mt-[20%] sm:w-[110px] w-fit box-border xs:h-[38px] h-[30px] text-[13px] sm:text-[15px] font-medium sm:font-bold  text-sidebar  bg-person-col font-['TT Commons'] sm:px-4 px-2 sm:rounded-[5px] rounded-[3px]"
+
+        className="absolute right-0 bottom-12 sm:w-[110px] w-fit box-border xs:h-[38px] h-[30px] text-[13px] sm:text-[15px] font-medium sm:font-bold  text-sidebar  bg-person-col font-['TT Commons'] sm:px-4 px-2 sm:rounded-[5px] rounded-[3px]"
+
         onClick={addLink} 
       >
         Upload

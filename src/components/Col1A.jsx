@@ -3,6 +3,7 @@ import React from "react";
 function Col1({ fullName, setFullName, email, setEmail, password, setPassword }) {
   return (
     <div className="col1 flex flex-auto flex-col sm:space-y-3 space-y-1 ">
+
       <h2 className="text-lg text-person-col  ">Full Name</h2>
       <div className="w-[100%] ">
         <input

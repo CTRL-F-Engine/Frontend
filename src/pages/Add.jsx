@@ -4,19 +4,23 @@ import Col1 from "../components/Col1A";
 import Col2 from "../components/Col2A";
 import Popup from "../components/popupA";
 import Sidebar from '../components/Sidebar';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function Content() {
-  const [fullName, setFullName] = useState("");
+  const [FullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  
+  const [PhoneNumber, setPhoneNumber] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [showpopup, setShowpopup] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
 
   const handleAddModerator = async () => {
-    if (!fullName || !email || !password || !username || !phoneNumber || !confirmPassword) {
-      alert("Please fill in all fields.");
+    if ( !email ||  !username ) {
+      alert("Please fill in required fields.");
       return;
     }
 
@@ -25,32 +29,40 @@ function Content() {
       return;
     }
 
+
     try {
-      const response = await fetch("YOUR_API_ENDPOINT/moderators", {
+      const formData = new FormData();
+      formData.append('email', email);
+      formData.append('username', username);
+      formData.append('FullName', FullName);
+      formData.append('PhoneNumber', PhoneNumber);
+      
+      
+      const token=localStorage.getItem("access")
+      let token2 = token.replace(/"/g, '');
+      console.log(token)
+      console.log(token2)
+      const response = await fetch("http://127.0.0.1:8000/manage/add-moderator/", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token2}`,
+          
         },
-        body: JSON.stringify({
-          fullName,
-          email,
-          password,
-          username,
-          phoneNumber,
-        }),
+        body: formData,
       });
-
-      if (response.ok) {
+      console.log(response.status)
+      if (response.status===201) {
+        console.log("hellllooooooo")
         // Successfully added moderator to the database
         setShowPopup(true);
         // You may also update the local state or perform any other actions
       } else {
         // Handle error
-        alert("Failed to add moderator. Please try again.");
+        const errorText = await response.text();
+        toast.error(errorText)
       }
     } catch (error) {
-      console.error("Error adding moderator:", error);
-      alert("An unexpected error occurred. Please try again.");
+      toast.error("There was an issue.Please, try again .")
     }
   };
 
@@ -58,13 +70,15 @@ function Content() {
     setShowPopup(false);
   };
   return (
+
     <div className='flex flex-row w-screen  bg-page-col h-[100vh]'>
       <Sidebar />
     <div className="flex flex-auto flex-col ml-[3%] mt-8 mr-[3%] ">
       <h1 className="text-person-col text-5xl whitespace-nowrap">Add Moderator</h1>
       <div className="bg-sidebar sm:mt-10 mt-5 sm:h-96 h-[475px]  rounded-md shadow p-9 sm:pt-12 pt-6 flex sm:flex-row flex-col -space-y-10 sm:space-y-0 sm:space-x-10">
+
         <Col1
-          fullName={fullName}
+          FullName={FullName}
           setFullName={setFullName}
           email={email}
           setEmail={setEmail}
@@ -74,24 +88,24 @@ function Content() {
         <Col2
           username={username}
           setUsername={setUsername}
-          phoneNumber={phoneNumber}
+          PhoneNumber={PhoneNumber}
           setPhoneNumber={setPhoneNumber}
           confirmPassword={confirmPassword}
           setConfirmPassword={setConfirmPassword}
         />
       </div>
       
-     
-      <div className="flex flex-auto flex-col place-items-end " >
-      
+
+       <div className="flex flex-auto flex-col place-items-end " >
       <button
-        className="mt-[8%]  sm:w-[110px] w-full box-border xs:h-[38px] h-[30px] text-[13px] sm:text-[15px] font-medium sm:font-bold  text-sidebar  bg-person-col font-['TT Commons'] sm:px-4 px-2 sm:rounded-[5px] rounded-[3px]"
-        onClick={handleAddModerator}  
+        className="absolute right-0 sm:bottom-12 bottom-6 sm:w-[110px] w-[100%] box-border xs:h-[38px] h-[30px] text-[13px] sm:text-[15px] font-medium sm:font-bold  text-sidebar  bg-person-col font-['TT Commons'] sm:px-4 px-2 sm:rounded-[5px] rounded-[3px]"
+        onClick={handleAddModerator} 
       >
         Add
       </button>
-      </div>
-      <Popup visible={showpopup} onClose={() => setShowpopup(false)} />
+</div>
+      <Popup visible={showPopup} onClose={() => setShowPopup(false)} />
+
      
       
     </div>

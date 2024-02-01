@@ -1,6 +1,6 @@
 import React from 'react'
 import 'tailwindcss/tailwind.css'; 
-import '../../index.css'
+import '../index.css'
 
 const Done = ({articles}) => {
   return (

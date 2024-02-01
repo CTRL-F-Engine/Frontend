@@ -24,10 +24,8 @@ const Article_editing = () => {
         <h1 className='text-text-col text-5xl whitespace-nowrap'>Article Editing</h1>
         <div  className="bg-sidebar space-y-8 mt-10 h-96 sm:h-[500px]  w-[80%] ">
           <Article/>
-        </div>     
-      </div>
-
-      <div className="flex flex-auto flex-row space-x-1" >
+        </div>    
+        <div className="flex flex-auto flex-row space-x-1" >
       <button
         className="mt-[8%]  sm:w-[110px] w-full box-border xs:h-[38px] h-[30px] text-[13px] sm:text-[15px] font-medium sm:font-bold  text-sidebar  bg-person-col font-['TT Commons'] sm:px-4 px-2 sm:rounded-[5px] rounded-[3px]"
         onClick={handleFinish}  
@@ -40,7 +38,9 @@ const Article_editing = () => {
       >
         Delete
       </button>
+      </div> 
       </div>
+
       <Popup visible={showpopup} onClose={() => setShowpopup(false)} />
       <DPopup visible={showDPopup} onClose={() => setShowDPopup(false)}  />
 

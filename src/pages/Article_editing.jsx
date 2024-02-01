@@ -1,9 +1,9 @@
 import React from 'react';
 import Article from '../components/Editarticle';
-import ModeratorSidebar from '../components/ModeratorSidebar'
-import Popup from "../components/SaveArticlePopup"
-import DPopup from "../components/DeleteArticle"
-import '../index.css'
+import ModeratorSidebar from '../components/ModeratorSidebar';
+import Popup from "../components/SaveArticlePopup";
+import DPopup from "../components/DeleteArticle";
+import '../index.css';
 
 const Article_editing = () => {
   const [showDPopup, setShowDPopup] = useState(false);

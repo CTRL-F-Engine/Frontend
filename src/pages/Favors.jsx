@@ -4,11 +4,12 @@ import { Article } from '../components/Article';
 import { Appcontext2 } from '../App';
 import { Navbar3 } from '../components/Navbar3';
 import img from '../assets/footer.svg';
+import AuthContext from '../context/AuthContext'
 
 export const Favors =()=>
 {
 
-const {isConnected} = useContext(Appcontext2)
+const {isConnected} = useContext(AuthContext)
 const [ref,setRef]=useState(null);
 const [isSticky, setIsSticky] = useState(false);
 

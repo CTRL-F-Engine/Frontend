@@ -5,11 +5,12 @@ import { Appcontext2 } from '../App';
 import pdp from '../assets/pdp.png'
 import { Navbar3 } from '../components/Navbar3';
 import Filter from '../components/Filter';
+import AuthContext from '../context/AuthContext'
 
 export const ResultSearch =()=>
 {
 
-const {isConnected} = useContext(Appcontext2)
+const {isConnected} = useContext(AuthContext)
 const [ref,setRef]=useState(null);
 const [search,setSearch]=useState('');
 const [isSticky, setIsSticky] = useState(false);

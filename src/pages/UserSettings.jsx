@@ -4,7 +4,7 @@ import { Appcontext2 } from '../App';
 import pdp from '../assets/pdp.png'
 import { Navbar3 } from '../components/Navbar3';
 import img from '../assets/footer.svg';
-import next from '../assets/next.png';
+import next from '../assets/Next.png';
 import { Link } from 'react-router-dom';
 
 export const UserSettings =()=>

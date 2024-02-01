@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route,Routes } from 'react-router-dom';
 import '../index.css';
-import Article_editing from '../pages/Article_editing';
+//import Article_editing from '../pages/Article_editing';
 
 const In_progress = ({inprogressarticles}) => {
   //logique from back

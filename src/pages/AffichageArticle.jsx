@@ -7,11 +7,12 @@ import { Navbar3 } from '../components/Navbar3';
 import Filter from '../components/Filter';
 import img from '../assets/footer.svg';
 import { ArticleAffiché } from '../components/ArticleAffiché';
+import AuthContext from '../context/AuthContext'
 
 export const AffichageArticle =()=>
 {
 
-const {isConnected} = useContext(Appcontext2)
+const {isConnected} = useContext(AuthContext)
 const [ref,setRef]=useState(null);
 const [search,setSearch]=useState('');
 const [isSticky, setIsSticky] = useState(false);

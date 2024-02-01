@@ -16,6 +16,7 @@ function Content() {
   
   const handleChange = (event) => {
     setNewLink(event.target.value);
+    console.log(newLink)
   };
 
   const handleEnterKey = (event) => {
@@ -24,16 +25,46 @@ function Content() {
     }
   };
 
-  const addLink = () => {
+  const addLink = async() => {
     if (!newLink) return;
     const link = {
       id: LinksUploaded.length === 0 ? 1 : LinksUploaded.length + 1,
       link: newLink,
     };
     setLinksUploaded([...LinksUploaded, link]);
-    setNewLink("");
-    setShowPopup(true);
+    try {
+      const formData = new FormData();
+      formData.append('link', newLink);
+      console.log(newLink)
+      const token=localStorage.getItem("access")
+      let token2 = token.replace(/"/g, '');
+      
+      const response = await fetch("http://127.0.0.1:8000/manage/articles/", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${token2}`,
+          
+        },
+        body: formData
+      });
+      console.log(response.status)
+      if (response.status===201) {
+        console.log("hellllooooooo")
+        
+        setShowPopup(true);
+        // You may also update the local state or perform any other actions
+      } else {
+        // Handle error
+        const errorText = await response.text();
+        toast.error(errorText)
+      }
+    } catch (error) {
+      toast.error("There was an issue.Please, try again .")
+    }
   };
+    
+    
+  
 
   const [showpopup, setShowpopup]=useState(false);
 

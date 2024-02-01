@@ -10,8 +10,8 @@ const Row1 = ({props}) => {
      <div className="w-[100%]">
        <input
          className="bg-admin-bg outline-none text-item-col sm:h-11 h-7 w-[100%] rounded-md pl-3"
-         value={user.title}
-         onChange={(e) => handleInputChange("title", e.target.value)}
+         value={user.FullName}
+         onChange={(e) => handleInputChange("FullName", e.target.value)}
        />
       
      </div>
@@ -31,7 +31,7 @@ const Row1 = ({props}) => {
      <div className="w-[100%]">
        <input
          className="bg-admin-bg outline-none text-item-col sm:h-11 h-7 w-[100%] rounded-md pl-3"
-         value={user.Email}
+         value={user.email}
          onChange={(e) => handleInputChange("Email", e.target.value)}
        />
      </div>
@@ -40,8 +40,8 @@ const Row1 = ({props}) => {
        <input
          className="bg-admin-bg outline-none text-item-col sm:h-11 h-7 w-[100%] rounded-md pl-3"
          type="password"
-         value={user.Password}
-         onChange={(e) => handleInputChange("Password", e.target.value)}
+         value={user.password}
+         onChange={(e) => handleInputChange("password", e.target.value)}
        />
      </div>
      <h2 className="text-lg text-text-col ">Confirm Password</h2>

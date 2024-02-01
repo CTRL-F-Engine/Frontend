@@ -4,9 +4,10 @@ import pdp from '../assets/pdp.png';
 import { Navbar3 } from '../components/Navbar3';
 import img from '../assets/footer.svg';
 import upload from '../assets/upload.png';
+import AuthContext from '../context/AuthContext'
 
 export const ChangePictr = () => {
-  const { isConnected } = useContext(Appcontext2);
+  const { isConnected } = useContext(AuthContext);
   const [ref, setRef] = useState(null);
   const [isSticky, setIsSticky] = useState(false);
   const fileInputRef = useRef(null);

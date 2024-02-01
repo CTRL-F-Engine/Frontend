@@ -31,8 +31,8 @@ import {ChangePw} from './pages/ChangePw';
 import {ChangePictr} from './pages/ChangePictr';
 import ModeratorSettings from './pages/ModeratorSettings';
 import ArticlesList from './pages/ArticlesList';
-import { AuthProvider } from './context/AuthContext'
-//import Article-editing from "./Pages Article_editing"
+import { AuthProvider } from './context/AuthContext';
+import Article_editing from "./pages/Article_editing"
 
 export const Appcontext2=createContext();
 function App() {
@@ -71,7 +71,7 @@ function App() {
   <Route path="//UserSettings" element={<UserSettings />} />
   <Route path="//ModeratorSettings" element={<ModeratorSettings/>}/>
   <Route path="//ArticlesList" element ={<ArticlesList/>}/>
-  <Route path ='//EditArticles' element = {<Article_editing/>}/>
+  <Route path="//Article_editing" element ={<Article_editing/>}/>
   <Route path='/password-reset-confirm/:uidb64/:token' element={<New_password/>}/> 
   <Route path="/upload" element={<Upload />} />
     </Routes> 

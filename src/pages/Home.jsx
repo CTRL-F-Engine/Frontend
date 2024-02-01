@@ -28,7 +28,7 @@ const [LittleNavVisible , setLittleNavVisible]=useState(false);
 const {isConnected} = useContext(AuthContext)
 const [ref,setRef]=useState(null);
 const [search,setSearch]=useState('');
-const navigate = useNavigate();
+
 const [isSticky, setIsSticky] = useState(false);
 
   const storedUser = JSON.parse(localStorage.getItem('User'));
@@ -41,7 +41,11 @@ const [isSticky, setIsSticky] = useState(false);
     
   },[])
 
-
+  const handleSetPopUp=(val1)=>
+  {
+    setShowPopup((val1) => !val1);
+   console.log(showPopup);
+  }
 const handleOffset = (data) => {
       setRef(data);
       console.log('Ref immediately after setRef:', ref); 

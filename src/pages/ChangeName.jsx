@@ -3,9 +3,10 @@ import { Appcontext2 } from '../App';
 import pdp from '../assets/pdp.png';
 import { Navbar3 } from '../components/Navbar3';
 import img from '../assets/footer.svg';
+import AuthContext from '../context/AuthContext'
 
 export const ChangeName = () => {
-  const { isConnected } = useContext(Appcontext2);
+  const { isConnected } = useContext(AuthContext);
   const [ref, setRef] = useState(null);
   const [isSticky, setIsSticky] = useState(false);
   const [user, setuser] = useState({

@@ -1,26 +1,62 @@
-import React, {useState} from 'react'
+import React, {useState,useEffect} from 'react'
 import ModeratorSidebar from '../components/ModeratorSidebar'
 import Row1 from '../components/Row1';
 import Row2 from '../components/Row2';
 import imag from '../assets/pdp.png';
 import Popup from "../components/popupS";
+import { ToastContainer, toast } from 'react-toastify';
 
 const ModeratorSettings = () => {
     const [showpopup, setShowpopup]=useState(false);
+    const [photoChanged,setphotoChanged]=useState(false);
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [user, setuser] = useState({
-      title: 'Bendahmane',
-      username: 'Nesrine',
-      link: '',
-      img: imag,
-      Email:'ln_bend@esi.dz',  
-        Password:'12345',
+      FullName: '',
+      username: '',
+      
+      photo: '',
+      
+      email:'',
+        password:'',
     });
-     // Handle input changes
-     const handleInputChange = (key, value) => {
-      if (key === 'Password') {
+    const [isEditMode, setIsEditMode] = useState(false);
+    useEffect(() => {
+      const fetchUserData = async () => {
+        try {
+          
+          const token=localStorage.getItem("access")
+        let token2 = token.replace(/"/g, '');
+          const response = await fetch("http://127.0.0.1:8000/moderate/settings/", {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token2}`,
+              "Content-Type": "application/json",
+            },
+          });
+          
+          if (response.ok) {
+            const userData = await response.json();
+            setuser(userData);
+            
+            setIsEditMode(true); // Enable edit mode since you have fetched existing user data
+            console.log(userData)
+          } else {
+            // Handle error
+            console.error("Error fetching user data");
+          }
+        } catch (error) {
+          // Handle error
+          console.error("Error fetching user data:", error);
+        }
+      };
+  
+      fetchUserData();
+    }, []);
+    const handleInputChange = (key, value) => {
+      if (key === 'password') {
         setuser((prevuser) => ({
           ...prevuser,
-          Password: value,
+          password: value,
         }));
       } else if (key === 'confirmPassword') {
         setConfirmPassword(value);
@@ -31,31 +67,69 @@ const ModeratorSettings = () => {
         }));
       }
     };
-    const handleImageChange = (file) => {
+    const [imgUrl,setimgUrl]=useState('')
+    const handleImageChange = (e) => {
+      const file = e.target.files[0];
+    
       const reader = new FileReader();
-  
-      reader.onload = (e) => {
+      reader.onload = () => {
         setuser((prevuser) => ({
           ...prevuser,
-          img: e.target.result,
+          photo: file, // Store the actual file, not the data URL
         }));
       };
-  
+      setimgUrl(`http://127.0.0.1:8000/profile_pictures/profile_pictures/${file.name}`)
+      setphotoChanged(true)
+    
       reader.readAsDataURL(file);
+      console.log(file)
     };
     
+    
     // Handle save action
-    const handleSave = () => {
-      if (user.Password !== confirmPassword) {
-        alert("Passwords do not match.");
+    const handleSave = async () => {
+      if (user.password && user.password !== confirmPassword) {
+        toast.error("Passwords do not match.");
         return;
       }
-      setShowpopup(true);
-      // Add logic to save the moderator data (e.g., send it to a server)
-      console.log("moderator data saved", user);
+    
+      try {
+        const formData = new FormData();
+        
+        formData.append('email', user.email);
+        formData.append('username', user.username);
+        formData.append('password', user.password || '');  // Password can be empty if not changed
+        formData.append('FullName', user.FullName);
+        console.log("ablus")
+        if (photoChanged){
+          
+          formData.append('photo', user.photo);  // Append the actual file
+        
+        }
+        
+        
+        
+        const token = localStorage.getItem('access');
+        let token2 = token.replace(/"/g, '');
+    
+        const response = await fetch("http://127.0.0.1:8000/moderate/settings/", {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token2}`,
+          },
+          body: formData,
+        });
+    
+        if (response.status === 200) {
+          setShowpopup(true);
+        } else {
+          const errorText = await response.text();
+          toast.error(`${errorText}`);
+        }
+      } catch (error) {
+        toast.error("There was an issue. Please, try again.");
+      }
     };
-
-  const [confirmPassword, setConfirmPassword] = useState('');
   return (
     <div className='flex flex-row w-screen  bg-admin-bg v-[100vh]'>
       <ModeratorSidebar />
@@ -63,7 +137,7 @@ const ModeratorSettings = () => {
       <h1 className="text-text-col text-5xl whitespace-nowrap">Settings</h1>
       <div className="bg-sidebar mt-5 h-[430px] sm:h-[460px] rounded-md shadow p-9 sm:pt-12 pt-6 flex flex-row space-x-24">
         <Row1 props={{user,handleInputChange}} />
-        <Row2 props={{ user, handleImageChange }} />
+        <Row2 props={{ user, handleImageChange ,imgUrl}} />
       </div>
       
       <div className="flex flex-auto flex-col place-items-end h-[27.6vh] sm:h-[23.65vh]" >

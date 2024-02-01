@@ -33,9 +33,10 @@ function Sidebar() {
     if (!isConnected  || user_type!=='admin'){
       if (!isConnected){
         navigate('/Login')
+        toast.error("You have to connect first !")
       }else{
         navigate('/')
-        toast.error("You do not permissions to access to this link !")
+        toast.error("You do not have permissions to access to this link !")
       }
       
       

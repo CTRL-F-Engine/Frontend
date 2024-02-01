@@ -168,7 +168,7 @@ function Content() {
       </div>
       <Popup visible={showpopup} onClose={() => setShowpopup(false)} />
     </div>
-    </div>
+    
   );
 }
 

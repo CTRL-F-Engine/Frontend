@@ -6,6 +6,8 @@ import DPopup from "../components/DeleteArticle"
 import '../index.css'
 
 const Article_editing = () => {
+  const [showDPopup, setShowDPopup] = useState(false);
+  const [showpopup, setShowpopup] = useState(false);
   // Handle finish
   const handleFinish = () => {
     setShowpopup(true);

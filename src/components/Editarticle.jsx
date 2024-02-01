@@ -2,7 +2,6 @@ import React , { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ScrollProgressBar from "react-scroll-progress-bar";
 import "../index.css"
-import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
 const Article = () => {
@@ -33,8 +32,7 @@ const Article = () => {
      };
   return (
     <div  className="flex flex-col bg-sidebar h-96 sm:h-[500px]  w-[80%]  text-item-col rounded-md shadow  overflow-y-auto scrollbar-thin scrollbar-thumb-white">
-      <ScrollProgressBar className=" bg-[#01C38D] h-1 w-full" />
-
+      <ScrollProgressBar className=" bg-[#01C38D] h-2 w-full" />
      <textarea
             value={articleData.content}
             onChange={handleContentChange}

@@ -27,7 +27,7 @@ import { ChangeName } from './pages/ChangeName';
 import {ChangePw} from './pages/ChangePw';
 import {ChangePictr} from './pages/ChangePictr';
 import ModeratorSettings from './pages/ModeratorSettings';
-import ArticlesList from './pages/ArticlesList';
+import ListeArticles from './pages/ListeArticles';
 import Article_editing from './pages/Article_editing';
 
 
@@ -61,7 +61,7 @@ function App() {
   <Route path="/ChangePictr" element={<ChangePictr />} />
   <Route path="//UserSettings" element={<UserSettings />} />
   <Route path="//ModeratorSettings" element={<ModeratorSettings/>}/>
-  <Route path="//ArticlesList" element ={<ArticlesList/>}/>
+  <Route path="/ListeArticles" element ={<ListeArticles/>}/>
   <Route path="//ArticleEdit" element ={<Article_editing/>}/>
 
        </Routes>    

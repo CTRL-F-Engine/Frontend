@@ -22,10 +22,10 @@ function ModeratorSidebar() {
   const [selectedItem, setSelectedItem] = useState(null);
 
   return (
-    <div className="flex flex-col  h-screen bg-sidebar p-0 lg:w-64 md:w-60 w-48">
+    <div className="flex flex-col  bg-sidebar p-0 lg:w-64 md:w-60 w-48 h-[100vh]">
       <SidebarHeader props={user} />
-      <ul className="w-full list-none flex-col  justify-start flex-end lg:mb-60 md:mb-48 mb-44">
-      <Link to="/ArticlesList">
+      <ul className="w-full list-none flex-col  items-start justify-start flex-end ">
+      <Link to="/ListeArticles">
       <li
           key="List of Articles"
           className={`w-full cursor-pointer m-0 h-12 flex text-left justify-center items-center space-x-4 hover:border-l-4 hover:border-black text-item-col opacity-50 hover:opacity-100 ${

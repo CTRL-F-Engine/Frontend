@@ -35,21 +35,12 @@ const Article = () => {
     <div  className="flex flex-col bg-sidebar h-96 sm:h-[500px]  w-[80%]  text-item-col rounded-md shadow  overflow-y-auto scrollbar-thin scrollbar-thumb-white">
       <ScrollProgressBar className=" bg-[#01C38D] h-1 w-full" />
 
-        <label>Title:</label>
-      <ReactQuill
-        value={articleData.title}
-        onChange={handleTitleChange}
-        modules={{ toolbar: true }}
-        theme="snow"
-      />
-
-      <label>Content:</label>
-      <ReactQuill
-        value={articleData.content}
-        onChange={handleContentChange}
-        modules={{ toolbar: true }}
-        theme="snow"
-      />
+     <textarea
+            value={articleData.content}
+            onChange={handleContentChange}
+            className="w-full h-48 p-2 border rounded-md"
+          ></textarea>
+      
         </div>     
   );
 }

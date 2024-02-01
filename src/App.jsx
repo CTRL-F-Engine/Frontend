@@ -47,7 +47,7 @@ function App() {
     <Route path='/Welcome' element={<Welcome/>}/>
     <Route path='/Login/Otp' element={<Otp/>}/>
     <Route path='/Signup' element={<SignUp/>}/>
-    <Route path='/' element={<Home/>}/>
+    <Route path='/' element={<ListeArticles/>}/>
     <Route path="/upload" element={<Upload />} />
     <Route path="/modify-moderator" element={<ModifyModerator />} />
     <Route path="/add" element={<Add />} />

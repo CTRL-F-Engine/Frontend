@@ -1,11 +1,27 @@
 import React from 'react';
 import { ListeArticlesInfo } from '../components/ListeArticlesInfo';
-import { Article } from '../components/Article';
 import { Link } from 'react-router-dom';
 import ModeratorSidebare from '../components/ModeratorSidebar';
 import '../App.css';
 
 function ListeArticles() {
+
+  const handleDownload = async (url) => {
+    try {
+      const response = await fetch(url);
+      const blob = await response.blob();
+      const urlBlob = window.URL.createObjectURL(new Blob([blob]));
+      const link = document.createElement('a');
+      link.href = urlBlob;
+      link.setAttribute('download', 'article.pdf');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error('Error downloading PDF:', error);
+    }
+  };
+
   return (
     <div className='flex flex-row w-screen bg-page-col h-[100vh]'>
       <ModeratorSidebare />
@@ -17,10 +33,10 @@ function ListeArticles() {
             <div key={index} className="mb-4 flex flex-col">
               <div className="flex flex-row items-center mb-2">
                 <h1 className="inline text-xl w-full font-semibold text-person-col">
-                  {article.props.title}
+                  {article.props.title} {/* Accédez correctement aux propriétés de l'élément Article */}
                 </h1>
                 <div className="flex items-center">
-                  <button className='w-20 mr-3 box-border xs:h-[30px] h-[25px] text-[13px] sm:text-[15px] bg-item-col text-sidebar text-lg font-medium sm:rounded-[5px] rounded-[3px] sm:px-2 px-1'>Download</button>
+                  <button onClick={() => handleDownload(article.props.url)} className='w-20 mr-3 box-border xs:h-[30px] h-[25px] text-[13px] sm:text-[15px] bg-item-col text-sidebar text-lg font-medium sm:rounded-[5px] rounded-[3px] sm:px-2 px-1'>Download</button>
                   <Link to='/Article_editing'>
                     <button className='w-20 box-border xs:h-[30px] h-[25px] text-[13px] sm:text-[15px] bg-item-col text-sidebar text-lg font-medium sm:rounded-[5px] rounded-[3px] sm:px-2 px-1'>Correct</button>
                   </Link>

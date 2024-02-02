@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import '../App.css';
 import imag from '../assets/pdp.png'
 import SidebarHeader from './SidebarHeader';
@@ -7,7 +7,6 @@ import ArtList from '../assets/ArtList.png'
 import EditS from '../assets/EditS.png'
 import Settings from '../assets/settings.png'
 import { Link } from 'react-router-dom';
-
 const user = [
   {
     title: 'BENDAHMANE Nesrine',
@@ -40,20 +39,7 @@ function ModeratorSidebar() {
         </li>
        </Link>
 
-       <Link to="/Article_editing">
-      <li
-          key="Article Editing"
-          className={`w-full cursor-pointer m-0 h-12 flex text-left justify-center items-center space-x-4 hover:border-l-4 hover:border-black text-item-col opacity-50 hover:opacity-100 ${
-            selectedItem === 'Article Editing' ? 'bg-admin-bg border-l-4 border-black' : ''
-          }`}
-          onClick={() => {
-            setSelectedItem('Article Editing');
-          }}
-        >
-          <img src={EditS} className="lg:w-[24px] lg:h-[24px] md:h-[20px] md:w-[20px] h-[16px] w-[16px]" />
-          <div className='lg:w-[80%] lg:text-[17px] md:w-[85%] md:text-[15px] w-[80%] text-[13px]'>Article Edting</div>
-        </li>
-       </Link>
+       
        <Link to="/ModeratorSettings">
       <li
           key="Settings"

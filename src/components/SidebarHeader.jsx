@@ -1,4 +1,4 @@
-import React from 'react';
+/* eslint-disable react/prop-types */
 
 function SidebarHeader({ props }) {
   const user = props[0]; // Access the first (and only) element in the array

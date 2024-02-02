@@ -29,17 +29,21 @@ import {ChangePictr} from './pages/ChangePictr';
 import ModeratorSettings from './pages/ModeratorSettings';
 import ListeArticles from './pages/ListeArticles';
 import Article_editing from './pages/Article_editing';
+import { EditArticles } from './pages/EditArticles';
 
 
 export const Appcontext2=createContext();
+export const Appcontext3=createContext();
 function App() {
   const [isConnected , setIsConnected]=useState(true);
-
+  const [Article , setArticle]=useState(null);
   return (
 
     <div className=' w-[100%] h-[100vh] '>     
-  <Appcontext2.Provider value={{isConnected , setIsConnected}}>
-  <Router>
+    <Appcontext2.Provider value={{isConnected , setIsConnected}}>
+    <Appcontext3.Provider value={{Article , setArticle}}>
+
+     <Router>
      <Routes> 
     <Route path='/Login' element={<Login/>}/>
     <Route path='/Login/Forget' element={<Forget/>}/>
@@ -60,13 +64,16 @@ function App() {
   <Route path="/ChangePictr" element={<ChangePictr />} />
   <Route path="//UserSettings" element={<UserSettings />} />
   <Route path="//ModeratorSettings" element={<ModeratorSettings/>}/>
+
   <Route path="/ListeArticles" element ={<ListeArticles/>}/>
-  <Route path="//ArticleEdit" element ={<Article_editing/>}/>
+  <Route path="//Article_editing" element ={<EditArticles/>}/>
 
        </Routes>    
     </Router>
-      
-</Appcontext2.Provider> 
+   </Appcontext3.Provider> 
+    
+</Appcontext2.Provider>  
+
   </div>
   
   )

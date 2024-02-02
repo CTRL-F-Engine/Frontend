@@ -1,13 +1,24 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import { ListeArticlesInfo } from '../components/ListeArticlesInfo';
 import { Link } from 'react-router-dom';
 import ModeratorSidebare from '../components/ModeratorSidebar';
 import '../App.css';
+import { Appcontext3 } from '../App';
+import { useContext } from 'react';
 
 function ListeArticles() {
+const {Article,setArticle} = useContext(Appcontext3)
+// here the Article data is initially null , it holds the article so that 
 
+
+const handleCorrect=()=>
+{
+   
+}
   const handleDownload = async (url) => {
     try {
+      console.log(Article)
       const response = await fetch(url);
       const blob = await response.blob();
       const urlBlob = window.URL.createObjectURL(new Blob([blob]));
@@ -38,7 +49,7 @@ function ListeArticles() {
                 <div className="flex items-center">
                   <button onClick={() => handleDownload(article.props.url)} className='w-20 mr-3 box-border xs:h-[30px] h-[25px] text-[13px] sm:text-[15px] bg-item-col text-sidebar text-lg font-medium sm:rounded-[5px] rounded-[3px] sm:px-2 px-1'>Download</button>
                   <Link to='/Article_editing'>
-                    <button className='w-20 box-border xs:h-[30px] h-[25px] text-[13px] sm:text-[15px] bg-item-col text-sidebar text-lg font-medium sm:rounded-[5px] rounded-[3px] sm:px-2 px-1'>Correct</button>
+                    <button onClick={handleCorrect} className='w-20 box-border xs:h-[30px] h-[25px] text-[13px] sm:text-[15px] bg-item-col text-sidebar text-lg font-medium sm:rounded-[5px] rounded-[3px] sm:px-2 px-1'>Correct</button>
                   </Link>
                 </div>
               </div>

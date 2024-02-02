@@ -6,6 +6,7 @@ import Bookmark2 from '../assets/Bookmark2.png';
 import { KeyWord } from './KeyWord';
 import { Download } from './Download';
 
+
 export const ArticleAffiché = (props) => {
   const [isBookmarked, setIsBookmarked] = useState(false);
 
@@ -23,7 +24,8 @@ export const ArticleAffiché = (props) => {
 <span className="text-gray-500 sm:text-sm text-xs font-medium">{props.date}</span>
 </div>
 <div className='flex justify-end gap-x-3 '>
-<Download />
+<Download pdfUrl={props.url} />
+
 <button onClick={handleSave}>
             <img
               className="sm:w-8 w-5"

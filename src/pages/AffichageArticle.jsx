@@ -7,12 +7,11 @@ import { Navbar3 } from '../components/Navbar3';
 import Filter from '../components/Filter';
 import img from '../assets/footer.svg';
 import { ArticleAffiché } from '../components/ArticleAffiché';
-import AuthContext from '../context/AuthContext'
 
 export const AffichageArticle =()=>
 {
 
-const {isConnected} = useContext(AuthContext)
+const {isConnected} = useContext(Appcontext2)
 const [ref,setRef]=useState(null);
 const [search,setSearch]=useState('');
 const [isSticky, setIsSticky] = useState(false);
@@ -66,7 +65,7 @@ const handleOffset = (data) => {
     <Navbar3 func={handleOffset} connected={true} sticky={true}/>
        
   
-       <ArticleAffiché title="Feature Engineering 101" date="Sep 5, 2022" author="Amira HADDAD" Institutions="bitgrit Data Science Publication" Abstract="This makes data pre-processing a crucial step in the machine learning pipeline — which involves feature preprocessing and generation. Each type of feature in a data set has its own way of preprocessing depending on its data type and the model used." 
+       <ArticleAffiché title="Feature Engineering 101" url ='https://drive.google.com/file/d/1mwtwqiMZGu0_WURi04oxjIIllFH9zExB/view?usp=drive_open' date="Sep 5, 2022" author="Amira HADDAD" Institutions="bitgrit Data Science Publication" Abstract="This makes data pre-processing a crucial step in the machine learning pipeline — which involves feature preprocessing and generation. Each type of feature in a data set has its own way of preprocessing depending on its data type and the model used." 
        content='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute .... orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute ....
        orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute ....
        orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute ....

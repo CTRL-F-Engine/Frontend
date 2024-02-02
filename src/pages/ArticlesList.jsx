@@ -52,7 +52,7 @@ const handleDownload = async (url) => {
                 </h1>
                 <div className="flex items-center">
                   <button onClick={() => handleDownload(article.url)} className='w-20 mr-3 box-border xs:h-[30px] h-[25px] text-[13px] sm:text-[15px] bg-item-col text-sidebar text-lg font-medium sm:rounded-[5px] rounded-[3px] sm:px-2 px-1'>Download</button>
-                  <Link to='/Article_editing'>
+                  <Link to={`/editArticle/${article.article_id}`}>
                     <button className='w-20 box-border xs:h-[30px] h-[25px] text-[13px] sm:text-[15px] bg-item-col text-sidebar text-lg font-medium sm:rounded-[5px] rounded-[3px] sm:px-2 px-1'>Correct</button>
                   </Link>
                 </div>

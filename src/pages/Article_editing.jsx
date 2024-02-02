@@ -1,53 +1,272 @@
-import React,{useState} from 'react';
-import Article from '../components/Editarticle';
-import ModeratorSidebar from '../components/ModeratorSidebar';
-import Popup from "../components/SaveArticlePopup";
-import DPopup from "../components/DeleteArticle";
-import '../index.css';
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
+import ModeratorSidebar from "../components/ModeratorSidebar"
+import { ReadMore } from "../components/ReadMore";
+import { useState } from "react";
+import { FinalBtn } from "../components/FinalBtn";
+import DeleteArticlePopup from "../components/DeleteArticlePopup";
+import { useNavigate, useParams } from 'react-router-dom';
+import { useContext ,useEffect} from "react";
+import Delete from "../components/DeletePopup";
 
-const Article_editing = () => {
-  const [showDPopup, setShowDPopup] = useState(false);
-  const [showpopup, setShowpopup] = useState(false);
-  // Handle finish
-  const handleFinish = () => {
-    setShowpopup(true);
-  };
-  const handleSave = () => {
-    //deleting logique
-    setShowDPopup(true);
-  };
+import axios from 'axios';
+import { toast } from "react-toastify";
+export const EditArticles=(props)=>
+{
+  const navigate = useNavigate();
+  const [article, setArticle] = useState({
+    article_id:'',
+    title:'',
+    institutions:'',
+    authors:[],
+    abstract:'',
+    keywords:'',
+    content:'',
+    references:'',
+    state:'',
+    url:'',
+
+  });
+  const [isEditMode, setIsEditMode] = useState(false);
+    //const {Article,setArticle} = useContext(Appcontext3)
+
+    const [content,setContent]=useState('');
+    const [title,setTitle]=useState('');
+
+    const [showpopup, setShowpopup]=useState(false);
+    const [showpopup2, setShowpopup2]=useState(false);
+    const articleId=useParams()
+    const article_id =articleId.article_id
+    useEffect(() => {
+      const fetchUserData = async () => {
+        try {
+          
+          const token=localStorage.getItem("access")
+        let token2 = token.replace(/"/g, '');
+          const response = await fetch(`http://127.0.0.1:8000/moderate/article/${article_id}`, {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token2}`,
+              "Content-Type": "application/json",
+            },
+          });
+          console.log(articleId)
+          if (response.ok) {
+            const articleData = await response.json();
+            setArticle(articleData);
+            
+            setIsEditMode(true); // Enable edit mode since you have fetched existing user data
+            console.log(articleData)
+            console.log(article)
+          } else {
+            // Handle error
+            console.error("Error fetching user data");
+          }
+        } catch (error) {
+          // Handle error
+          console.error("Error fetching user data:", error);
+        }
+      };
+  
+      fetchUserData();
+    }, []);
+
+    // Handle input changes
+  const handleInputChange = (key, value) => {
+    
+    setArticle((prevArticle) => ({
+      ...prevArticle,
+      [key]: value,
+    }));
+  
+};
+const handleDelete = () => {
+  setShowpopup2(true); // Show the confirmation popup
+};
+const confirmDelete=async()=>
+{
+  try {
+    const token = localStorage.getItem("access");
+    let token2 = token.replace(/"/g, '');
+    await axios.delete(`http://127.0.0.1:8000/moderate/delete/${article_id}`, {
+        headers: {
+            Authorization: `Bearer ${token2}`,
+        },
+    });
+
+    // Update the state based on the previous state
+    setShowpopup2(true);
+    toast.success("Article deleted successfully !")
+    navigate('/ArticlesList')
+
+
     
 
-
-  return (
-    <div className='flex flex-row bg-admin-bg w-screen h-[100vh]'>
-      <ModeratorSidebar/>
-      <div className="flex flex-auto flex-col ml-[5%] mt-8 mr-[5%] overflow-x-auto scrollbar-thin scrollbar-thumb-white">
-        <h1 className='text-text-col text-5xl whitespace-nowrap'>Article Editing</h1>
-        <div  className="bg-sidebar  h-96 sm:h-[500px]  w-[80%] rounded-md shadow ">
-          <Article/>
-        </div>    
-        <div className="flex flex-auto flex-row space-x-1" >
-      <button
-        className="mt-[8%]  sm:w-[110px] w-full box-border xs:h-[38px] h-[30px] text-[13px] sm:text-[15px] font-medium sm:font-bold  text-sidebar  bg-person-col font-['TT Commons'] sm:px-4 px-2 sm:rounded-[5px] rounded-[3px]"
-        onClick={handleFinish}  
-      >
-        Finish
-      </button>
-      <button
-        className="mt-[8%]  sm:w-[110px] w-full box-border xs:h-[38px] h-[30px] text-[13px] sm:text-[15px] font-medium sm:font-bold  text-sidebar  bg-person-col font-['TT Commons'] sm:px-4 px-2 sm:rounded-[5px] rounded-[3px]"
-        onClick={handleSave}  
-      >
-        Delete
-      </button>
-      </div> 
-      </div>
-
-      <Popup visible={showpopup} onClose={() => setShowpopup(false)} />
-      <DPopup visible={showDPopup} onClose={() => setShowDPopup(false)}  />
-
-    </div>
-  )
+} catch (error) {
+    console.error('Error deleting moderator:', error);
 }
+}
+const handleWheel = (e) => {
+    e.preventDefault();
+  };
+const handleEdit=async()=>
+{
+  try {
+    const formData = new FormData();
 
-export default Article_editing
+    formData.append('title', article.title);
+    formData.append('content', article.content);
+    formData.append('references', article.references);
+    formData.append('institutions', article.institutions);
+    formData.append('authors', article.authors);
+    formData.append('keywords', article.keywords);
+    formData.append('abstract', article.abstract);
+    formData.append('url', article.url);
+    formData.append('state', 'done');
+    formData.append('article_id', article.article_id);
+
+    
+    
+    const token = localStorage.getItem('access');
+    let token2 = token.replace(/"/g, '');
+
+    const response = await fetch(`http://127.0.0.1:8000/moderate/article/${article_id}`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token2}`,
+      },
+      body: formData,
+    });
+    console.log(response.status)
+    if (response.status === 200) {
+      setShowpopup(true);
+    } else {
+      const errorText = await response.text();
+      toast.error(`${errorText}`);
+    }
+  } catch (error) {
+    toast.error("There was an issue. Please, try again.");
+  }
+}
+ const textareaStyle = {
+        resize: 'none',
+        /* You can add other styles as needed */
+      };
+    return (
+
+        <div className='flex  w-screen
+        bg-page-col items-center h-[100vh]'>
+        <ModeratorSidebar />
+        <div  className="mx-auto w-[60%]">
+         <h1 className="text-[40px] mb-[30px]">
+Article Editing        </h1>
+<div className="w-[100%] h-[60vh] rounded-[5px] bg-white mb-10 overflow-auto">
+     
+     <h1 className="text-[25px]  ">
+       </h1>
+       <h2 className=" text-[30px] font-bold mb-2 h-[5vh]  p-3 text-[#191E29]">Title</h2>
+<textarea style={{
+    ...textareaStyle,   // Include any other styles from textareaStyle
+    height: 'auto',
+    maxHeight: '100px',  // Set your preferred maximum height
+  }} onChange={(e) => handleInputChange("title", e.target.value)} className="w-[100%] text-[25px] h-[auto] p-3 outline-none "       onWheel={handleWheel}
+ defaultValue={article.title} /> 
+     <h2 className=" text-[30px] font-bold mb-2 h-[5vh]  p-3 text-[#191E29]">Authors</h2>
+     <div
+  style={{
+    ...textareaStyle,   // Include any other styles from textareaStyle
+    overflowY: 'hidden', // Hide vertical scrollbar
+    whiteSpace: 'pre-wrap', // Preserve whitespace and wrap text
+  }}
+  onChange={(e) => handleInputChange("authors", e.target.value)}
+  className="w-[100%] text-[25px] p-3 outline-none"
+  onWheel={handleWheel}
+  contentEditable="true"
+  dangerouslySetInnerHTML={{ __html: article.authors }}
+/>
+ <h2 className=" text-[30px] font-bold mb-2 h-[5vh]  p-3 text-[#191E29]">Institutions</h2>
+ <div
+  style={{
+    ...textareaStyle,   // Include any other styles from textareaStyle
+    overflowY: 'hidden', // Hide vertical scrollbar
+    whiteSpace: 'pre-wrap', // Preserve whitespace and wrap text
+  }}
+  onChange={(e) => handleInputChange("institutions", e.target.value)}
+  className="w-[100%] text-[25px] p-3 outline-none"
+  onWheel={handleWheel}
+  contentEditable="true"
+  dangerouslySetInnerHTML={{ __html: article.institutions }}
+/>
+ <h2 className=" text-[30px] font-bold mb-2 h-[5vh]  p-3 text-[#191E29]">Abstract</h2>
+ <div
+  style={{
+    ...textareaStyle,   // Include any other styles from textareaStyle
+    overflowY: 'hidden', // Hide vertical scrollbar
+    whiteSpace: 'pre-wrap', // Preserve whitespace and wrap text
+  }}
+  onChange={(e) => handleInputChange("abstract", e.target.value)}
+  className="w-[100%] text-[25px] p-3 outline-none"
+  onWheel={handleWheel}
+  contentEditable="true"
+  dangerouslySetInnerHTML={{ __html: article.abstract }}
+/>
+ <h2 className=" text-[30px] font-bold mb-2 h-[5vh]  p-3 text-[#191E29]">Keywords</h2>
+ <div
+  style={{
+    ...textareaStyle,   // Include any other styles from textareaStyle
+    overflowY: 'hidden', // Hide vertical scrollbar
+    whiteSpace: 'pre-wrap', // Preserve whitespace and wrap text
+  }}
+  onChange={(e) => handleInputChange("keywords", e.target.value)}
+  className="w-[100%] text-[25px] p-3 outline-none"
+  onWheel={handleWheel}
+  contentEditable="true"
+  dangerouslySetInnerHTML={{ __html: article.keywords }}
+/> 
+ <h2 className=" text-[30px] font-bold mb-2 h-[vh]  p-3 text-[#191E29]">Content</h2>
+ <div
+  style={{
+    ...textareaStyle,   // Include any other styles from textareaStyle
+    overflowY: 'hidden', // Hide vertical scrollbar
+    whiteSpace: 'pre-wrap', // Preserve whitespace and wrap text
+  }}
+  onChange={(e) => handleInputChange("content", e.target.value)}
+  className="w-[100%] text-[25px] p-3 outline-none"
+  onWheel={handleWheel}
+  contentEditable="true"
+  dangerouslySetInnerHTML={{ __html: article.content }}
+/>
+ <h2 className=" text-[30px] font-bold mb-2 h-[5vh]  p-3 text-[#191E29]">References</h2>
+ <div
+  style={{
+    ...textareaStyle,   // Include any other styles from textareaStyle
+    overflowY: 'hidden', // Hide vertical scrollbar
+    whiteSpace: 'pre-wrap', // Preserve whitespace and wrap text
+  }}
+  onChange={(e) => handleInputChange("references", e.target.value)}
+  className="w-[100%] text-[25px] p-3 outline-none"
+  onWheel={handleWheel}
+  contentEditable="true"
+  dangerouslySetInnerHTML={{ __html: article.references }}
+/>
+
+     </div>
+<div>
+     {/* <Button
+            reset={"hh"} content={"hhh"} />  */}
+    <div className="flex justify-end gap-x-3 mr-2">
+     <div onClick={handleEdit}>
+        
+        <FinalBtn content="Finish"/>
+        </div> 
+        <div onClick={handleDelete}>
+        <FinalBtn content="Delete"/> 
+            </div> 
+    </div>
+</div>
+        </div>
+    <DeleteArticlePopup visible={showpopup} onClose={() => setShowpopup(false)}/>   
+    <Delete visible={showpopup2}  onConfirm={confirmDelete} onClose={() => setShowpopup2(false)} /> 
+      </div>
+    )
+}

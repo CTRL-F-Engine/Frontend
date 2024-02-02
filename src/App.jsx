@@ -23,6 +23,14 @@ import {Favors} from './pages/Favors';
 import { Reset } from './pages/Reset';
 import {AffichageArticle} from './pages/AffichageArticle'
 import {UserSettings} from './pages/UserSettings'
+import { ChangeName } from './pages/ChangeName';
+import {ChangePw} from './pages/ChangePw';
+import {ChangePictr} from './pages/ChangePictr';
+import ModeratorSettings from './pages/ModeratorSettings';
+import ListeArticles from './pages/ListeArticles';
+import Article_editing from './pages/Article_editing';
+
+
 export const Appcontext2=createContext();
 function App() {
   const [isConnected , setIsConnected]=useState(true);
@@ -38,7 +46,7 @@ function App() {
     <Route path='/Welcome' element={<Welcome/>}/>
     <Route path='/Login/Otp' element={<Otp/>}/>
     <Route path='/Signup' element={<SignUp/>}/>
-    <Route path='/' element={<Home/>}/>
+    <Route path='/' element={<ListeArticles/>}/>
     <Route path="/upload" element={<Upload />} />
     <Route path="/modify-moderator" element={<ModifyModerator />} />
     <Route path="/add" element={<Add />} />
@@ -47,6 +55,14 @@ function App() {
   <Route path="/ResultSearch" element={<ResultSearch />} />
   <Route path="/Favors" element={<Favors />} />
   <Route path="/AffichageArticle" element={<AffichageArticle />} />
+        <Route path="/ChangeName" element={<ChangeName />} />
+  <Route path="/ChangePw" element={<ChangePw />} />
+  <Route path="/ChangePictr" element={<ChangePictr />} />
+  <Route path="//UserSettings" element={<UserSettings />} />
+  <Route path="//ModeratorSettings" element={<ModeratorSettings/>}/>
+  <Route path="/ListeArticles" element ={<ListeArticles/>}/>
+  <Route path="//ArticleEdit" element ={<Article_editing/>}/>
+
        </Routes>    
     </Router>
       

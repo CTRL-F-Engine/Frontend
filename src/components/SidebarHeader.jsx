@@ -4,7 +4,7 @@ function SidebarHeader({ props }) {
   const user = props[0]; // Access the first (and only) element in the array
 
   return (
-    <div className="flex flex-col lg:w-[60%] md:w-[65%] w-[60%] items-center mt-8 mb-8">
+    <div className="flex flex-col lg:w-[60%] md:w-[65%] w-[60%] items-center mb-8">
       <div
         key={user.title}
         className="flex flex-col items-center cursor-pointer"

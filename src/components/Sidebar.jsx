@@ -7,6 +7,8 @@ import List from '../assets/LIST.png'
 import upload from '../assets/upload.png'
 import Settings from '../assets/settings.png'
 import add from '../assets/add.png';
+import logo from '../assets/logoDark.png';
+
 
 import { Link } from 'react-router-dom';
 const user = [
@@ -26,8 +28,9 @@ function Sidebar() {
 
   return (
     <div className="flex flex-col  bg-sidebar p-0 lg:w-64 md:w-60 w-48 h-[100vh]">
+            <img src={logo} className='justify-center items-center h-full w-full ml-[15%]'/> 
       <SidebarHeader props={user} />
-      <ul className="w-full list-none flex-col  items-start justify-start flex-end ">
+      <ul className="w-full list-none flex-col items-start justify-start flex-end ">
       <Link to="/upload">
       <li
           key="upload"
@@ -86,7 +89,7 @@ function Sidebar() {
         </li>
        </Link>
        </ul>
-       <ul className="w-full list-none flex-col  items-start justify-start mt-[60%]">
+       <ul className="w-full list-none flex-col  items-start justify-start mt-[35%] ">
 
         <li
           className={`w-full cursor-pointer m-0 h-12 space-x-4 flex flex-row justify-center items-center  hover:border-l-4 hover:border-black text-item-col opacity-50 hover:opacity-100 ${selectedItem === 'logout' ? 'bg-page-col border-l-4 border-black': ''}`}

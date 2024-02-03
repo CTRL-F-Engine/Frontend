@@ -7,6 +7,8 @@ import pdp from '../assets/pdp.png'
 import { LittleSideBarWhite } from "./LittleSideBarWhite";
 import { Navbar } from "./Navbar";
 import { Link } from 'react-router-dom';
+import logo from '../assets/logoLong.png';
+
 
 
 export const Navbar3=(props)=>
@@ -83,9 +85,7 @@ const [LittleNavVisible , setLittleNavVisible]=useState(false);
     <div className="relative xs:block hidden border-cyan-500 w-[90%] xs:w-[40%]">
      <div className="flex w-full justify-between gap-x-10 items-center">
    <Link to="/">
-     <h1 className="text-cyan-500 w-fit font-bold cursor-pointer">
-    LOGO
-</h1> </Link>
+   <img src={logo} className=" w-28 mt-[50%] cursor-pointer" /></Link>
        </div> 
 
 

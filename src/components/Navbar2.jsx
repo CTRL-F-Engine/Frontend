@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import pdp from '../assets/pdp.png'
 import { LittleSideBarWhite } from "./LittleSideBarWhite";
 import { Link } from "react-router-dom";
+import logo from '../assets/logoLong.png';
 export const Navbar2=(props)=>
 {
   const getPdp=()=>
@@ -84,9 +85,8 @@ const [LittleNavVisible , setLittleNavVisible]=useState(false);
      <div className="flex w-full justify-between gap-x-10 items-center">
 
      <Link to="/">
-     <h1 className="text-cyan-500 w-fit font-bold cursor-pointer">
-    LOGO
-</h1> </Link>{(isVisible && props.connected) && <input onChange={handleChange} onKeyUp={handleSearch}   className="block w-full p-3 text-sm text-sky-950  border-[3px]  text-[15px]  rounded-[4px] bg-slate-200 focus:cyan-500 font-medium 
+     <img src={logo} className=" w-28 mt-[50%] cursor-pointer" />
+ </Link>{(isVisible && props.connected) && <input onChange={handleChange} onKeyUp={handleSearch}   className="block w-full p-3 text-sm text-sky-950  border-[3px]  text-[15px]  rounded-[4px] bg-slate-200 focus:cyan-500 font-medium 
    outline-none   placeholder:text-sky-900"
     placeholder="Search" required/>}
   { (isVisible && props.connected) &&<div className="absolute inset-y-0 end-3 flex items-center ps-10 pointer-events-none">

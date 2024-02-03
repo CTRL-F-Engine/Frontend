@@ -14,6 +14,7 @@ import { Btn } from '../components/Btn';
 import Popup from '../components/PopupSearch';
 import Wait from '../components/Wait';
 import { useNavigate } from 'react-router-dom';
+import logo from '../assets/logoLong.png'
 export const Home =()=>
 {
   const navigate = useNavigate();
@@ -83,7 +84,10 @@ const handleOffset = (data) => {
 </div>}
 </div>
 {(LittleNavVisible && isConnected) &&<LittleSideBar/>} 
+<div className="mt-12 w-[100%] h-[90vh] flex items-center justify-center -mb-[670px] ">
 
+    <img src={logo} className='cursor-pointer ml-[5%] md:w-[70%] w-[70%] xs:w-[60%] lg:w-[50%] lg:h-[70%] md:h-[60%] xs:h-[40%]' />
+   </div>
     <div className=" w-[100%] h-[90vh] flex items-center justify-center ">
        <Search_bar func={handleSetPopUp}  disabled={!isConnected}  placeholder="search"/>
     </div>

@@ -32,7 +32,7 @@ function Content() {
   const [showpopup, setShowpopup]=useState(false);
 
   return (
-    <div className='flex flex-row w-screen h-[100vh] bg-page-col '>
+    <div className='admin flex flex-row w-screen h-[100vh]  '>
       <Sidebar />
     <div className={`flex flex-auto flex-col ml-[3%] mt-8 mr-[3%]  `}>
       <h1 className="text-person-col text-5xl">Upload Articles</h1>

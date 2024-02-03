@@ -86,6 +86,15 @@ animation-iteration-count: infinite;
     background-position: center; 
     background-repeat: repeat;
 }
+
+.admin
+{
+    background-image: url('./assets/admin2.png');
+    background-size: cover;  
+    background-position:center; 
+    background-repeat: repeat; 
+    
+}
 .border-zero:focus
 {
  border: 0px;

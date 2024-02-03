@@ -72,7 +72,7 @@ function Content() {
 const [confirmPassword, setConfirmPassword] = useState('');
 
   return (
-    <div className='flex flex-row w-screen  bg-page-col h-[100vh]'>
+    <div className='admin flex flex-row w-screen  bg-page-col h-[100vh]'>
       <Sidebar />
     <div className="flex flex-auto flex-col relative ml-[5%] mt-8 mr-[5%]">
       <h1 className="text-person-col text-5xl whitespace-nowrap">Settings</h1>
@@ -84,7 +84,7 @@ const [confirmPassword, setConfirmPassword] = useState('');
       <div className="flex flex-auto flex-col place-items-end" >
       
       <button
-        className="mt-[3%] sm:w-[110px] w-full box-border xs:h-[38px] h-[30px] text-[13px] sm:text-[15px] font-medium sm:font-bold  text-sidebar  bg-person-col font-['TT Commons'] sm:px-4 px-2 sm:rounded-[5px] rounded-[3px]"
+        className="mt-[3%] sm:w-[110px] w-20 box-border xs:h-[38px] h-[30px] text-[13px] sm:text-[15px] font-medium sm:font-bold  text-sidebar  bg-person-col font-['TT Commons'] sm:px-4 px-2 sm:rounded-[5px] rounded-[3px]"
         onClick={handleSave} 
       >
         Save

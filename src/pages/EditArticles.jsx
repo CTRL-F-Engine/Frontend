@@ -35,13 +35,13 @@ const handleEdit=()=>
       };
     return (
 
-        <div className='flex  w-screen
+        <div className='admin flex  w-screen
         bg-page-col items-center h-[100vh]'>
         <ModeratorSidebar />
         <div  className="mx-auto w-[60%]">
          <h1 className="text-[40px] mb-[30px]">
 Article Editing        </h1>
-     <div className="w-[100%]  h-[60vh] rounded-[5px] bg-white mb-10">
+     <div className="w-[100%]  h-[60vh]  rounded-[5px] bg-white mb-10">
      <h1 className="text-[25px]  ">
        </h1>
 <textarea style={textareaStyle} className="text-[25px] h-[9vh] p-3 outline-none"       onWheel={handleWheel}

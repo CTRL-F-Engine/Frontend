@@ -61,7 +61,9 @@ export const AuthProvider = ({ children }) => {
         }else if (data.user_type==="admin"){
           
           navigate('/upload')
-        }
+        }else if (data.user_type==="moderator"){
+          
+          navigate('/ArticlesList')}
         
       }else{
         toast.error("invalid credentials! Try again.")

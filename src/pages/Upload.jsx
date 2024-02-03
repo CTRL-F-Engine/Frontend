@@ -5,9 +5,12 @@ import Popup from "../components/popupU";
 import Sidebar from '../components/Sidebar';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../context/AuthContext';
+import { RingLoader } from 'react-spinners';
+import { css } from '@emotion/react';
 import { toast } from "react-toastify";
 function Content() {
   const navigate = useNavigate();
+  const [isUploading, setIsUploading] = useState(false);
   const [newLink, setNewLink] = useState("");
   const [LinksUploaded, setLinksUploaded] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
@@ -38,7 +41,7 @@ function Content() {
       console.log(newLink)
       const token=localStorage.getItem("access")
       let token2 = token.replace(/"/g, '');
-      
+      setIsUploading(true)
       const response = await fetch("http://127.0.0.1:8000/manage/articles/", {
         method: "POST",
         headers: {
@@ -48,23 +51,28 @@ function Content() {
         body: formData
       });
       console.log(response.status)
-      if (response.status===201) {
-        console.log("hellllooooooo")
-        
+      if (response.status===200) {
+        setIsUploading(false)
         setShowPopup(true);
         // You may also update the local state or perform any other actions
       } else {
+        setIsUploading(false)
         // Handle error
         const errorText = await response.text();
-        toast.error(errorText)
+        toast.error("There was an issue.Please, try again .")
       }
     } catch (error) {
+      setIsUploading(false)
       toast.error("There was an issue.Please, try again .")
     }
   };
     
     
-  
+  const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: red;
+  `;
 
   const [showpopup, setShowpopup]=useState(false);
 
@@ -84,8 +92,11 @@ function Content() {
             onChange={handleChange}
             onKeyUp={handleEnterKey}
           />
+            
         </div>
       </div>
+      <div className=" flex flex-auto flex-col place-items-center">
+          <RingLoader css={override} size={150} color={'#36D7B7'} loading={isUploading} /></div>
       <div className="flex flex-auto flex-col place-items-end" >
       
       <button
@@ -98,6 +109,7 @@ function Content() {
       </button>
       </div>
       <Popup visible={showPopup} onClose={() => setShowPopup(false)} />
+      
     </div>
     </div>
   );

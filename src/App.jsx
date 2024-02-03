@@ -63,7 +63,7 @@ function App() {
   <Route path="/add" element={<Add />} />
   <Route path="/list" element={<ListeModerators />} />
   <Route path="/settings" element={<Settings />} />
-  <Route path="/ResultSearch" element={<ResultSearch />} />
+  <Route path="/ResultSearch/:query" element={<ResultSearch />} />
   <Route path="/Favors" element={<Favors />} />
   <Route path="/AffichageArticle" element={<AffichageArticle />} />
   <Route path="/ChangeName" element={<ChangeName />} />

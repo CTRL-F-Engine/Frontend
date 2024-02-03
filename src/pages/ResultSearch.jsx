@@ -5,20 +5,98 @@ import { Appcontext2 } from '../App';
 import pdp from '../assets/pdp.png'
 import { Navbar3 } from '../components/Navbar3';
 import Filter from '../components/Filter';
+import { useNavigate } from "react-router-dom";
+
+import { useParams } from 'react-router-dom';
 import AuthContext from '../context/AuthContext'
 
 export const ResultSearch =()=>
 {
-
+  const navigate = useNavigate();
 const {isConnected} = useContext(AuthContext)
 const [ref,setRef]=useState(null);
 const [search,setSearch]=useState('');
 const [isSticky, setIsSticky] = useState(false);
 const [isFilterVisible, setIsFilterVisible] = useState(false);
+const { query } = useParams();
+const [filteredData, setFilteredData] = useState(null);
+const [articles, setArticles] = useState([]);
+const truncateText = (text, limit) => {
+  const words = text.split(' ');
+  const truncatedText = words.slice(0, limit).join(' ')+ '...';
+  return truncatedText;
+};
+
 
 const handleFilterClick = () => {
   setIsFilterVisible(!isFilterVisible);
 };
+const handleFilterChange = (filterValues) => {
+
+  console.log('Filtered Values:', filterValues);
+  setFilteredData(filterValues);
+};
+
+const handleSearch=async(e)=>
+      {
+        if (e.key === "Enter") {
+          setSearch(query);
+      try {
+        
+        const token=localStorage.getItem("access")
+        let token2 = token.replace(/"/g, '');
+          const response = await fetch(`http://127.0.0.1:8000/search/query=${query}`, {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${token2}`,
+              "Content-Type": "application/json",
+            },body: JSON.stringify(filteredData),
+          });
+        const data = await response.json();
+        console.log("____________________________________")
+        console.log(data)
+        //setSearchResults(data.results); // Update results based on your API response
+        navigate(`/ResultSearch/${encodeURIComponent(search)}`);
+      } catch (error) {
+        console.error('Error fetching search results:', error);
+      }}
+      }
+useEffect(() => {
+  setSearch(query);
+
+  const fetchArticles = async () => {
+    try {
+      const token = localStorage.getItem("access");
+      const token2 = token.replace(/"/g, '');
+
+      const response = await fetch(`http://127.0.0.1:8000/search/query=${query}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token2}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      const truncatedArticles = data.map(article => ({
+        ...article,
+        content: truncateText(article.content, 50),
+      }));
+
+      setArticles(truncatedArticles);
+      console.log(articles)
+    } catch (error) {
+      console.error('Error fetching articles:', error);
+    }
+  };
+
+  fetchArticles();
+}, [query]);
+
 const handleOffset = (data) => {
       setRef(data);
       console.log('Ref immediately after setRef:', ref); 
@@ -50,10 +128,7 @@ const handleOffset = (data) => {
           window.removeEventListener('scroll', handleScroll);
         };
       }, [ref]);
-      const handleSearch=(e)=>
-      {
-      e.key==="Enter"?console.log(search):"";
-      }
+      
       const handleChange=(e)=>
       {
           setSearch(e.target.value); 
@@ -63,7 +138,8 @@ const handleOffset = (data) => {
     <Navbar3 func={handleOffset} connected={true} sticky={true}/>
     <div className='flex flex-row space-x-[15%] mt-28  px-10'>
         <div className='w-[78%] h-7 bg-search-col relative'>
-          <input
+          <input value={search} onKeyUp={handleSearch} 
+        onChange={(e) => setSearch(e.target.value)}
             className="block w-full xs:h-[38px] h-[30px] p-3 text-sm text-sky-950 border-[3px] text-[15px] rounded-[4px] bg-slate-200 focus:cyan-500 font-medium outline-none placeholder:text-sky-900"
             placeholder="Search"
           />
@@ -94,7 +170,7 @@ const handleOffset = (data) => {
           Filter
         </button>
       </div>
-      {isFilterVisible && <Filter />}
+      {isFilterVisible && <Filter onFilterChange={handleFilterChange}/>}
   
     <h1 className='px-4 sm:px-10 mt-8 font-semibold text-2xl text-blue-950 mb-8'>
     Result
@@ -103,33 +179,20 @@ const handleOffset = (data) => {
    <hr className='border-2 mb-10 border-blue-950'></hr>
     </div> 
   
-    <div className=' grid gap-y-12'>
-      <Article date='05 Dec' title = 'Article 01' content='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute ....'/>
-      <div className='px-4 sm:px-10'>
-   <hr className='border-2 border-blue-950'></hr>
-    </div> 
-   <Article date='05 Dec' title = 'Article 01' content='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute ....'/>
-   <div className='px-4 sm:px-10'>
-   <hr className='border-2 border-blue-950'></hr>
-    </div> 
-   <Article date='05 Dec' title = 'Article 01' content='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute ....'/>
-   <div className='px-4 sm:px-10'>   <hr className='border-2 border-blue-950'></hr>
-    </div> 
-   <Article date='05 Dec' title = 'Article 01' content='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute ....'/>
-   <div className='px-4 sm:px-10'>   <hr className='border-2 border-blue-950'></hr>
-    </div> 
-  
-   
-   <Article date='05 Dec' title = 'Article 01' content='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute ....'/>
-   <div className='px-4 sm:px-10'>   <hr className='border-2 border-blue-950'></hr>
-    </div> 
-   <Article date='05 Dec' title = 'Article 01' content='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute ....'/>   
-   <div className='px-4 sm:px-10'>   <hr className='border-2 border-blue-950'></hr>
-    </div> 
+    <div className='grid gap-y-12'>
+        {articles.map((article, index) => (
+          <React.Fragment key={index}>
+            <Article date={article.date} title={article.title} content={article.content} keywords={article.keywords}/>
+            <div className='px-4 sm:px-10'>
+              <hr className='border-2 border-blue-950'></hr>
+            </div>
+          </React.Fragment>
+        ))}
+      </div>
     <div className='h-[70px]'>
 
     </div>
-    </div>
+    
     
   
     </div>)

@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import { useState } from 'react';
+import { useState ,useEffect} from 'react';
 import myImage from '../assets/bookmark.svg';
 import Bookmark2 from '../assets/Bookmark2.png';
 import { KeyWord } from './KeyWord';
@@ -8,6 +8,9 @@ import { ReadMore } from './ReadMore';
 
 export const Article = (props) => {
   const [isBookmarked, setIsBookmarked] = useState(props.isFavorPage);
+  const [keywords,setKeywords]=useState(props.keywords)
+  const keys=keywords.split(',');
+  console.log(typeof keywords.split(','));  // Outputs: "number"
 
   const handleSave = () => {
     setIsBookmarked(!isBookmarked);
@@ -24,9 +27,9 @@ export const Article = (props) => {
       </p>
       <div className="xs:flex grid gap-y-4 mt-10 items-center justify-between">
         <div className="flex sm:gap-x-4 gap-x-2">
-          <KeyWord content="Data Science" />
-          <KeyWord content="Machine Learning" />
-          <KeyWord content="NLP" />
+        {Array.isArray(keys) && keys.map((keyword, index) => (
+        <KeyWord key={index} content={keyword} />
+      ))}
         </div>
         <div className="flex justify-end gap-x-3">
         <button onClick={handleSave}>

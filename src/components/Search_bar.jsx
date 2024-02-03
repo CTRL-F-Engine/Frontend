@@ -7,11 +7,34 @@ export const Search_bar=(props)=>
 {
     const navigate = useNavigate();
     const [search,setSearch]=useState('');
-    const handleSearch=(e)=>
-    {
-    e.key==="Enter"?console.log(search):"";
-     ( e.key==="Enter" && search) ?navigate('/ResultSearch') :"";
-    }
+    const handleSearch=async(e)=>
+      {
+        if (e.key === "Enter") {
+      try {
+        const token=localStorage.getItem("access")
+        let token2 = token.replace(/"/g, '');
+          const response = await fetch(`http://127.0.0.1:8000/search/query=${search}`, {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token2}`,
+              "Content-Type": "application/json",
+            },
+          });
+        const data = await response.json();
+        console.log("____________________________________")
+        console.log(data)
+        //setSearchResults(data.results); // Update results based on your API response
+        navigate(`/ResultSearch/${encodeURIComponent(search)}`);
+      } catch (error) {
+        console.error('Error fetching search results:', error);
+      }}
+      }
+      
+    // const handleSearch=(e)=>
+    // {
+    // e.key==="Enter"?console.log(search):"";
+    //  ( e.key==="Enter" && search) ?navigate('/ResultSearch') :"";
+    // }
     const handleChange=(e)=>
     {
         const data=e.target.value;

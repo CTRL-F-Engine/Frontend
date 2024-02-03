@@ -9,6 +9,7 @@ function Delete({ visible, onClose ,onConfirm}) {
   const [showPopup, setShowPopup] = useState(false);
 
   const handleSave = () => {
+    onConfirm()
     setShowPopup(true);
     
   };
@@ -16,6 +17,7 @@ function Delete({ visible, onClose ,onConfirm}) {
   const closeAll = () => {
     onClose();
     setShowPopup(false);
+    
     
     
   };
@@ -37,7 +39,7 @@ function Delete({ visible, onClose ,onConfirm}) {
         </h2>
         <div  className="flex flex-row  space-x-36">
           <button onClick={onClose} className="bg-sidebar text-person-col text-md">Cancel</button>
-          <button onClick={onConfirm} className="bg-sidebar text-delete text-md">Delete</button>
+          <button onClick={handleSave} className="bg-sidebar text-delete text-md">Delete</button>
         </div>
         <Popup visible={showPopup} onClose={closeAll} /> 
       </div>

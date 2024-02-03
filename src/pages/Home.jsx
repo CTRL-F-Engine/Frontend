@@ -37,6 +37,8 @@ const [isSticky, setIsSticky] = useState(false);
     if (isConnected  && user_type==='admin'){
       navigate('/upload')
       //toast.error("You do not permissions to access to this link !")
+    }else if (isConnected && user_type==='moderator'){
+      navigate('/ArticlesList')
     }
     
   },[])
@@ -72,9 +74,26 @@ const handleOffset = (data) => {
           window.removeEventListener('scroll', handleScroll);
         };
       }, [ref]);
-      const handleSearch=(e)=>
+      const handleSearch=async(e)=>
       {
-      e.key==="Enter"?console.log(search):"";
+        if (e.key === "Enter") {
+      try {
+        const token=localStorage.getItem("access")
+        let token2 = token.replace(/"/g, '');
+          const response = await fetch(`http://127.0.0.1:8000/search/query=${search}`, {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token2}`,
+              "Content-Type": "application/json",
+            },
+          });
+        const data = await response.json();
+        console.log("____________________________________")
+        console.log(data)
+        //setSearchResults(data.results); // Update results based on your API response
+      } catch (error) {
+        console.error('Error fetching search results:', error);
+      }}
       }
       const handleChange=(e)=>
       {
@@ -96,7 +115,8 @@ const handleOffset = (data) => {
 {(LittleNavVisible && isConnected) &&<LittleSideBar/>} 
 
     <div className=" w-[100%] h-[90vh] flex items-center justify-center ">
-       <Search_bar func={handleSetPopUp}  disabled={!isConnected}  placeholder="search"/>
+       <Search_bar func={handleSetPopUp}  disabled={!isConnected}  placeholder="search" onKeyUp={handleSearch} onSearch={handleSearch}
+          onChange={handleChange}/>
     </div>
     <Navbar2 func={handleOffset} connected={isConnected} sticky={isSticky}/>
     <div className='relative  z-10  px-8'>

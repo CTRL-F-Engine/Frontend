@@ -4,6 +4,7 @@ import ModeratorSidebar from "../components/ModeratorSidebar"
 import { ReadMore } from "../components/ReadMore";
 import { useState } from "react";
 import { FinalBtn } from "../components/FinalBtn";
+import { FinalBtn2 } from "../components/FinalBtn2";
 import DeleteArticlePopup from "../components/DeleteArticlePopup";
 import { useNavigate, useParams } from 'react-router-dom';
 import { useContext ,useEffect} from "react";
@@ -15,12 +16,12 @@ export const EditArticles=(props)=>
 {
   const navigate = useNavigate();
   const [article, setArticle] = useState({
-    article_id:'',
+    article_id:0,
     title:'',
     institutions:'',
-    authors:[],
+    authors:'',
     abstract:'',
-    keywords:'',
+    keywords:[],
     content:'',
     references:'',
     state:'',
@@ -95,9 +96,8 @@ const confirmDelete=async()=>
     });
 
     // Update the state based on the previous state
-    setShowpopup2(true);
-    toast.success("Article deleted successfully !")
-    navigate('/ArticlesList')
+    
+    
 
 
     
@@ -109,6 +109,47 @@ const confirmDelete=async()=>
 const handleWheel = (e) => {
     e.preventDefault();
   };
+
+  const handleSave=async()=>
+  {
+    try {
+      const formData = new FormData();
+  
+      formData.append('title', article.title);
+      formData.append('content', article.content);
+      formData.append('references', article.references);
+      formData.append('institutions', article.institutions);
+      console.log(article.institutions)
+      formData.append('authors', article.authors);
+      formData.append('keywords', article.keywords.split(','));
+      formData.append('abstract', article.abstract);
+      formData.append('url', article.url);
+      formData.append('state', 'pending');
+      formData.append('article_id', article.article_id);
+  
+      
+      
+      const token = localStorage.getItem('access');
+      let token2 = token.replace(/"/g, '');
+  
+      const response = await fetch(`http://127.0.0.1:8000/moderate/article/${article_id}`, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token2}`,
+        },
+        body: formData,
+      });
+      console.log(response.status)
+      if (response.status === 200) {
+        toast.success('Article saved successfully ! ')
+      } else {
+        const errorText = await response.text();
+        toast.error(`${errorText}`);
+      }
+    } catch (error) {
+      toast.error("There was an issue. Please, try again.");
+    }
+  }
 const handleEdit=async()=>
 {
   try {
@@ -119,7 +160,7 @@ const handleEdit=async()=>
     formData.append('references', article.references);
     formData.append('institutions', article.institutions);
     formData.append('authors', article.authors);
-    formData.append('keywords', article.keywords);
+    formData.append('keywords', article.keywords.split(','));
     formData.append('abstract', article.abstract);
     formData.append('url', article.url);
     formData.append('state', 'done');
@@ -149,7 +190,7 @@ const handleEdit=async()=>
   }
 }
  const textareaStyle = {
-        resize: 'none',
+        
         /* You can add other styles as needed */
       };
     return (
@@ -167,105 +208,112 @@ Article Editing        </h1>
        <h2 className=" text-[30px] font-bold mb-2 h-[5vh]  p-3 text-[#191E29]">Title</h2>
 <textarea style={{
     ...textareaStyle,   // Include any other styles from textareaStyle
-    height: 'auto',
-    maxHeight: '100px',  // Set your preferred maximum height
-  }} onChange={(e) => handleInputChange("title", e.target.value)} className="w-[100%] text-[25px] h-[auto] p-3 outline-none "       onWheel={handleWheel}
+    whiteSpace: 'pre-wrap',
+    height: 'fit-content', // Set to 'fit-content'
+    overflowY: 'hidden', // Remove the vertical scrollbar  // Set your preferred maximum height
+  }} onChange={(e) => {handleInputChange("title", e.target.value);console.log(e.target.value)}} className="w-[100%] text-[25px] h-[auto] p-3 outline-none "       onWheel={handleWheel}
  defaultValue={article.title} /> 
      <h2 className=" text-[30px] font-bold mb-2 h-[5vh]  p-3 text-[#191E29]">Authors</h2>
-     <div
-  style={{
-    ...textareaStyle,   // Include any other styles from textareaStyle
-    overflowY: 'hidden', // Hide vertical scrollbar
-    whiteSpace: 'pre-wrap', // Preserve whitespace and wrap text
-  }}
-  onChange={(e) => handleInputChange("authors", e.target.value)}
-  className="w-[100%] text-[25px] p-3 outline-none"
-  onWheel={handleWheel}
-  contentEditable="true"
-  dangerouslySetInnerHTML={{ __html: article.authors }}
-/>
+     <textarea
+      style={{
+        ...textareaStyle,
+        
+        height: '8vh',
+        whiteSpace: 'pre-wrap',
+        resize: 'none', // If you want to disable resizing
+      }}
+      onChange={(e) => handleInputChange("authors", e.target.value)}
+      className="w-[100%] text-[25px] p-3 outline-none"
+      value={article.authors} // Use value instead of dangerouslySetInnerHTML
+    />
  <h2 className=" text-[30px] font-bold mb-2 h-[5vh]  p-3 text-[#191E29]">Institutions</h2>
- <div
-  style={{
-    ...textareaStyle,   // Include any other styles from textareaStyle
-    overflowY: 'hidden', // Hide vertical scrollbar
-    whiteSpace: 'pre-wrap', // Preserve whitespace and wrap text
-  }}
-  onChange={(e) => handleInputChange("institutions", e.target.value)}
-  className="w-[100%] text-[25px] p-3 outline-none"
-  onWheel={handleWheel}
-  contentEditable="true"
-  dangerouslySetInnerHTML={{ __html: article.institutions }}
-/>
+ <textarea
+      style={{
+        ...textareaStyle,
+        
+        height: '20vh',
+        whiteSpace: 'pre-wrap',
+        resize: 'none', // If you want to disable resizing
+      }}
+      onChange={(e) => handleInputChange("institutions", e.target.value)}
+      className="w-[100%] text-[25px] p-3 outline-none"
+      value={article.institutions} // Use value instead of dangerouslySetInnerHTML
+    />
  <h2 className=" text-[30px] font-bold mb-2 h-[5vh]  p-3 text-[#191E29]">Abstract</h2>
- <div
-  style={{
-    ...textareaStyle,   // Include any other styles from textareaStyle
-    overflowY: 'hidden', // Hide vertical scrollbar
-    whiteSpace: 'pre-wrap', // Preserve whitespace and wrap text
-  }}
-  onChange={(e) => handleInputChange("abstract", e.target.value)}
-  className="w-[100%] text-[25px] p-3 outline-none"
-  onWheel={handleWheel}
-  contentEditable="true"
-  dangerouslySetInnerHTML={{ __html: article.abstract }}
-/>
+ <textarea
+      style={{
+        ...textareaStyle,
+        
+        height: '30vh',
+        whiteSpace: 'pre-wrap',
+        resize: 'none', // If you want to disable resizing
+      }}
+      onChange={(e) => handleInputChange("abstract", e.target.value)}
+      className="w-[100%] text-[25px] p-3 outline-none"
+      value={article.abstract} // Use value instead of dangerouslySetInnerHTML
+    />
  <h2 className=" text-[30px] font-bold mb-2 h-[5vh]  p-3 text-[#191E29]">Keywords</h2>
- <div
-  style={{
-    ...textareaStyle,   // Include any other styles from textareaStyle
-    overflowY: 'hidden', // Hide vertical scrollbar
-    whiteSpace: 'pre-wrap', // Preserve whitespace and wrap text
-  }}
-  onChange={(e) => handleInputChange("keywords", e.target.value)}
-  className="w-[100%] text-[25px] p-3 outline-none"
-  onWheel={handleWheel}
-  contentEditable="true"
-  dangerouslySetInnerHTML={{ __html: article.keywords }}
-/> 
+ <textarea
+      style={{
+        ...textareaStyle,
+        
+        height: 'auto',
+        whiteSpace: 'pre-wrap',
+        resize: 'none', // If you want to disable resizing
+      }}
+      onChange={(e) => handleInputChange("keywords", e.target.value)}
+      className="w-[100%] text-[25px] p-3 outline-none"
+      value={article.keywords} // Use value instead of dangerouslySetInnerHTML
+    />
  <h2 className=" text-[30px] font-bold mb-2 h-[vh]  p-3 text-[#191E29]">Content</h2>
- <div
-  style={{
-    ...textareaStyle,   // Include any other styles from textareaStyle
-    overflowY: 'hidden', // Hide vertical scrollbar
-    whiteSpace: 'pre-wrap', // Preserve whitespace and wrap text
-  }}
-  onChange={(e) => handleInputChange("content", e.target.value)}
-  className="w-[100%] text-[25px] p-3 outline-none"
-  onWheel={handleWheel}
-  contentEditable="true"
-  dangerouslySetInnerHTML={{ __html: article.content }}
-/>
+ <textarea
+      style={{
+        ...textareaStyle,
+        
+        height: '50vh',
+        whiteSpace: 'pre-wrap',
+        resize: 'none', // If you want to disable resizing
+      }}
+      onChange={(e) => handleInputChange("content", e.target.value)}
+      className="w-[100%] text-[25px] p-3 outline-none"
+      value={article.content} // Use value instead of dangerouslySetInnerHTML
+    />
  <h2 className=" text-[30px] font-bold mb-2 h-[5vh]  p-3 text-[#191E29]">References</h2>
- <div
-  style={{
-    ...textareaStyle,   // Include any other styles from textareaStyle
-    overflowY: 'hidden', // Hide vertical scrollbar
-    whiteSpace: 'pre-wrap', // Preserve whitespace and wrap text
-  }}
-  onChange={(e) => handleInputChange("references", e.target.value)}
-  className="w-[100%] text-[25px] p-3 outline-none"
-  onWheel={handleWheel}
-  contentEditable="true"
-  dangerouslySetInnerHTML={{ __html: article.references }}
-/>
+ <textarea
+      style={{
+        ...textareaStyle,
+        
+        height: '20vh',
+        whiteSpace: 'pre-wrap',
+        resize: 'none', // If you want to disable resizing
+      }}
+      onChange={(e) => handleInputChange("references", e.target.value)}
+      className="w-[100%] text-[25px] p-3 outline-none"
+      value={article.references} // Use value instead of dangerouslySetInnerHTML
+    />
 
      </div>
 <div>
      {/* <Button
             reset={"hh"} content={"hhh"} />  */}
     <div className="flex justify-end gap-x-3 mr-2">
-     <div onClick={handleEdit}>
+     
+        <div onClick={handleDelete}>
+        <FinalBtn2 content="Delete"/> 
+            </div> 
+            <div onClick={handleSave}>
+        
+        <FinalBtn content="Save"/>
+        </div> 
+            <div onClick={handleEdit}>
         
         <FinalBtn content="Finish"/>
         </div> 
-        <div onClick={handleDelete}>
-        <FinalBtn content="Delete"/> 
-            </div> 
     </div>
 </div>
         </div>
-    <DeleteArticlePopup visible={showpopup} onClose={() => setShowpopup(false)}/>   
+    <DeleteArticlePopup visible={showpopup} onClose={() => {setShowpopup(false);
+    navigate('/ArticlesList')}}/>   
     <Delete visible={showpopup2}  onConfirm={confirmDelete} onClose={() => setShowpopup2(false)} /> 
       </div>
     )

@@ -1,13 +1,15 @@
 /* eslint-disable no-unused-vars */
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-export const ReadMore=()=>
+export const ReadMore=(props)=>
 {
+    const action=props.action
+
     const handleReadMore=()=>
     {
-        
     }
     return (
-        <Link to="/AffichageArticle">
+        <Link to={action}>
         <button  
         
         className={`  sm:w-[110px] w-fit

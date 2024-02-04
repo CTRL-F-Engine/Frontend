@@ -3,7 +3,9 @@ import React, { useEffect, useState, useContext } from 'react';
 import { Article } from '../components/Article';
 import { Appcontext2 } from '../App';
 import pdp from '../assets/pdp.png'
+import AuthContext from '../context/AuthContext'
 import { Navbar3 } from '../components/Navbar3';
+import { useNavigate, useParams } from 'react-router-dom';
 import Filter from '../components/Filter';
 import img from '../assets/footer.svg';
 import { ArticleAffiché } from '../components/ArticleAffiché';
@@ -11,11 +13,58 @@ import { ArticleAffiché } from '../components/ArticleAffiché';
 export const AffichageArticle =()=>
 {
 
-const {isConnected} = useContext(Appcontext2)
+const {isConnected} = useContext(AuthContext)
 const [ref,setRef]=useState(null);
 const [search,setSearch]=useState('');
 const [isSticky, setIsSticky] = useState(false);
 const [isFilterVisible, setIsFilterVisible] = useState(false);
+const navigate = useNavigate();
+const [article, setArticle] = useState({
+  article_id:'',
+  title:'',
+  institutions:'',
+  authors:'',
+  abstract:'',
+  keywords:'',
+  content:'',
+  references:'',
+  state:'',
+  date:'',
+  url:'',
+});
+const articleId=useParams()
+    const article_id =articleId.article_id
+    useEffect(() => {
+      const fetchUserData = async () => {
+        try {
+          
+          const token=localStorage.getItem("access")
+        let token2 = token.replace(/"/g, '');
+          const response = await fetch(`http://127.0.0.1:8000/article/${article_id}`, {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token2}`,
+              "Content-Type": "application/json",
+            },
+          });
+          console.log(articleId)
+          if (response.ok) {
+            const articleData = await response.json();
+            setArticle(articleData);
+            console.log(articleData)
+            console.log(article)
+          } else {
+            // Handle error
+            console.error("Error fetching user data");
+          }
+        } catch (error) {
+          // Handle error
+          console.error("Error fetching user data:", error);
+        }
+      };
+  
+      fetchUserData();
+    }, []);
 
 const handleFilterClick = () => {
   setIsFilterVisible(!isFilterVisible);
@@ -65,16 +114,9 @@ const handleOffset = (data) => {
     <Navbar3 func={handleOffset} connected={true} sticky={true}/>
        
   
-       <ArticleAffiché title="Feature Engineering 101" url ='https://drive.google.com/file/d/1mwtwqiMZGu0_WURi04oxjIIllFH9zExB/view?usp=drive_open' date="Sep 5, 2022" author="Amira HADDAD" Institutions="bitgrit Data Science Publication" Abstract="This makes data pre-processing a crucial step in the machine learning pipeline — which involves feature preprocessing and generation. Each type of feature in a data set has its own way of preprocessing depending on its data type and the model used." 
-       content='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute .... orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute ....
-       orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute ....
-       orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute ....
-       orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute ....
-       orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute ....
-       orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute ....
-       orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute ....
-       orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute ....'
-       References="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute ...."/>
+       <ArticleAffiché title={article.title} url ={article.url} date={article.date} author={article.authors} Institutions={article.institutions} Abstract={article.abstract} 
+       content={article.content} 
+       References={article.references}/>
   
    
    

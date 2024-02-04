@@ -12,31 +12,85 @@ export const ChangePw = () => {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const [user, setuser] = useState({
+    FullName: '',
+    username: '',
+    
+    photo: '',
+    
+    email:'',
+      password:'',
+  });
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        
+        const token=localStorage.getItem("access")
+      let token2 = token.replace(/"/g, '');
+        const response = await fetch("http://127.0.0.1:8000/settings/", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token2}`,
+            "Content-Type": "application/json",
+          },
+        });
+        
+        if (response.ok) {
+          const userData = await response.json();
+          setuser(userData);
+          
+          
+          console.log(userData)
+        } else {
+          // Handle error
+          console.error("Error fetching user data");
+        }
+      } catch (error) {
+        // Handle error
+        console.error("Error fetching user data:", error);
+      }
+    };
   
+    fetchUserData();
+  }, []);
 
-  const handleSaveChanges = () => {
+  const handleSaveChanges = async() => {
     if (newPassword.trim() !== '' && newPassword === confirmPassword) {
       // Save changes
       setuser((prevUser) => ({
         ...prevUser,
-        Password: newPassword, // Update the Password property
+        password: newPassword, // Update the Password property
       }));
       setIsChangesSaved(true);
       setPasswordError('');
+        const formData = new FormData();
+        
+        formData.append('email', user.email);
+        formData.append('username', user.username);
+        formData.append('password', newPassword);  // Password can be empty if not changed
+        formData.append('FullName', user.FullName);
+        console.log(user.password)
+        console.log(newPassword)
+        
+        
+        
+        const token = localStorage.getItem('access');
+        let token2 = token.replace(/"/g, '');
+    
+        const response = await fetch("http://127.0.0.1:8000/settings/", {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token2}`,
+          },
+          body: formData,
+        });
     } else {
       setIsChangesSaved(false);
       setPasswordError('Passwords do not match');
     }
+
   };
-  const [user, setuser] = useState({
-    title: 'Abla RABIA',
-    username: 'Abla_08',
-    link: '',
-    img: pdp,
-    description: 'Administrator',
-    Email: 'la_rabii@esi.dz',
-    Password: '456',
-  });
+  
   const [isChangesSaved, setIsChangesSaved] = useState(false);
 
   const handleOffset = (data) => {

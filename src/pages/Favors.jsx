@@ -11,7 +11,13 @@ export const Favors =()=>
 
 const {isConnected} = useContext(AuthContext)
 const [ref,setRef]=useState(null);
+const [articles,setArticles]=useState([])
 const [isSticky, setIsSticky] = useState(false);
+const truncateText = (text, limit) => {
+  const words = text.split(' ');
+  const truncatedText = words.slice(0, limit).join(' ')+ '...';
+  return truncatedText;
+};
 
 const handleOffset = (data) => {
       setRef(data);
@@ -19,12 +25,7 @@ const handleOffset = (data) => {
     
       console.log('Data:', data);
     };
-    useEffect(()=>
-    {
-
-    },[isConnected])
-     useEffect(() => {
-      }, [ref]);
+    
      
       useEffect(() => {
         const handleScroll = () => {
@@ -44,7 +45,40 @@ const handleOffset = (data) => {
           window.removeEventListener('scroll', handleScroll);
         };
       }, [ref]);
-     
+      useEffect(() => {
+        const fetchUserData = async () => {
+          
+          try {
+            
+            const token=localStorage.getItem("access")
+          let token2 = token.replace(/"/g, '');
+            const response = await fetch(`http://127.0.0.1:8000/favors/`, {
+              method: "GET",
+              headers: {
+                Authorization: `Bearer ${token2}`,
+                "Content-Type": "application/json",
+              },
+            });
+            if (response.ok) {
+              const data = await response.json();
+             const truncatedArticles = data.map(article => ({
+        ...article,
+        content: truncateText(article.content, 50),
+      }));
+
+      setArticles(truncatedArticles);
+            } else {
+              // Handle error
+              console.error("Error fetching user data");
+            }
+          } catch (error) {
+            // Handle error
+            console.error("Error fetching user data:", error);
+          }
+        };
+    
+        fetchUserData();
+      }, []);
     return (
     <div  className='w-full h-screen flex flex-col'>
 
@@ -56,31 +90,17 @@ const handleOffset = (data) => {
     </h1>
     <div className='px-4 sm:px-10'>
    <hr className='border-2 mb-10 border-blue-950'></hr>
-    </div> 
-  
-    <div className=' grid gap-y-12'>
-      <Article date='05 Dec' title = 'Article 01' content='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute ....' isFavorPage={true}/>
-      <div className='px-4 sm:px-10'>
-   <hr className='border-2 border-blue-950'></hr>
-    </div> 
-   <Article date='05 Dec' title = 'Article 01' content='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute ....' isFavorPage={true}/>
-   <div className='px-4 sm:px-10'>
-   <hr className='border-2 border-blue-950'></hr>
-    </div> 
-   <Article date='05 Dec' title = 'Article 01' content='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute ....' isFavorPage={true}/>
-   <div className='px-4 sm:px-10'>   <hr className='border-2 border-blue-950'></hr>
-    </div> 
-   <Article date='05 Dec' title = 'Article 01' content='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute ....' isFavorPage={true}/>
-   <div className='px-4 sm:px-10'>   <hr className='border-2 border-blue-950'></hr>
-    </div> 
-  
-   
-   <Article date='05 Dec' title = 'Article 01' content='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute ....' isFavorPage={true}/>
-   <div className='px-4 sm:px-10'>   <hr className='border-2 border-blue-950'></hr>
-    </div> 
-   <Article date='05 Dec' title = 'Article 01' content='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute ....' isFavorPage={true}/>   
-   <div className='px-4 sm:px-10'>   <hr className='border-2 border-blue-950'></hr>
-    </div> 
+    
+   <div className='grid gap-y-12'>
+        {articles.map((article, index) => (
+          <React.Fragment key={index}>
+            <Article date={article.date} article_id={article.article_id} title={article.title} content={article.content} keywords={article.keywords}/>
+            <div className='px-4 sm:px-10'>
+              <hr className='border-2 border-blue-950'></hr>
+            </div>
+          </React.Fragment>
+        ))}
+      </div>
     <div className='h-[70px]'>
 
     </div>

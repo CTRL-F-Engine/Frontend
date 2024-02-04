@@ -10,18 +10,50 @@ export const ChangeName = () => {
   const [ref, setRef] = useState(null);
   const [isSticky, setIsSticky] = useState(false);
   const [user, setuser] = useState({
-    title: 'Abla RABIA',
-    username: 'Abla_08',
-    link: '',
-    img: pdp,
-    description: 'Administrator',
-    Email: 'la_rabii@esi.dz',
-    Password: '456',
+    FullName: '',
+    username: '',
+    
+    photo: '',
+    
+    email:'',
+      password:'',
   });
-  const [fullName, setFullName] = useState(user.title);
+
+  const [fullName, setFullName] = useState(user.FullName);
   const [isChangesSaved, setIsChangesSaved] = useState(false);
   const [inputError, setInputError] = useState('');
-
+useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        
+        const token=localStorage.getItem("access")
+      let token2 = token.replace(/"/g, '');
+        const response = await fetch("http://127.0.0.1:8000/settings/", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token2}`,
+            "Content-Type": "application/json",
+          },
+        });
+        
+        if (response.ok) {
+          const userData = await response.json();
+          setuser(userData);
+          
+          
+          console.log(userData)
+        } else {
+          // Handle error
+          console.error("Error fetching user data");
+        }
+      } catch (error) {
+        // Handle error
+        console.error("Error fetching user data:", error);
+      }
+    };
+  
+    fetchUserData();
+  }, []);
   const handleOffset = (data) => {
     setRef(data);
   };
@@ -44,14 +76,16 @@ export const ChangeName = () => {
     };
   }, [ref]);
 
-  const handleSaveChanges = () => {
-    if (fullName !== user.title && fullName.trim() !== '') {
+  const handleSaveChanges = async() => {
+    
+    if (fullName !== user.FullName && fullName.trim() !== '') {
       // Save changes
       setuser((prevUser) => ({
         ...prevUser,
-        title: fullName,
+        FullName: fullName,
       }));
       setIsChangesSaved(true);
+      console.log(fullName)
       setInputError('');
     } else if (fullName.trim() === '') {
       setIsChangesSaved(false);
@@ -60,6 +94,28 @@ export const ChangeName = () => {
       setIsChangesSaved(false);
       setInputError('No changes made');
     }
+    const formData = new FormData();
+        
+        formData.append('email', user.email);
+        formData.append('username', user.username);
+        formData.append('password', user.password || '');  // Password can be empty if not changed
+        formData.append('FullName', fullName);
+        
+        
+        
+        
+        const token = localStorage.getItem('access');
+        let token2 = token.replace(/"/g, '');
+    
+        const response = await fetch("http://127.0.0.1:8000/settings/", {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token2}`,
+          },
+          body: formData,
+        });
+    
+
   };
 
   return (
@@ -80,7 +136,7 @@ export const ChangeName = () => {
         <input
           className='bg-search-col mb-5 outline-none text-item-col h-12 sm:h-16 w-[100%] rounded-[4px] pl-3 mt-2'
           onChange={(e) => setFullName(e.target.value)}
-          placeholder={user.title}
+          placeholder={user.FullName}
         />
         <button
           onClick={handleSaveChanges}

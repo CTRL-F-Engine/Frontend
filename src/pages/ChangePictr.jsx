@@ -16,14 +16,47 @@ export const ChangePictr = () => {
     fileInputRef.current.click();
   };
   const [user, setuser] = useState({
-    title: 'Abla RABIA',
-    username: 'Abla_08',
-    link: '',
-    img: pdp,
-    description: 'Administrator',
-    Email: 'la_rabii@esi.dz',
-    Password: '456',
+    FullName: '',
+    username: '',
+    
+    photo: '',
+    
+    email:'',
+      password:'',
   });
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        
+        const token=localStorage.getItem("access")
+      let token2 = token.replace(/"/g, '');
+        const response = await fetch("http://127.0.0.1:8000/settings/", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token2}`,
+            "Content-Type": "application/json",
+          },
+        });
+        
+        if (response.ok) {
+          const userData = await response.json();
+          setuser(userData);
+          
+          setIsEditMode(true); // Enable edit mode since you have fetched existing user data
+          console.log(userData)
+        } else {
+          // Handle error
+          console.error("Error fetching user data");
+        }
+      } catch (error) {
+        // Handle error
+        console.error("Error fetching user data:", error);
+      }
+    };
+  
+    fetchUserData();
+  }, []);
+
 
   const handleOffset = (data) => {
     setRef(data);
@@ -51,30 +84,59 @@ export const ChangePictr = () => {
 
   const [saveMessage, setSaveMessage] = useState('');
 
-  const handleSaveChanges = () => {
+  const handleSaveChanges = async() => {
     if (user.img !== pdp) {
-      // Perform actual saving logic here (e.g., send to server)
-      // ...
+        const formData = new FormData();
+        
+        formData.append('email', user.email);
+        formData.append('username', user.username);
+        formData.append('password', user.password || '');  // Password can be empty if not changed
+        formData.append('FullName', user.FullName);
+        console.log("ablus")
+        if (photoChanged){
+          
+          formData.append('photo', user.photo);  // Append the actual file
+        
+        }
+        
+        
+        
+        const token = localStorage.getItem('access');
+        let token2 = token.replace(/"/g, '');
+    
+        const response = await fetch("http://127.0.0.1:8000/settings/", {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token2}`,
+          },
+          body: formData,
+        });
+    
 
       setSaveMessage('Your changes have been saved!');
     } else {
       setSaveMessage('No changes made');
     }
   };
-
+  const [imgUrl,setimgUrl]=useState('')
+  const [photoChanged,setphotoChanged]=useState(false);
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    if (file) {
+    
       const reader = new FileReader();
-      reader.onloadend = () => {
-        setuser((prevUser) => ({
-          ...prevUser,
-          img: reader.result,
+      reader.onload = () => {
+        setuser((prevuser) => ({
+          ...prevuser,
+          photo: file, // Store the actual file, not the data URL
         }));
       };
+      setimgUrl(`http://127.0.0.1:8000/profile_pictures/profile_pictures/${file.name}`)
+      setphotoChanged(true)
+    
       reader.readAsDataURL(file);
+      console.log(file)
     }
-  };
+  
 
   return (
     <div className='w-full h-screen flex flex-col'>
@@ -129,7 +191,7 @@ export const ChangePictr = () => {
           <img className='absolute sm:end-64' src={upload} alt='Upload' />
         </div>
         </div>
-         <img src={user.img} alt={user.title} className='h-36 w-36 rounded-full mb-8' /> 
+         <img src={imgUrl ? imgUrl : `http://127.0.0.1:8000${user.photo}`} alt={user.title} className='h-36 w-36 rounded-full mb-8' /> 
         </div>
 
         <div className='px-4 sm:px-10 '>

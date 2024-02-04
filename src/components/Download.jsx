@@ -2,18 +2,13 @@ import React from 'react';
 
 export const Download = ({ pdfUrl }) => {
     const handleDownload = async () => {
+  
+
+    
         try {
-            const response = await fetch(pdfUrl);
-            const blob = await response.blob();
-            const url = window.URL.createObjectURL(new Blob([blob]));
-            const link = document.createElement('a');
-            link.href = url;
-            link.setAttribute('download', 'article.pdf');
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+          window.location.href = pdfUrl;
         } catch (error) {
-            console.error('Error downloading PDF:', error);
+          console.error('Error downloading PDF:', error);
         }
     };
 

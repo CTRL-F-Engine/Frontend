@@ -4,16 +4,58 @@ import { Search_bar } from "./Search_bar"
 import { useState } from "react";
 import { Navbar } from "./Navbar";
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import pdp from '../assets/pdp.png'
 import { LittleSideBarWhite } from "./LittleSideBarWhite";
 import { Link } from "react-router-dom";
 export const Navbar2=(props)=>
-{
+{    const navigate = useNavigate();
+
+  const [pdp,setPdp]=useState('')
+  const [user, setuser] = useState({
+    FullName: '',
+    username: '',
+    
+    photo: '',
+    
+    email:'',
+      password:'',
+  });
   const getPdp=()=>
   {
     return pdp;
   }
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        
+        const token=localStorage.getItem("access")
+      let token2 = token.replace(/"/g, '');
+        const response = await fetch("http://127.0.0.1:8000/settings/", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token2}`,
+            "Content-Type": "application/json",
+          },
+        });
+        
+        if (response.ok) {
+          const userData = await response.json();
+          setuser(userData);
+          setPdp(`http://127.0.0.1:8000/profile_pictures/profile_pictures/${file.name}`)
+          console.log(userData)
+        } else {
+          // Handle error
+          console.error("Error fetching user data");
+        }
+      } catch (error) {
+        // Handle error
+        console.error("Error fetching user data:", error);
+      }
+    };
+  
+    fetchUserData();
+  }, []);
 const [ShowResulet ,setShowResult]=useState(false)
 const [LittleNavVisible , setLittleNavVisible]=useState(false);
 
@@ -50,14 +92,34 @@ const [LittleNavVisible , setLittleNavVisible]=useState(false);
       nav.current.classList.add('nav')
     }
   };
-    const handleSearch=(e)=>
-    {
-    e.key==="Enter"?console.log(search):"";
-    }
-    const handleChange=(e)=>
-    {
-        setSearch(e.target.value); 
-    }
+  const handleSearch=async(e)=>
+  {
+    if (e.key === "Enter") {
+  try {
+    const token=localStorage.getItem("access")
+    let token2 = token.replace(/"/g, '');
+      const response = await fetch(`http://127.0.0.1:8000/search/query=${search}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token2}`,
+          "Content-Type": "application/json",
+        },
+      });
+    const data = await response.json();
+    console.log("____________________________________")
+    console.log(data)
+    //setSearchResults(data.results); // Update results based on your API response
+    navigate(`/ResultSearch/${encodeURIComponent(search)}`);
+  } catch (error) {
+    console.error('Error fetching search results:', error);
+  }}
+  }
+  const handleChange=(e)=>
+  {
+      const data=e.target.value;
+      console.log(data) ;
+      setSearch(data);
+  }
     return (
      ( <div className="w-[100vw] z-20 relative">
 { (<div ref={nav} className={`   ${
@@ -106,7 +168,12 @@ const [LittleNavVisible , setLittleNavVisible]=useState(false);
   setLittleNavVisible(!LittleNavVisible);
 }} className='text-white rounded-full
  bg-white cursor-pointer xs:w-[50px] xs:h-[50px] w-[35px] h-[35px]'>
- <img src={getPdp()}/>
+ <img src={`http://127.0.0.1:8000${user.photo}`} style={{
+    borderRadius: '50%', // Make it a circle by setting border-radius to 50%
+    objectFit: 'cover', // Ensure the image covers the entire circle without stretching
+    boxShadow: '0 0 2px rgba(0, 0, 0, 0.2)', // Add a subtle shadow
+  }}
+  />
 </div>}
 </div>)}
       </div>)

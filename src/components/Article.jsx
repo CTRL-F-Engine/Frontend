@@ -10,12 +10,75 @@ export const Article = (props) => {
   const [isBookmarked, setIsBookmarked] = useState(props.isFavorPage);
   const [keywords,setKeywords]=useState(props.keywords)
   const keys=keywords.split(',');
-  console.log(typeof keywords.split(','));  // Outputs: "number"
+  const [articleLink,setArticleLink]=useState('')
 
-  const handleSave = () => {
+  const handleSave = async() => {
+    const requestBody = {
+      article_id: props.article_id
+    };
     setIsBookmarked(!isBookmarked);
-  };
+    if (!isBookmarked){
+      try {
+        const token=localStorage.getItem("access")
+        let token2 = token.replace(/"/g, '');
+          const response = await fetch(`http://127.0.0.1:8000/addfv/`, {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${token2}`,
+              "Content-Type": "application/json",
+            },body: JSON.stringify(requestBody),
+          });
+        const data = await response.json();
+      } catch (error) {
+        console.error('Error adding the article to favors');
+      }}else{
+        try {
+          const token=localStorage.getItem("access")
+          let token2 = token.replace(/"/g, '');
+            const response = await fetch(`http://127.0.0.1:8000/rmfv/`, {
+              method: "DELETE",
+              headers: {
+                Authorization: `Bearer ${token2}`,
+                "Content-Type": "application/json",
+              },body: JSON.stringify(requestBody),
+            });
+          const data = await response.json();
+        } catch (error) {
+          console.error('Error removing the article from favors');
+        }
+      }
+      console.log(props.article_id)}
 
+      useEffect(() => {
+        const requestBody = {
+          article_id: props.article_id
+        };
+        const fetchUserData = async () => {
+          
+          try {
+            
+            const token=localStorage.getItem("access")
+          let token2 = token.replace(/"/g, '');
+            const response = await fetch(`http://127.0.0.1:8000/isfv/`, {
+              method: "POST",
+              headers: {
+                Authorization: `Bearer ${token2}`,
+                "Content-Type": "application/json",
+              },body: JSON.stringify(requestBody),
+            });
+            if (response.status===200) {
+                setIsBookmarked(true)
+            }else if (response.status===204) {
+              setIsBookmarked(false)
+            }}
+           catch (error) {
+            // Handle error
+            console.error("Error fetching user data:", error);
+          }
+        };
+    
+        fetchUserData();
+      }, []);
   return (
     <div className="sm:px-10 px-4">
       <h1 className="inline mr-3 text-[32px] sm:text-3xl md:text-4xl text-gray-900 font-bold">
@@ -39,7 +102,7 @@ export const Article = (props) => {
             alt="Bookmark"
           />
         </button>
-          <ReadMore />
+          <ReadMore action={`/AffichageArticle/${props.article_id}`}/>
         </div>
       </div>
     </div>

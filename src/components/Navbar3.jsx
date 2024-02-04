@@ -11,10 +11,52 @@ import { Link } from 'react-router-dom';
 
 export const Navbar3=(props)=>
 {
+  const [user, setuser] = useState({
+    FullName: '',
+    username: '',
+    
+    photo: '',
+    
+    email:'',
+      password:'',
+  });
+  
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        
+        const token=localStorage.getItem("access")
+      let token2 = token.replace(/"/g, '');
+        const response = await fetch("http://127.0.0.1:8000/settings/", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token2}`,
+            "Content-Type": "application/json",
+          },
+        });
+        
+        if (response.ok) {
+          const userData = await response.json();
+          setuser(userData);
+          
+          console.log(userData)
+        } else {
+          // Handle error
+          console.error("Error fetching user data");
+        }
+      } catch (error) {
+        // Handle error
+        console.error("Error fetching user data:", error);
+      }
+    };
+  
+    fetchUserData();
+  }, []);
   const getPdp=()=>
   {
     return pdp;
   }
+
 const [LittleNavVisible , setLittleNavVisible]=useState(false);
 
     const [search,setSearch]=useState('');
@@ -98,7 +140,11 @@ const [LittleNavVisible , setLittleNavVisible]=useState(false);
   setLittleNavVisible(!LittleNavVisible);
 }} className='text-white rounded-full
  bg-white cursor-pointer xs:w-[50px] xs:h-[50px] w-[35px] h-[35px]'>
- <img src={getPdp()}/>
+ <img src={`http://127.0.0.1:8000${user.photo}`} style={{
+    borderRadius: '50%', // Make it a circle by setting border-radius to 50%
+    objectFit: 'cover', // Ensure the image covers the entire circle without stretchin
+    boxShadow: '0 0 2px rgba(0, 0, 0, 0.2)', // Add a subtle shadow
+  }}/>
 </div>}
 </div>)}
       </div>)

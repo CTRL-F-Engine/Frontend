@@ -35,6 +35,8 @@ const handleFilterChange = (filterValues) => {
 
   console.log('Filtered Values:', filterValues);
   setFilteredData(filterValues);
+  handleSearch({ key: "Enter" });
+  
 };
 
 const handleSearch=async(e)=>
@@ -42,7 +44,6 @@ const handleSearch=async(e)=>
         if (e.key === "Enter") {
           setSearch(query);
       try {
-        
         const token=localStorage.getItem("access")
         let token2 = token.replace(/"/g, '');
           const response = await fetch(`http://127.0.0.1:8000/search/query=${query}`, {
@@ -54,8 +55,15 @@ const handleSearch=async(e)=>
           });
         const data = await response.json();
         console.log("____________________________________")
-        console.log(data)
+        console.log(filteredData)
         //setSearchResults(data.results); // Update results based on your API response
+        const truncatedArticles = data.map(article => ({
+          ...article,
+          content: truncateText(article.content, 50),
+        }));
+  
+        setArticles(truncatedArticles);
+        console.log(articles)
         navigate(`/ResultSearch/${encodeURIComponent(search)}`);
       } catch (error) {
         console.error('Error fetching search results:', error);
@@ -63,7 +71,6 @@ const handleSearch=async(e)=>
       }
 useEffect(() => {
   setSearch(query);
-
   const fetchArticles = async () => {
     try {
       const token = localStorage.getItem("access");
@@ -170,7 +177,7 @@ const handleOffset = (data) => {
           Filter
         </button>
       </div>
-      {isFilterVisible && <Filter onFilterChange={handleFilterChange}/>}
+      {isFilterVisible && <Filter onFilterChange={handleFilterChange} onkey={handleSearch}/>}
   
     <h1 className='px-4 sm:px-10 mt-8 font-semibold text-2xl text-blue-950 mb-8'>
     Result
@@ -182,7 +189,7 @@ const handleOffset = (data) => {
     <div className='grid gap-y-12'>
         {articles.map((article, index) => (
           <React.Fragment key={index}>
-            <Article date={article.date} title={article.title} content={article.content} keywords={article.keywords}/>
+            <Article date={article.date} article_id={article.article_id} title={article.title} content={article.content} keywords={article.keywords}/>
             <div className='px-4 sm:px-10'>
               <hr className='border-2 border-blue-950'></hr>
             </div>

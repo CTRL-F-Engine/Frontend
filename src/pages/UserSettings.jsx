@@ -6,23 +6,56 @@ import { Navbar3 } from '../components/Navbar3';
 import img from '../assets/footer.svg';
 import next from '../assets/Next.png';
 import { Link } from 'react-router-dom';
+import AuthContext from '../context/AuthContext'
 
 export const UserSettings =()=>
 {
 
-const {isConnected} = useContext(Appcontext2)
+const {isConnected} = useContext(AuthContext)
 const [ref,setRef]=useState(null);
 const [isSticky, setIsSticky] = useState(false);
 const [user, setuser] = useState({
-    title: 'Abla RABIA',
-    username: 'Abla_08',
-    link: '',
-    img: pdp,
-    description: 'Administrator',
-    Email:'la_rabii@esi.dz',
-      Password:'456',
-  });
+  FullName: '',
+  username: '',
+  
+  photo: '',
+  
+  email:'',
+    password:'',
+});
+const [isEditMode, setIsEditMode] = useState(false);
+useEffect(() => {
+  const fetchUserData = async () => {
+    try {
+      
+      const token=localStorage.getItem("access")
+    let token2 = token.replace(/"/g, '');
+      const response = await fetch("http://127.0.0.1:8000/settings/", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token2}`,
+          "Content-Type": "application/json",
+        },
+      });
+      
+      if (response.ok) {
+        const userData = await response.json();
+        setuser(userData);
+        
+        setIsEditMode(true); // Enable edit mode since you have fetched existing user data
+        console.log(userData)
+      } else {
+        // Handle error
+        console.error("Error fetching user data");
+      }
+    } catch (error) {
+      // Handle error
+      console.error("Error fetching user data:", error);
+    }
+  };
 
+  fetchUserData();
+}, []);
 const handleOffset = (data) => {
       setRef(data);
       console.log('Ref immediately after setRef:', ref); 
@@ -68,10 +101,11 @@ const handleOffset = (data) => {
    <hr className='border-2 mb-10 border-blue-950'></hr>
     </div>
     <div className='userInfo flex flex-row  px-4 sm:px-10 space-x-5 mb-10'>
-    <img src={user.img} alt={user.title} className="lg:h-36 lg:w-36 md:h-24 md:w-24 h-16 w-16 rounded-full" />
+    <img src={`http://127.0.0.1:8000${user.photo}`} alt={user.username} className="lg:h-36 lg:w-36 md:h-24 md:w-24 h-16 w-16 rounded-full" />
     <div className='flex flex-col  justify-center '>
-      <span className='font-medium sm:text-2xl text-xl text-blue-950'>{user.title}</span>
-      <span  className='font-medium sm:text-2xl text-xl text-blue-950'>{user.Email}</span>
+      <span className='font-medium sm:text-2xl text-xl text-blue-950'>{user.username}</span>
+      <span className='font-medium sm:text-2xl text-xl text-blue-950'>{user.FullName}</span>
+      <span  className='font-medium sm:text-2xl text-xl text-blue-950'>{user.email}</span>
     </div>
     </div> 
     <div className='Choix flex flex-col space-y-3 px-4 sm:px-10 relative w-full'>

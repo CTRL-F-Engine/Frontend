@@ -15,6 +15,10 @@ import { toast } from "react-toastify";
 export const EditArticles=(props)=>
 {
   const navigate = useNavigate();
+  const formattedDateString=new Date().toLocaleDateString();
+  var dateParts = formattedDateString.split('/');
+  var d = dateParts[2] + '-' + dateParts[0].padStart(2, '0') + '-' + dateParts[1].padStart(2, '0');
+  console.log(typeof d);  // Outputs: string
   const [article, setArticle] = useState({
     article_id:0,
     title:'',
@@ -26,6 +30,7 @@ export const EditArticles=(props)=>
     references:'',
     state:'',
     url:'',
+    date:'',
 
   });
   const [isEditMode, setIsEditMode] = useState(false);
@@ -113,8 +118,9 @@ const handleWheel = (e) => {
   const handleSave=async()=>
   {
     try {
+      
       const formData = new FormData();
-  
+      
       formData.append('title', article.title);
       formData.append('content', article.content);
       formData.append('references', article.references);
@@ -125,6 +131,8 @@ const handleWheel = (e) => {
       formData.append('abstract', article.abstract);
       formData.append('url', article.url);
       formData.append('state', 'pending');
+      formData.append('date', d);
+
       formData.append('article_id', article.article_id);
   
       
@@ -163,6 +171,7 @@ const handleEdit=async()=>
     formData.append('keywords', article.keywords.split(','));
     formData.append('abstract', article.abstract);
     formData.append('url', article.url);
+    formData.append('date', d);
     formData.append('state', 'done');
     formData.append('article_id', article.article_id);
 

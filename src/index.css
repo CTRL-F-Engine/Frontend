@@ -67,7 +67,7 @@ animation-iteration-count: infinite;
 }
 .app
 {
-    background-image: url('./assets/bg-new.png');
+    background-image: url('./assets/bgFinal.png');
     background-size: cover;  
     background-position: center; 
     background-repeat: repeat;

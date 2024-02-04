@@ -4,6 +4,7 @@
 import { Input } from '../components/Input';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import logo from '../assets/LOGO2.png';
 export const Login =(props)=> {
   const [email, setEmail] = useState('');
   const [password,setPassword] = useState('');
@@ -38,10 +39,12 @@ const handleSignUp=()=>
 {
 }
   return (
-    <div className=" flex flex-col-reverse  app md:flex-row  
-    w-full items-center h-full
-    justify-around   gap-y-9">
-        <div className=' flex flex-col sm:items-end justify-center gap-y-7  '>
+    <div className=" flex flex-col-reverse  app md:flex-row min-h-full
+    w-full items-center 
+    justify-around  py-4">
+     
+      
+              <div className=' flex flex-col sm:items-end justify-center gap-y-6  '>
 <p className="lg:w-[450px]  mx-auto text-left w-full text-violet-100 sm:text-[50px] text-[40px] font-bold font-['TT Commons'] ">
       Log In
             </p> 
@@ -78,8 +81,10 @@ const handleSignUp=()=>
           <Link to="/Signup"> Sign up</Link>     </button>   
             </p>  
 </div>
-<div className='w-[30%]'>
-  </div>
+{/* <div className='w-[30%]'>
+  </div> */}
+
+   <img className=' lg:w-[430px] w-[250px] sm:w-[280px] md:w-[360px]' src={logo} />
         </div> 
    
         

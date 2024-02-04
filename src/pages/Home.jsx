@@ -14,7 +14,7 @@ import { Btn } from '../components/Btn';
 import Popup from '../components/PopupSearch';
 import Wait from '../components/Wait';
 import { useNavigate } from 'react-router-dom';
-import logo from '../assets/logoLong.png'
+import logo from '../assets/LongLogo2.png'
 export const Home =()=>
 {
   const navigate = useNavigate();
@@ -85,13 +85,16 @@ const handleOffset = (data) => {
 </div>
 {(LittleNavVisible && isConnected) &&<LittleSideBar/>} 
 
+<div className='flex-col space-y-[120px] lg:space-y-[150px] '>
 <div className=" h-[700px] flex items-center justify-center -mb-[670px] ">
 
-    <img src={logo} className='cursor-pointer ml-[5%] md:w-[500px]  xs:w-[400px] lg:w-[550px] ' />
+    <img src={logo} className='cursor-pointer ml-[5%] md:w-[500px]  xs:w-[400px] lg:w-[630px] ' />
    </div>
-    <div className=" w-[100%] h-[90vh] flex items-center justify-center ">
-       <Search_bar func={handleSetPopUp}  disabled={!isConnected}  placeholder="search"/>
-    </div>  
+    <div className=" w-[100%] h-[80vh] flex items-center justify-center ">
+       <Search_bar func={handleSetPopUp}  disabled={!isConnected}  placeholder="search" onKeyUp={handleSearch} onSearch={handleSearch}
+          onChange={handleChange}/>
+    </div>
+    </div>
 
 
     <Navbar2 func={handleOffset} connected={isConnected} sticky={isSticky}/>

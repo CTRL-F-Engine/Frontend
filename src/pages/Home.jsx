@@ -84,13 +84,16 @@ const handleOffset = (data) => {
 </div>}
 </div>
 {(LittleNavVisible && isConnected) &&<LittleSideBar/>} 
-<div className="mt-12 w-[100%] h-[90vh] flex items-center justify-center -mb-[670px] ">
 
-    <img src={logo} className='cursor-pointer ml-[5%] md:w-[70%] w-[70%] xs:w-[60%] lg:w-[50%] lg:h-[70%] md:h-[60%] xs:h-[40%]' />
+<div className=" h-[700px] flex items-center justify-center -mb-[670px] ">
+
+    <img src={logo} className='cursor-pointer ml-[5%] md:w-[500px]  xs:w-[400px] lg:w-[550px] ' />
    </div>
     <div className=" w-[100%] h-[90vh] flex items-center justify-center ">
        <Search_bar func={handleSetPopUp}  disabled={!isConnected}  placeholder="search"/>
-    </div>
+    </div>  
+
+
     <Navbar2 func={handleOffset} connected={isConnected} sticky={isSticky}/>
     <div className='relative  z-10  px-8'>
 
@@ -103,6 +106,9 @@ const handleOffset = (data) => {
     <div className='px-4 sm:px-10'>
    <hr className='border-2 mb-10 border-blue-950'></hr>
     </div> 
+
+
+
     <div className=' grid gap-y-12'>
       <Article date='05 Dec' title = 'Article 01'  content='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute ....'/>
       <div className='px-4 sm:px-10'>
@@ -127,9 +133,11 @@ const handleOffset = (data) => {
     <div className='h-[70px]'>
     </div>
     </div>
+
+
 {!isConnected && window.scrollY>=400 &&<Popup />}
 {!isConnected && showPopup &&<Popup />}
-<footer className='h-[70px] w-full'>
+<footer className='h-[70px]  w-full'>
   <img src={img} />
 </footer>
     </div>)

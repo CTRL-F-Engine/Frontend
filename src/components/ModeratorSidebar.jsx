@@ -4,7 +4,6 @@ import imag from '../assets/pdp.png'
 import SidebarHeader from './SidebarHeader';
 import logg from '../assets/log-out.png';
 import ArtList from '../assets/ArtList.png'
-import EditS from '../assets/EditS.png'
 import Settings from '../assets/settings.png'
 import { Link } from 'react-router-dom';
 const user = [
@@ -15,7 +14,6 @@ const user = [
     description: 'Moderator',
   },
 ];
-
 function ModeratorSidebar() {
   // Initial state for selected item
   const [selectedItem, setSelectedItem] = useState(null);
@@ -38,8 +36,6 @@ function ModeratorSidebar() {
           <div className='lg:w-[80%] lg:text-[17px] md:w-[85%] md:text-[15px] w-[80%] text-[13px]'>List of Articles</div>
         </li>
        </Link>
-
-       
        <Link to="/ModeratorSettings">
       <li
           key="Settings"
@@ -56,13 +52,11 @@ function ModeratorSidebar() {
        </Link>
        </ul>
        <ul className="w-full list-none flex-col  items-start justify-start mt-[60%]">
-
         <li
           className={`w-full cursor-pointer m-0 h-12 space-x-4 flex flex-row justify-center items-center  hover:border-l-4 hover:border-black text-item-col opacity-50 hover:opacity-100 ${selectedItem === 'logout' ? 'bg-page-col border-l-4 border-black': ''}`}
           onClick={() => {
             setSelectedItem('logout');
-          }}
-        >
+          }}>
           <img src={logg}className="lg:w-[24px] lg:h-[24px] md:h-[20px] md:w-[20px] h-[16px] w-[16px]" />
           <div className='lg:w-[80%] lg:text-[17px] md:w-[85%] md:text-[15px] w-[80%] text-[13px]'>Log Out</div>
         </li>

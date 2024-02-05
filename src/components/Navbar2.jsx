@@ -1,17 +1,26 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import { Search_bar } from "./Search_bar"
-import { useState } from "react";
+import { useState,useContext } from "react";
 import { Navbar } from "./Navbar";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import logo from '../assets/logoLong.png';
+import AuthContext from '../context/AuthContext'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { LittleSideBarWhite } from "./LittleSideBarWhite";
 import { Link } from "react-router-dom";
 export const Navbar2=(props)=>
 {    const navigate = useNavigate();
 
   const [pdp,setPdp]=useState('')
+  const storedUser = JSON.parse(localStorage.getItem('User'));
+  const user_type = storedUser ? storedUser.user_type : null;
+
+  const {isConnected,setIsConnected} = useContext(AuthContext)
+
   const [user, setuser] = useState({
     FullName: '',
     username: '',
@@ -25,6 +34,20 @@ export const Navbar2=(props)=>
   {
     return pdp;
   }
+  useEffect(()=>{
+    if (!isConnected  || user_type!=='simple'){
+      if (!isConnected){
+        navigate('/Login')
+        toast.error("You have to connect first !")
+      }else{
+        navigate('/')
+        toast.error("You do not have permissions to access to this link !")
+      }
+      
+      
+    }
+    
+  },[])
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -146,9 +169,9 @@ const [LittleNavVisible , setLittleNavVisible]=useState(false);
      <div className="flex w-full justify-between gap-x-10 items-center">
 
      <Link to="/">
-     <h1 className="text-cyan-500 w-fit font-bold cursor-pointer">
-    LOGO
-</h1> </Link>{(isVisible && props.connected) && <input onChange={handleChange} onKeyUp={handleSearch}   className="block w-full p-3 text-sm text-sky-950  border-[3px]  text-[15px]  rounded-[4px] bg-slate-200 focus:cyan-500 font-medium 
+
+      <img src={logo} className=" w-28 mt-[50%] cursor-pointer" />
+      </Link>{(isVisible && props.connected) && <input onChange={handleChange} onKeyUp={handleSearch}   className="block w-full p-3 text-sm text-sky-950  border-[3px]  text-[15px]  rounded-[4px] bg-slate-200 focus:cyan-500 font-medium 
    outline-none   placeholder:text-sky-900"
     placeholder="Search" required/>}
   { (isVisible && props.connected) &&<div className="absolute inset-y-0 end-3 flex items-center ps-10 pointer-events-none">

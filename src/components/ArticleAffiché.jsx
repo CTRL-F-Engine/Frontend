@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import { useState } from 'react';
+import { useState ,useEffect} from 'react';
 import myImage from '../assets/bookmark.svg';
 import Bookmark2 from '../assets/Bookmark2.png';
 import { KeyWord } from './KeyWord';
@@ -10,10 +10,73 @@ import { Download } from './Download';
 export const ArticleAffiché = (props) => {
   const [isBookmarked, setIsBookmarked] = useState(false);
 
-  const handleSave = () => {
+  const handleSave = async() => {
+    const requestBody = {
+      article_id: props.article_id
+    };
     setIsBookmarked(!isBookmarked);
-  };
-
+    if (!isBookmarked){
+      try {
+        const token=localStorage.getItem("access")
+        let token2 = token.replace(/"/g, '');
+          const response = await fetch(`http://127.0.0.1:8000/addfv/`, {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${token2}`,
+              "Content-Type": "application/json",
+            },body: JSON.stringify(requestBody),
+          });
+        const data = await response.json();
+      } catch (error) {
+        console.error('Error adding the article to favors');
+      }}else{
+        try {
+          const token=localStorage.getItem("access")
+          let token2 = token.replace(/"/g, '');
+            const response = await fetch(`http://127.0.0.1:8000/rmfv/`, {
+              method: "DELETE",
+              headers: {
+                Authorization: `Bearer ${token2}`,
+                "Content-Type": "application/json",
+              },body: JSON.stringify(requestBody),
+            });
+          const data = await response.json();
+        } catch (error) {
+          console.error('Error removing the article from favors');
+        }
+      }
+      }
+      useEffect(() => {
+        const requestBody = {
+          article_id: props.article_id
+        };
+        
+        const fetchUserData = async () => {
+          
+          try {
+            console.log(props.article_id)
+            const token=localStorage.getItem("access")
+          let token2 = token.replace(/"/g, '');
+            const response = await fetch(`http://127.0.0.1:8000/isfv/`, {
+              method: "POST",
+              headers: {
+                Authorization: `Bearer ${token2}`,
+                "Content-Type": "application/json",
+              },body: JSON.stringify(requestBody),
+            });
+            if (response.status===200) {
+                setIsBookmarked(true)
+            }else if (response.status===204) {
+              setIsBookmarked(false)
+            }}
+           catch (error) {
+            // Handle error
+            console.error("Error fetching user data:", error);
+          }
+        };
+    
+        fetchUserData();
+      }, []);
   return (
     <div className='pb-20'>
       <div className='xs:flex grid gap-y-4 px-4 sm:px-10 mt-28 mb-3  space-x-5 items-end justify-between '>

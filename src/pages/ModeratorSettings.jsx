@@ -131,7 +131,7 @@ const ModeratorSettings = () => {
       }
     };
   return (
-    <div className='flex flex-row w-screen  bg-admin-bg v-[100vh]'>
+    <div className='admin flex flex-row w-screen  bg-admin-bg v-[100vh]'>
       <ModeratorSidebar />
     <div className="flex flex-auto flex-col relative ml-[5%] mt-8 mr-[5%]">
       <h1 className="text-text-col text-5xl whitespace-nowrap">Settings</h1>

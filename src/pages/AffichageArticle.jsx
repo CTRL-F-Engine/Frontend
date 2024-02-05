@@ -114,7 +114,7 @@ const handleOffset = (data) => {
     <Navbar3 func={handleOffset} connected={true} sticky={true}/>
        
   
-       <ArticleAffiché title={article.title} url ={article.url} date={article.date} author={article.authors} Institutions={article.institutions} Abstract={article.abstract} 
+       <ArticleAffiché article_id={article_id} title={article.title} url ={article.url} date={article.date} author={article.authors} Institutions={article.institutions} Abstract={article.abstract} 
        content={article.content} 
        References={article.references}/>
   

@@ -12,6 +12,7 @@ export const Favors =()=>
 const {isConnected} = useContext(AuthContext)
 const [ref,setRef]=useState(null);
 const [articles,setArticles]=useState([])
+const [isEmpty,setIsEmpty]=useState(false)
 const [isSticky, setIsSticky] = useState(false);
 const truncateText = (text, limit) => {
   const words = text.split(' ');
@@ -61,6 +62,11 @@ const handleOffset = (data) => {
             });
             if (response.ok) {
               const data = await response.json();
+              
+              if (data.length<=1){
+                setIsEmpty(true)
+                
+              }
              const truncatedArticles = data.map(article => ({
         ...article,
         content: truncateText(article.content, 50),
@@ -105,7 +111,7 @@ const handleOffset = (data) => {
 
     </div>
     </div>
-    <footer className='h-[70px] w-full'>
+    <footer className={`h-[70px] w-full ${isEmpty ? 'absolute bottom-10' : ''}`}>
   <img src={img} />
 </footer> 
   

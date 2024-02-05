@@ -1,16 +1,22 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import { useState } from "react";
+import { useState,useContext } from "react";
 import { useRef } from "react";
 import { useEffect } from "react";
 import pdp from '../assets/pdp.png'
 import { LittleSideBarWhite } from "./LittleSideBarWhite";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import AuthContext from '../context/AuthContext'
 import { Navbar } from "./Navbar";
 import { Link } from 'react-router-dom';
-
+import logo from '../assets/logoLong.png';
+import { useNavigate } from 'react-router-dom';
 
 export const Navbar3=(props)=>
 {
+  const navigate = useNavigate();
+  
   const [user, setuser] = useState({
     FullName: '',
     username: '',
@@ -20,7 +26,23 @@ export const Navbar3=(props)=>
     email:'',
       password:'',
   });
-  
+  const {isConnected,setIsConnected} = useContext(AuthContext)
+  const storedUser = JSON.parse(localStorage.getItem('User'));
+  const user_type = storedUser ? storedUser.user_type : null;
+  useEffect(()=>{
+    if (!isConnected  || user_type!=='simple'){
+      if (!isConnected){
+        navigate('/Login')
+        toast.error("You have to connect first !")
+      }else{
+        navigate('/')
+        toast.error("You do not have permissions to access to this link !")
+      }
+      
+      
+    }
+    
+  },[])
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -125,9 +147,8 @@ const [LittleNavVisible , setLittleNavVisible]=useState(false);
     <div className="relative xs:block hidden border-cyan-500 w-[90%] xs:w-[40%]">
      <div className="flex w-full justify-between gap-x-10 items-center">
    <Link to="/">
-     <h1 className="text-cyan-500 w-fit font-bold cursor-pointer">
-    LOGO
-</h1> </Link>
+   <img src={logo} className=" w-28 mt-[50%] cursor-pointer" />
+      </Link>
        </div> 
 
 

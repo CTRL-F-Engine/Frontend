@@ -67,7 +67,7 @@ animation-iteration-count: infinite;
 }
 .app
 {
-    background-image: url('./assets/background.png');
+    background-image: url('./assets/bgFinal.png');
     background-size: cover;  
     background-position: center; 
     background-repeat: repeat;
@@ -85,6 +85,15 @@ animation-iteration-count: infinite;
     background-size: cover;  
     background-position: center; 
     background-repeat: repeat;
+}
+
+.admin
+{
+    background-image: url('./assets/admin2.png');
+    background-size: cover;  
+    background-position:center; 
+    background-repeat: repeat; 
+    
 }
 .border-zero:focus
 {

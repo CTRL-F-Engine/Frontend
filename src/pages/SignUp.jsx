@@ -4,6 +4,7 @@
 import { Input } from '../components/Input';
 import { Link } from 'react-router-dom';
 import { useState ,useContext} from 'react';
+import logo from '../assets/LOGO2.png';
 import AuthContext from '../context/AuthContext'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -95,9 +96,7 @@ const handleLogin=()=>
             </p> 
          
 </div>
-<div className='w-[30%]'>
-
-  </div>
+<img className=' lg:w-[430px] w-[250px] sm:w-[280px] md:w-[360px]' src={logo} />
         </div> 
    
         

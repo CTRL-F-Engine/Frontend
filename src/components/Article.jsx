@@ -56,7 +56,8 @@ export const Article = (props) => {
         const fetchUserData = async () => {
           
           try {
-            
+          
+            console.log(props.article_id)
             const token=localStorage.getItem("access")
           let token2 = token.replace(/"/g, '');
             const response = await fetch(`http://127.0.0.1:8000/isfv/`, {

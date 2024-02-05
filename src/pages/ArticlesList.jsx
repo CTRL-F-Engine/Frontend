@@ -38,7 +38,7 @@ const handleDownload = async (url) => {
     }
 };
   return (
-    <div className='flex flex-row w-screen bg-page-col h-[100vh]'>
+    <div className='admin flex flex-row w-screen bg-page-col h-[100vh]'>
       <ModeratorSidebare />
       <div className="flex flex-auto flex-col sm:ml-[5%] ml-[3%] mt-8 sm:mr-[5%] mr-[3%] overflow-x-auto scrollbar-thin scrollbar-thumb-white ">
         <h1 className="text-person-col text-5xl whitespace-nowrap">Articles</h1>

@@ -118,7 +118,7 @@ function Content() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showpopup, setShowpopup]=useState(false);
   return (
-    <div className='flex flex-row w-screen  bg-page-col h-[100vh]'>
+    <div className='admin flex flex-row w-screen  bg-page-col h-[100vh]'>
       <Sidebar />
 
     <div className="flex flex-auto flex-col  ml-[3%] mt-8 mr-[3%] ">

@@ -204,12 +204,13 @@ const handleEdit=async()=>
       };
     return (
 
-        <div className='flex  w-screen
+        <div className='admin flex  w-screen
         bg-page-col items-center h-[100vh]'>
         <ModeratorSidebar />
-        <div  className="mx-auto w-[60%]">
-         <h1 className="text-[40px] mb-[30px]">
-Article Editing        </h1>
+        
+        <div className="flex flex-auto flex-col  sm:ml-[5%] ml-[3%] mb-6 mt-0 sm:mr-[5%] mr-[3%] overflow-x-auto scrollbar-thin scrollbar-thumb-white ">
+        <h1 className="text-person-col text-5xl mb-6">Article Editing</h1>
+
 <div className="w-[100%] h-[60vh] rounded-[5px] bg-white mb-10 overflow-auto">
      
      <h1 className="text-[25px]  ">

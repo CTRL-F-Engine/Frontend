@@ -64,7 +64,7 @@ function Notcool() {
     };
 
     return (
-        <div className='flex flex-row w-screen bg-page-col h-[100vh]'>
+        <div className='admin flex flex-row w-screen bg-page-col h-[100vh]'>
             <Sidebar />
       
       

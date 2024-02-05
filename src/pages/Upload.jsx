@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import AuthContext from '../context/AuthContext';
 import { RingLoader } from 'react-spinners';
 import { css } from '@emotion/react';
+import Wait from "../components/Wait";
 import { toast } from "react-toastify";
 function Content() {
   const navigate = useNavigate();
@@ -77,10 +78,11 @@ function Content() {
   const [showpopup, setShowpopup]=useState(false);
 
   return (
-    <div className='flex flex-row w-screen h-[100vh] bg-page-col '>
+    <div className='admin flex flex-row w-screen h-[100vh] bg-page-col '>
       <Sidebar />
 
-    <div className={`flex flex-auto flex-col ml-[3%] mt-8 mr-[3%]  `}>
+      <div className="flex flex-auto flex-col relative ml-[5%] mt-8 mr-[5%]">
+
       <h1 className="text-person-col text-5xl">Upload Articles</h1>
 
       <div className="bg-sidebar mt-10 h-52 rounded-md shadow p-9 pt-12">
@@ -95,21 +97,21 @@ function Content() {
             
         </div>
       </div>
-      <div className=" flex flex-auto flex-col place-items-center">
-          <RingLoader css={override} size={150} color={'#36D7B7'} loading={isUploading} /></div>
+      
       <div className="flex flex-auto flex-col place-items-end" >
       
       <button
 
-        className="absolute right-0 bottom-12 sm:w-[110px] w-fit box-border xs:h-[38px] h-[30px] text-[13px] sm:text-[15px] font-medium sm:font-bold  text-sidebar  bg-person-col font-['TT Commons'] sm:px-4 px-2 sm:rounded-[5px] rounded-[3px]"
-
+className="absolute right-0  bottom-20 w-[110px]  box-border xs:h-[38px] h-[30px] text-[13px] sm:text-[15px] font-medium sm:font-bold  text-sidebar  bg-person-col font-['TT Commons'] sm:px-4 px-2 sm:rounded-[5px] rounded-[3px]"
+      
         onClick={addLink} 
       >
         Upload
       </button>
       </div>
       <Popup visible={showPopup} onClose={() => setShowPopup(false)} />
-      
+  
+      {isUploading && < Wait />}
     </div>
     </div>
   );

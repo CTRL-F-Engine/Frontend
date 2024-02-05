@@ -41,7 +41,6 @@ useEffect(() => {
       if (response.ok) {
         const userData = await response.json();
         setuser(userData);
-        
         setIsEditMode(true); // Enable edit mode since you have fetched existing user data
         console.log(userData)
       } else {
@@ -52,6 +51,7 @@ useEffect(() => {
       // Handle error
       console.error("Error fetching user data:", error);
     }
+    
   };
 
   fetchUserData();
@@ -104,7 +104,11 @@ const handleOffset = (data) => {
     <img src={`http://127.0.0.1:8000${user.photo}`} alt={user.username} className="lg:h-36 lg:w-36 md:h-24 md:w-24 h-16 w-16 rounded-full" />
     <div className='flex flex-col  justify-center '>
       <span className='font-medium sm:text-2xl text-xl text-blue-950'>{user.username}</span>
-      <span className='font-medium sm:text-2xl text-xl text-blue-950'>{user.FullName}</span>
+      {user.FullName !== null && (
+  <span className='font-medium sm:text-2xl text-xl text-blue-950'>
+    {user.FullName}
+  </span>
+)}
       <span  className='font-medium sm:text-2xl text-xl text-blue-950'>{user.email}</span>
     </div>
     </div> 

@@ -5,6 +5,7 @@ import { Input } from '../components/Input';
 import { Link } from 'react-router-dom';
 import { useState ,useContext} from 'react';
 import AuthContext from '../context/AuthContext'
+import logo from '../assets/LOGO2.png';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -81,8 +82,7 @@ const handleSignUp=()=>
           <Link to="/Signup"> Sign up</Link>     </button>   
             </p>  
 </div>
-<div className='w-[30%]'>
-  </div>
+<img className=' lg:w-[430px] w-[250px] sm:w-[280px] md:w-[360px]' src={logo} />
         </div> 
    
         

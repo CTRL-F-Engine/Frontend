@@ -41,7 +41,7 @@ const handleSignUp=()=>
   return (
     <div className=" flex flex-col-reverse  app md:flex-row min-h-full
     w-full items-center 
-    justify-around  py-4">
+    justify-around gap-y-0">
      
       
               <div className=' flex flex-col sm:items-end justify-center gap-y-6  '>

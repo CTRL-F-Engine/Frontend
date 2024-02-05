@@ -34,20 +34,7 @@ export const Navbar2=(props)=>
   {
     return pdp;
   }
-  useEffect(()=>{
-    if (!isConnected  || user_type!=='simple'){
-      if (!isConnected){
-        navigate('/Login')
-        toast.error("You have to connect first !")
-      }else{
-        navigate('/')
-        toast.error("You do not have permissions to access to this link !")
-      }
-      
-      
-    }
-    
-  },[])
+  
   useEffect(() => {
     const fetchUserData = async () => {
       try {

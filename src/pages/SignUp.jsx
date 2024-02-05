@@ -46,9 +46,9 @@ const handleLogin=()=>
 {
 }
   return (
-    <div className=" flex flex-col-reverse  app md:flex-row  
-    w-full items-center h-full
-    justify-around   gap-y-9">
+    <div className=" flex flex-col-reverse  app md:flex-row min-h-full
+    w-full items-center 
+    justify-around gap-y-0">
         <div className=' flex flex-col sm:items-end justify-center gap-y-7  '>
 <p className="lg:w-[450px]  mx-auto text-left w-full text-violet-100 sm:text-[50px] text-[40px] font-bold font-['TT Commons'] ">
        Sign up   
@@ -96,7 +96,7 @@ const handleLogin=()=>
             </p> 
          
 </div>
-<img className=' lg:w-[430px] w-[250px] sm:w-[280px] md:w-[360px]' src={logo} />
+   <img className=' lg:w-[430px] w-[250px] sm:w-[280px] md:w-[360px]' src={logo} />
         </div> 
    
         
